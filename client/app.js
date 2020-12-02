@@ -1,11 +1,11 @@
 // import "./App.css";
 import React, {useState, useEffect} from 'react'
 import {loadWeb3, loadBlockchainData} from './loadData'
-import {me, login, logout} from './userActions'
+import {me} from './userActions'
 
 function App() {
   const [state, setState] = useState({initialData: null, loading: true})
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({})
 
   //useEffect for blockchain stuff
   useEffect(() => {
@@ -23,6 +23,8 @@ function App() {
       .catch(err => console.error(err))
   }, [])
 
+  console.log('USER', user)
+
   return (
     <div className="App">
       <header className="App-header">
@@ -36,9 +38,9 @@ function App() {
           <img id="redditIcon" src="/images/reddit.png" />
           <p id="loginText">Log In</p>
         </button>
-        <button id="signup" onClick={() => login()}>
+        <a id="signup" href="/auth/reddit">
           Create An Account
-        </button>
+        </a>
         <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
         <button id="menuButton" onClick={() => toggleMenu(false)}>
           =

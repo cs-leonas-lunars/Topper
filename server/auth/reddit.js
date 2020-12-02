@@ -19,52 +19,86 @@ module.exports = router
  * process.env.GOOGLE_CALLBACK = '/your/google/callback'
  */
 
-if (!process.env.REDDIT_CLIENT_ID || !process.env.REDDIT_CLIENT_SECRET) {
-  console.log('Reddit client ID / secret not found')
-} else {
-  passport.use(
-    new RedditStrategy(
-      {
-        clientID: process.env.REDDIT_CLIENT_ID,
-        clientSecret: process.env.REDDIT_CLIENT_SECRET,
-        callbackURL: '/auth/reddit/callback'
-      },
-      (accessToken, refreshToken, profile, done) => {
-        const redditId = profile.id
-        const email = profile.emails[0].value
-        const username = profile.username
-        // also could get user image also to make it look all nice -> add imageUrl to models
+// if (!process.env.REDDIT_CLIENT_ID || !process.env.REDDIT_CLIENT_SECRET) {
+//   console.log('Reddit client ID / secret not found')
+// } else {
 
-        User.findOrCreate({
-          where: {redditId},
-          defaults: {email, username}
-        })
-          .then(([user]) => done(null, user))
-          .catch(done)
-      }
-    )
+// function logThis() {
+//   console.log('WE SHOULD SEE THIS')
+// }
+
+passport.use(
+  new RedditStrategy(
+    {
+      clientID: process.env.REDDIT_CLIENT_ID,
+      clientSecret: process.env.REDDIT_CLIENT_SECRET,
+      callbackURL: '/auth/reddit/callback'
+    },
+    function(accessToken, refreshToken, profile, done) {
+      // logThis()
+
+      const redditId = profile.id
+      const email = profile.emails[0].value
+      const username = profile.username
+      // also could get user image also to make it look all nice -> add imageUrl to models
+
+      User.findOrCreate({
+        where: {redditId},
+        defaults: {email, username}
+      })
+
+        .then(([user]) => done(null, user))
+        .catch(done)
+    }
+    // const [user] = await User.findOrCreate({
+    //   where: {redditId},
+    //   defaults: {email, username},
+    // })
+    // console.log(user, 'USER')
+    // process.nextTick(function () {
+    // To keep the example simple, the user's Reddit profile is returned to
+    // represent the logged-in user.  In a typical application, you would want
+    // to associate the Reddit account with a user record in your database,
+    // and return that user instead.
+    //   return done(null, profile)
+    // })
+    // function (accessToken, refreshToken, profile, done) {
+    //   User.findOrCreate({redditId: profile.id}, function (err, user) {
+    //     return done(err, user)
+    //   })
+    // }
   )
+)
 
-  router.get('/', (req, res, next) => {
-    console.log('SHOULD BE SEEING THIS')
-    req.session.state = crypto.randomBytes(32).toString('hex')
-    passport.authenticate('reddit', {
-      state: req.session.state
-    })(req, res, next)
+router.get('/', (req, res, next) => {
+  req.session.state = crypto.randomBytes(32).toString('hex')
+  passport.authenticate('reddit', {
+    state: req.session.state
+  })(req, res, next)
+})
+
+router.get(
+  ('/callback',
+  (req, res, next) => {
+    // Check for origin via state token
+    if (req.query.state == req.session.state) {
+      passport.authenticate('reddit', {
+        failureRedirect: '/login',
+        successRedirect: '/'
+      })
+    } else {
+      next(new Error(403))
+    }
   })
+)
 
-  router.get(
-    ('/callback',
-    (req, res, next) => {
-      // Check for origin via state token
-      if (req.query.state === req.session.state) {
-        passport.authenticate('reddit', {
-          failureRedirect: '/login',
-          successRedirect: '/'
-        })
-      } else {
-        next(new Error(403))
-      }
-    })
-  )
-}
+// router.get('/', passport.authenticate('reddit', {state: req.session.state}))
+
+// router.get(
+//   '/callback',
+//   passport.authenticate('reddit', {
+//     successRedirect: '/home',
+//     failureRedirect: '/login',
+//   })
+// )
+// }

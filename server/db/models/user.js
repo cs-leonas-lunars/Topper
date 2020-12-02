@@ -16,6 +16,9 @@ const User = db.define('user', {
       notEmpty: true
     }
   },
+  redditId: {
+    type: Sequelize.STRING
+  },
   address: {
     type: Sequelize.STRING,
     allowNull: false,

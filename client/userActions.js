@@ -36,20 +36,6 @@ export const logout = async () => {
 
 // this should only be reddit based, no local login
 // after getting reddit credentials there needs to be a redirect where the user can put in their wallet address or easily create one if they dont already have one
-export const login = async () => {
-  try {
-    const res = await axios.get(
-      '/auth/google'
-      //   headers: {
-      //     "Access-Control-Allow-Origin": "*",
-      //   },
-    )
-    console.log(res, 'RES')
-    return res
-  } catch (err) {
-    console.error(err)
-  }
-}
 
 // get user transactions
 export const transactionHistory = async id => {
