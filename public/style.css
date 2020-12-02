@@ -19,3 +19,239 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+@font-face {
+  font-family: PoetsenOne;
+  src: url('/fonts/PoetsenOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url('/fonts/Montserrat-Bold.ttf');
+}
+
+@font-face {
+  font-family: Montserrat-Thin;
+  src: url('/fonts/Montserrat-Thin.ttf');
+}
+
+@font-face {
+  font-family: Montserrat-ExtraThin;
+  src: url('/fonts/Montserrat-ExtraThin.otf');
+}
+
+.App {
+  text-align: center;
+  background-color: transparent;
+}
+
+#background {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+#overlay {
+  position: absolute;
+  background-color: rgb(0, 0, 0, 0.15);
+  backdrop-filter: blur(100px);
+  height: 100vh;
+  width: 100vw;
+  transition: background-color 0.5s;
+  z-index: 1;
+}
+
+#brandIcon {
+  position: absolute;
+  width: 105px;
+  height: auto;
+  top: 17vh;
+  left: 50%;
+  margin-left: -52.5px;
+  z-index: 2;
+}
+
+#logoText {
+  position: absolute;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #fff;
+  font-family: PoetsenOne;
+  width: 100vw;
+  bottom: 40vh;
+  z-index: 2;
+}
+
+#login {
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  left: 50%;
+  margin-left: -75px;
+  bottom: 25vh;
+  background-color: transparent;
+  backdrop-filter: blur(35px);
+  border-radius: 100vh;
+  border-width: 0;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 0px 35px -17.5px #000;
+  transition: background-color 0.35s, box-shadow 0.35s;
+  z-index: 2;
+}
+
+#login:hover {
+  background-color: rgb(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 50px -17.5px #000;
+}
+#loginText {
+  position: absolute;
+  width: 82.5%;
+  top: -1%;
+  right: 0%;
+  font-size: 1rem;
+  font-family: Montserrat-Bold;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  z-index: 3;
+}
+
+#circle {
+  position: absolute;
+  background-color: #eb6c6c;
+  height: 40px;
+  width: 40px;
+  top: 5px;
+  left: 5px;
+  border-radius: 100vh;
+  z-index: 3;
+  display: none;
+}
+
+#redditIcon {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: 10px;
+  left: 14px;
+  z-index: 3;
+}
+
+#signup {
+  position: absolute;
+  width: 60vw;
+  height: 50px;
+  left: 20vw;
+  bottom: 15vh;
+  font-size: 0.75rem;
+  font-family: Montserrat-Thin;
+  text-align: center;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 100vh;
+  border-width: 0;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.35s;
+  z-index: 2;
+}
+
+#signup:hover {
+  color: #ccc;
+}
+
+#ethereumText {
+  position: absolute;
+  font-size: 0.6rem;
+  text-align: center;
+  color: #fff;
+  font-family: Montserrat-ExtraThin;
+  width: 100vw;
+  bottom: 3.5vw;
+  z-index: 2;
+  display: none;
+}
+
+#menuButton {
+  position: absolute;
+  top: 3.5vw;
+  right: 5vw;
+  font-size: 3rem;
+  font-family: Montserrat-Thin;
+  text-align: center;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 100vh;
+  border-width: 0;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.35s;
+  z-index: 2;
+}
+
+#menuButton:hover {
+  color: #ccc;
+}
+
+#menu {
+  position: absolute;
+  background-color: rgb(255, 255, 255, 0.4);
+  backdrop-filter: blur(35px);
+  height: 100vh;
+  width: 0vw;
+  right: 0vw;
+  border-radius: 40px 0px 0px 40px;
+  transition: width 0.5s, box-shadow 0.5s;
+  z-index: 3;
+}
+
+#closeMenu {
+  position: absolute;
+  top: 2.5vw;
+  right: -75vw;
+  font-size: 3rem;
+  font-family: Montserrat-Thin;
+  text-align: center;
+  background-color: transparent;
+  color: #444;
+  border-radius: 100vh;
+  border-width: 0;
+  cursor: pointer;
+  outline: none;
+  transform: rotate(45deg);
+  transition: right 0.5s, color 0.35s;
+  z-index: 4;
+}
+
+#closeMenu:hover {
+  color: #777;
+}
+
+/*
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+} */
+
+.App-header {
+  background-color: transparent;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+/* @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
