@@ -1,22 +1,29 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const User = db.define('user', {
-  username: {
+const Transaction = db.define('transaction', {
+  recipientEmail: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true
     }
   },
-  email: {
+  recipientAddress: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true
     }
   },
-  address: {
+  amount: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  linkToPost: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
@@ -25,4 +32,4 @@ const User = db.define('user', {
   }
 })
 
-module.exports = User
+module.exports = Transaction
