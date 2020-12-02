@@ -5,7 +5,8 @@ services:
   - postgresql # starts up postgres
 addons:
   postgresql: '10' # recent postgres version on Travis
-dist: xenial # uses xenial environment
+dist: trusty # uses xenial environment
+sudo: false
 notifications:
   email:
     on_success: change # default: change (only when going from broken to fixed)
@@ -13,7 +14,7 @@ notifications:
 install:
   - npm ci # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "topper";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
   - npm test # test the code
   - npm run build-client # make the bundle
