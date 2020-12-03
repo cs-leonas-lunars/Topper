@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import history from './history'
+import {signup} from './userActions'
 
 const Signup = () => {
   const [address, setAddress] = useState('')
@@ -12,8 +13,7 @@ const Signup = () => {
       address,
       email
     }
-    const res = await axios.put('api/users/update', info)
-    history.push('/home')
+    await signup(info)
   }
 
   return (
