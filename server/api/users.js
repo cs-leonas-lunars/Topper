@@ -7,13 +7,22 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       attributes: ['id', 'email']
     })
     res.json(users)
   } catch (err) {
     next(err)
+  }
+})
+
+router.put('/update', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.user.id)
+    const {address, email} = req.body
+
+    await user.update({address, email})
+    res.sendStatus(200)
+  } catch (err) {
+    console.error(err)
   }
 })

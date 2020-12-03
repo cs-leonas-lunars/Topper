@@ -29,8 +29,8 @@ window.onload = () => {
       console.log("Ethereum Data (content): ", data)
     );
     */
-  });
-  
+  })
+
   allPosts.map((post, idx) => {
     let tag = allHeaders[idx].children[0].children[0].innerText
     if (tag.toLowerCase() !== 'promoted') injectButton(post, idx)

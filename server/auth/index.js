@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
+const {User, Transaction} = require('../db/models')
 module.exports = router
 router.use('/reddit', require('./reddit'))
 // router.post("/login", async (req, res, next) => {
@@ -38,6 +38,10 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+router.get('/me', async (req, res) => {
+  const user = await User.findByPk(req.user.id, {
+    include: Transaction
+  })
+
+  res.json(user)
 })

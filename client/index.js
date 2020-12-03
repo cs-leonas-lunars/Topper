@@ -6,13 +6,14 @@ import history from './history'
 import store from './store'
 import App from './app'
 import './index.css'
+import Routes from './Routes'
 // establishes socket connection
 // import './socket'
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <App />
+      <Routes />
     </Router>
   </Provider>,
   document.getElementById('app')
