@@ -3,7 +3,7 @@
 
   "name": "Topper",
   "description":
-    "Tip your favorite Reddit contributors with bitcoin over the Lightning Network",
+    "Tip your favorite Reddit contributors over the Ethereum Network",
   "version": "0.0.1",
 
   "browser_action": {
@@ -15,11 +15,12 @@
   },
   "content_security_policy":
     "script-src 'self' 'sha256-2f2/1D0emiWe/SLg6UTAOT3O6C6C61kbslq01Bv7g+A='; object-src 'self'",
-  "permissions": ["activeTab", "tabs"],
+  "permissions": ["activeTab", "tabs", "storage"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js", "inject.js"]
     }
-  ]
+  ],
+  "web_accessible_resources": ["background.js"]
 }
