@@ -18,9 +18,12 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.put('/users/update', async (req, res, next) => {
+router.put('/update', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.body.id)
+    console.log(req.user.id, 'USER ID')
+    console.log(req.body, 'REQ.BODY')
+    const user = await User.findByPk(req.user.id)
+    console.log(user, 'DB USER')
     await user.update({address: req.body.address, email: req.body.email})
 
     res.sendStatus(200)
