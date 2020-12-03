@@ -10,11 +10,13 @@ const Home = props => {
   //       .then((x) => setUser(x))
   //       .catch((err) => console.error(err))
   //   }, [])
-  console.log(props, 'PROPS')
-  return (
+  // console.log(props, 'PROPS')
+  console.log(props, 'USER')
+  return !props.user ? (
+    <div>Loading</div>
+  ) : (
     <div>
-      Home
-      <div>username: {props.user.username}</div>
+      username: {props.user.username}
       <button onClick={() => logout()}>Logout</button>
     </div>
   )

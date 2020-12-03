@@ -29,6 +29,7 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/signup" component={Signup} />
+      {/* <Route exact path="/home" component={Home} /> */}
       <Route exact path="/home" render={() => <Home user={user} />} />
       <Route component={Landing} />
       {/* <Redirect from="/" to="landing" /> */}
