@@ -32,19 +32,19 @@ passport.use(
     {
       clientID: process.env.REDDIT_CLIENT_ID,
       clientSecret: process.env.REDDIT_CLIENT_SECRET,
-      callbackURL: '/auth/reddit/callback'
+      callbackURL: 'http://localhost:5000/auth/reddit/callback'
     },
     function(accessToken, refreshToken, profile, done) {
       // logThis()
-
+      console.log('PROFILE INFO ', profile)
       const redditId = profile.id
-      const email = profile.emails[0].value
-      const username = profile.username
+      // const email = profile.emails[0].value
+      const username = profile.name
       // also could get user image also to make it look all nice -> add imageUrl to models
 
       User.findOrCreate({
         where: {redditId},
-        defaults: {email, username}
+        defaults: {username}
       })
 
         .then(([user]) => done(null, user))
@@ -72,25 +72,25 @@ passport.use(
 
 router.get('/', (req, res, next) => {
   req.session.state = crypto.randomBytes(32).toString('hex')
+  console.log('got hereeeeere on state', req.session.state)
   passport.authenticate('reddit', {
     state: req.session.state
   })(req, res, next)
 })
 
-router.get(
-  ('/callback',
-  (req, res, next) => {
-    // Check for origin via state token
-    if (req.query.state == req.session.state) {
-      passport.authenticate('reddit', {
-        failureRedirect: '/login',
-        successRedirect: '/'
-      })
-    } else {
-      next(new Error(403))
-    }
-  })
-)
+router.get('/callback', (req, res, next) => {
+  // Check for origin via state token
+  console.log('calll got heeeeere')
+  if (req.query.state === req.session.state) {
+    console.log('got inside the comparison')
+    passport.authenticate('reddit', {
+      failureRedirect: '/login',
+      successRedirect: '/'
+    })(req, res, next)
+  } else {
+    next(new Error(403))
+  }
+})
 
 // router.get('/', passport.authenticate('reddit', {state: req.session.state}))
 
