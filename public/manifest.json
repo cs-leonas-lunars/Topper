@@ -3,7 +3,7 @@
 
   "name": "Topper",
   "description":
-    "Tip your favorite Reddit contributors with bitcoin over the Lightning Network",
+    "Tip your favorite Reddit contributors over the Ethereum Network",
   "version": "0.0.1",
 
   "browser_action": {
