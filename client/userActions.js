@@ -4,7 +4,6 @@ export const me = async () => {
   try {
     const res = await axios.get('/auth/me')
     return res.data
-    //return !res.data.user.id ? history.push('/landing') : history.push('/home')
   } catch (err) {
     console.error(err)
   }
@@ -13,7 +12,7 @@ export const me = async () => {
 export const logout = async () => {
   try {
     await axios.post('/auth/logout')
-    window.location.reload()
+    history.push('/')
   } catch (err) {
     console.error(err)
   }

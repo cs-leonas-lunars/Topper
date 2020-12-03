@@ -1,17 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {logout} from './userActions'
-import {me} from './userActions'
 
 const Home = props => {
-  //   const [user, setUser] = useState({})
-  //   useEffect(() => {
-  //     setUser(null)
-  //     me()
-  //       .then((x) => setUser(x))
-  //       .catch((err) => console.error(err))
-  //   }, [])
-  // console.log(props, 'PROPS')
-  console.log(props, 'USER')
   return !props.user ? (
     <div>Loading</div>
   ) : (

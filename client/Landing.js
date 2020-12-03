@@ -15,14 +15,6 @@ const Landing = () => {
           Start
         </a>
       </button>
-      {/* <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
-      <button id="menuButton" onClick={() => toggleMenu(false)}>
-        =
-      </button>
-      <div id="menu" />
-      <button id="closeMenu" onClick={() => toggleMenu(true)}>
-        +
-      </button> */}
     </header>
   )
 }
