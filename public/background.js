@@ -1,27 +1,23 @@
-window.localStorage.setItem('ethereum', window.ethereum)
+window.localStorage.setItem(
+  'ethereum',
+  JSON.stringify(window.ethereum, (key, value) => {
+    if (typeof value === 'function') {
+      console.log('FUNCTION: ', value)
+      console.log('FUNCTION AS STRING: ', value.toString())
+      return value.toString()
+    } else {
+      return value
+    }
+  })
+)
 window.localStorage.setItem('web3', window.web3)
 
 /*
-chrome.runtime.sendMessage(
-  "eldblkjfmbhajfladajjicjacccfheii",
-  { ethereum: window.ethereum, web3: window.web3 },
-  (res) => {
-    console.log("SENT!");
-    console.log(res);
-  }
-);
-*/
+window.localStorage.setItem("callEnable", false);
 
-/*
-chrome.storage.local.set({ ethereum: window.ethereum }, () => {
-  chrome.storage.local.get("ethereum", (data) => {
-    console.log("STORED DATA ETHEREUM: ", data);
-  });
-});
-
-chrome.storage.local.set({ web3: window.web3 }, () => {
-  chrome.storage.local.get("web3", (data) => {
-    console.log("STORED DATA WEB3: ", data);
-  });
+window.addEventListener("storage", () => {
+  // When local storage changes, dump the list to
+  // the console.
+  console.log(JSON.parse(window.localStorage.getItem("callEnable")));
 });
 */

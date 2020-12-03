@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-
 let start = 0
 let allPosts = Array.from(
   document.getElementsByClassName('_3-miAEojrCvx_4FQ8x3P-s')
@@ -20,17 +19,16 @@ let allHeaders = Array.from(
 let end = allPosts.length
 
 window.onload = () => {
-  let ethereum = window.localStorage.getItem('ethereum')
+  let ethereum = JSON.parse(window.localStorage.getItem('ethereum'))
   let web3 = window.localStorage.getItem('web3')
   chrome.storage.local.set({ethereum, web3}, () => {
     console.log('Successfully Stored!')
-    /*
-    chrome.storage.local.get("ethereum", (data) =>
-      console.log("Ethereum Data (content): ", data)
-    );
-    */
   })
-
+  /*
+  browser.storage.onChanged.addListener(() => {
+    window.localStorage.setItem("callEnable", true);
+  });
+  */
   allPosts.map((post, idx) => {
     let tag = allHeaders[idx].children[0].children[0].innerText
     if (tag.toLowerCase() !== 'promoted') injectButton(post, idx)
