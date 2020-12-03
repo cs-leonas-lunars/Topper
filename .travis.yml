@@ -5,7 +5,8 @@ services:
   - postgresql # starts up postgres
 addons:
   postgresql: '10' # recent postgres version on Travis
-dist: xenial # uses xenial environment
+dist: trusty # uses xenial environment
+sudo: false
 notifications:
   email:
     on_success: change # default: change (only when going from broken to fixed)
@@ -13,15 +14,18 @@ notifications:
 install:
   - npm ci # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "topper-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
   - npm test # test the code
   - npm run build-client # make the bundle
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: topper-fsa
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: KHBLGfdxvFvwU8lLe1mbjnpRBswpcDlrEpmvP0gA2KaNcH9pkctKBQJRpLxNoiE+0Cl02lbein1awJYKa+EjiaGinHovOzNvPsjp+vGvTPixRx4XjN7GZos68lm7pMdrHzp7YMMCVrVxcm1ldPwZaOh0CZpaoYNJfVuhN2G0h8hhp8SJJvgbq9RJzmJ5RxjNcw+HOdNmu72rWwxYg8rJ3/TiXjPPEzp/ZjuB6pUQSwaegXr0cWZ2ZR2s4O66fUHiij3eQzmEjzjOJ6/N25/kt//d1D5xnwBbYq73OvappsyTm2nqX4tjD5/gdFq+NhirCAybQ52FPKwZc2GlXuZuG3bp/ijaamv0MwVkBfjXkrCMC32LwFsgR9t0JDret6LX6rXL3SBv8mMXO1+7iwMKT08ekfobuAEICrueikkyI6tW9gxBVR0Jmf8WfYqrG3LMtM4+kSKephkt6A/zj+nzJcwmomb4Kru/Z3USsNs3Iie1RGK1V8LL2hc4DTMeVRUqxTEhKNWJtSE0R5T0qtcXFG17kSKJroMh3GW3GaHIIRNeaFBl1gGb8L8rC1huLk5Xz7Kq2qtg0zfUEsrIDFCSFkShL/hQImC9OScAwMEW+hK8dGN1UuupjQ2k7snbmQ+7eAyX5qjTzeZ2jXuA2n5eHRcwgxHZCf+doY4sblK2rlg=
