@@ -1,7 +1,13 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 const Signup = () => {
-  return <div>Signup</div>
+  const [address, setAddress] = useState('')
+  const [email, setEmail] = useEmail('')
+  return (
+    <div>
+      <form />
+    </div>
+  )
 }
 
 export default Signup
