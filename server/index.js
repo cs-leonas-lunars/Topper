@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
 }
 
-// if (process.env.NODE_ENV !== "production") require("../secrets");
+// if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 passport.serializeUser((user, done) => done(null, user.id))
 
@@ -70,7 +70,6 @@ const createApp = () => {
   })
 
   app.use('*', (req, res) => {
-    console.log('REQ', req)
     res.sendFile(path.join(__dirname, '..', 'public/index.html'))
   })
 
