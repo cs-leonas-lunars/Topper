@@ -17,3 +17,12 @@ export const logout = async () => {
     console.error(err)
   }
 }
+
+export const signup = async info => {
+  try {
+    await axios.put('api/users/update', info)
+    history.push('/home')
+  } catch (err) {
+    console.error(err)
+  }
+}
