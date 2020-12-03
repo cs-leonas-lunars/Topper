@@ -1,66 +1,39 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
-import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
-import {me} from './store'
+import React, {useState, useEffect} from 'react'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
+import Landing from './Landing'
+import Home from './Home'
+import Signup from './Signup'
+import {loadWeb3, loadBlockchainData} from './loadData'
+import {me} from './userActions'
 
-/**
- * COMPONENT
- */
-class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData()
-  }
+const Routes = () => {
+  const [state, setState] = useState({initialData: null, loading: true})
+  const [user, setUser] = useState({})
 
-  render() {
-    const {isLoggedIn} = this.props
+  //useEffect for blockchain stuff
+  useEffect(() => {
+    setState({initialData: null, loading: true})
+    loadWeb3()
+      .then(() => loadBlockchainData())
+      .then(x => setState({initialData: x, loading: false}))
+  }, [])
 
-    return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
-    )
-  }
+  // useEffect for user
+  useEffect(() => {
+    setUser(null)
+    me()
+      .then(x => setUser(x))
+      .catch(err => console.error(err))
+  }, [])
+
+  return (
+    <Switch>
+      <Route exact path="/signup" component={Signup} />
+      <Route exact path="/home" render={() => <Home user={user} />} />
+      <Route component={Landing} />
+      {/* <Redirect from="/" to="landing" /> */}
+    </Switch>
+  )
 }
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
-  }
-}
-
-const mapDispatch = dispatch => {
-  return {
-    loadInitialData() {
-      dispatch(me())
-    }
-  }
-}
-
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
-
-/**
- * PROP TYPES
- */
-Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
+export default withRouter(Routes)
