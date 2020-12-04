@@ -32,6 +32,7 @@ export const loadBlockchainData = async data => {
       console.log('FORTMATIC EXTENSION: ', accounts[0])
       console.log('RECIPIENT: ', data.recipient)
       //get infortmation from routes, create an axios.get recipient wallet
+      //also set user wallet to userdb entry
       return {
         account: accounts[0],
         recipient: data.recipient //recipient wallet
