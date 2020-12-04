@@ -15,8 +15,6 @@ passport.use(
     },
     function(accessToken, refreshToken, profile, done) {
       const redditId = profile.id
-      // i would like to be able to get the email for sure somehow
-      // figure out how to add email and 2FA verification
       const username = profile.name
       // also could get user image also to make it look all nice -> add imageUrl to models
 
@@ -43,7 +41,7 @@ router.get('/callback', (req, res, next) => {
   if (req.query.state === req.session.state) {
     passport.authenticate('reddit', {
       failureRedirect: '/',
-      successRedirect: '/signup'
+      successRedirect: '/home'
     })(req, res, next)
   } else {
     next(new Error(403))

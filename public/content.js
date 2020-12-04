@@ -1,42 +1,69 @@
-/* eslint-disable no-undef */
-
+chrome.storage.local.clear()
 let start = 0
-let allPosts = Array.from(
-  document.getElementsByClassName('_3-miAEojrCvx_4FQ8x3P-s')
-)
-
-let topBroadcast = Array.from(
-  document.querySelectorAll("div[class='_25K6Ujp7eqOAHEdYuHm3pY']")
-)[0]
-
-let allUsers = Array.from(
-  document.querySelectorAll(
-    "div[class='_3AStxql1mQsrZuUIFP9xSg nU4Je7n-eSXStTBAPMYt8']"
+let end = 0
+let allPosts = []
+let allUsers = []
+let allHeaders = []
+if (
+  window.location.href.split('/')[2] &&
+  window.location.href.split('/')[2] === 'www.reddit.com'
+) {
+  start = 0
+  allPosts = Array.from(
+    document.getElementsByClassName('_3-miAEojrCvx_4FQ8x3P-s')
   )
-)
-let allHeaders = Array.from(
-  document.querySelectorAll("div[class='cZPZhMe-UCZ8htPodMyJ5']")
-)
-let end = allPosts.length
+  allUsers = Array.from(
+    document.querySelectorAll(
+      "div[class='_3AStxql1mQsrZuUIFP9xSg nU4Je7n-eSXStTBAPMYt8']"
+    )
+  )
+  allHeaders = Array.from(
+    document.querySelectorAll("div[class='cZPZhMe-UCZ8htPodMyJ5']")
+  )
+  end = allPosts.length
 
-window.onload = () => {
-  let ethereum = window.localStorage.getItem('ethereum')
-  let web3 = window.localStorage.getItem('web3')
-  chrome.storage.local.set({ethereum, web3}, () => {
-    console.log('Successfully Stored!')
-    /*
-    chrome.storage.local.get("ethereum", (data) =>
-      console.log("Ethereum Data (content): ", data)
-    );
-    */
-  })
+  window.onload = () => {
+    let timer = setInterval(() => {
+      let status = window.localStorage.getItem('status')
+      if (status) {
+        let ethereum = window.localStorage.getItem('ethereum')
+        if (ethereum !== 'undefined') ethereum = JSON.parse(ethereum)
+        let web3 = window.localStorage.getItem('web3')
+        let account = window.localStorage.getItem('account')
+        let onReddit = window.localStorage.getItem('onReddit')
+        chrome.storage.local.set({
+          ethereum,
+          web3,
+          account,
+          status,
+          onReddit
+        })
+        return clearInterval(timer)
+      }
+    }, 250)
 
-  allPosts.map((post, idx) => {
-    let tag = allHeaders[idx].children[0].children[0].innerText
-    if (tag.toLowerCase() !== 'promoted') injectButton(post, idx)
-  })
-  console.log(topBroadcast)
-  injectButton(topBroadcast, 'broadcast')
+    allPosts.map((post, idx) => {
+      let tag = allHeaders[idx].children[0].children[0].innerText
+      if (tag.toLowerCase() !== 'promoted') injectButton(post, idx)
+    })
+  }
+
+  document.addEventListener('scroll', () => findPosts())
+} else {
+  let timer = setInterval(() => {
+    let status = window.localStorage.getItem('status')
+    if (status) {
+      let ethereum = JSON.parse(window.localStorage.getItem('ethereum'))
+      let web3 = window.localStorage.getItem('web3')
+      let onReddit = window.localStorage.getItem('onReddit')
+      return chrome.storage.local.set(
+        {ethereum, web3, status, onReddit},
+        () => {
+          return clearInterval(timer)
+        }
+      )
+    }
+  }, 250)
 }
 
 function findPosts() {
@@ -62,7 +89,6 @@ function findPosts() {
 }
 
 function injectButton(post, idx) {
-  console.log('POST', post)
   let btn = document.createElement('BUTTON')
   let image = document.createElement('IMG')
   let text = document.createElement('P')
@@ -95,10 +121,8 @@ function injectButton(post, idx) {
   btn.appendChild(text)
   btn.onclick = () => {
     let recipient = allUsers[btn.id].children[3].innerText.split('/')[1]
-    console.log(recipient)
+    chrome.storage.local.set({recipient})
     //initiateTransaction(recipient);
   }
   post.appendChild(btn)
 }
-
-document.addEventListener('scroll', () => findPosts())

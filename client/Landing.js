@@ -1,21 +1,34 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {loadBlockchainData} from './loadData'
+import {me, login, logout} from './userActions'
 
 const Landing = () => {
   return (
-    <header className="App-header">
-      <img id="background" src="/images/topperBackground.gif" />
-      <div id="overlay" onClick={() => toggleMenu(true)} />
-      <img id="brandIcon" src="/images/TipJar.png" />
-      <h1 id="logoText">Topper</h1>
-      <p id="paraText">Please Log In With Reddit</p>
-      <button id="login">
-        <div id="circle" />
-        <img id="redditIcon" src="/images/reddit.png" />
-        <a id="loginText" href="/auth/reddit">
-          Start
-        </a>
-      </button>
-    </header>
+    <div className="App">
+      <header className="App-header">
+        <img id="background" src="/images/topperBackground.gif" />
+        <div id="overlay" onClick={() => toggleMenu(true)} />
+        <img id="brandIcon" src="/images/TipJar.png" />
+        <h1 id="logoText">Topper</h1>
+        <p id="paraText">Please Log In With Reddit</p>
+        <button id="login">
+          <div id="circle" />
+          <img id="redditIcon" src="/images/reddit.png" />
+          <a id="loginText" href="/auth/reddit">
+            Login
+          </a>
+        </button>
+        <button id="signup">Create An Account</button>
+        <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
+        <button id="menuButton" onClick={() => toggleMenu(false)}>
+          =
+        </button>
+        <div id="menu" />
+        <button id="closeMenu" onClick={() => toggleMenu(true)}>
+          +
+        </button>
+      </header>
+    </div>
   )
 }
 
