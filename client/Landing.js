@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react'
-// import history from './history'
-import {loadBlockchainData, loadWeb3} from './loadData'
 
-import {me, login, logout} from './userActions'
+import {loadBlockchainData, loadWeb3} from './loadData'
 
 const Landing = ({history}) => {
   const [state, setState] = useState({initialData: null, loading: true})
@@ -44,6 +42,8 @@ const Landing = ({history}) => {
     },
     [history, user]
   )
+
+const Landing = () => {
 
   return (
     <div className="App">
