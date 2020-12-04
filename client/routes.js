@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
-import history from './history'
-import {loadWeb3, loadBlockchainData} from './loadData'
+import {loadBlockchainData} from './loadData'
 import {me} from './userActions'
 
 const Routes = () => {
@@ -13,9 +12,32 @@ const Routes = () => {
   //useEffect for blockchain stuff
   useEffect(() => {
     setState({initialData: null, loading: true})
-    loadWeb3()
-      .then(() => loadBlockchainData())
-      .then(x => setState({initialData: x, loading: false}))
+    window.onload = () => {
+      setTimeout(() => {
+        if (chrome.storage) {
+          let timer = setInterval(() => {
+            chrome.storage.local.get(data => {
+              if (data.status && JSON.parse(data.status)) {
+                if (data.onReddit && JSON.parse(data.onReddit)) {
+                  loadBlockchainData(data).then(x => {
+                    setState({initialData: x, loading: false})
+                  })
+                } else {
+                  console.log('Not on Reddit')
+                  setState({initialData: null, loading: false})
+                  //Render NonReddit Extension Page
+                }
+                return clearInterval(timer)
+              }
+            })
+          }, 250)
+        } else {
+          loadBlockchainData().then(x =>
+            setState({initialData: x, loading: false})
+          )
+        }
+      }, 3000)
+    }
   }, [])
 
   // useEffect for user

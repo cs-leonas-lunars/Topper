@@ -3,48 +3,6 @@ import {loadBlockchainData} from './loadData'
 import {me, login, logout} from './userActions'
 
 const Landing = () => {
-  const [state, setState] = useState({initialData: null, loading: true})
-  const [user, setUser] = useState(null)
-
-  //useEffect for blockchain stuff
-  useEffect(() => {
-    setState({initialData: null, loading: true})
-    window.onload = () => {
-      setTimeout(() => {
-        if (chrome.storage) {
-          let timer = setInterval(() => {
-            chrome.storage.local.get(data => {
-              if (data.status && JSON.parse(data.status)) {
-                if (data.onReddit && JSON.parse(data.onReddit)) {
-                  loadBlockchainData(data).then(x => {
-                    setState({initialData: x, loading: false})
-                  })
-                } else {
-                  console.log('Not on Reddit')
-                  setState({initialData: null, loading: false})
-                  //Render NonReddit Extension Page
-                }
-                return clearInterval(timer)
-              }
-            })
-          }, 250)
-        } else {
-          loadBlockchainData().then(x =>
-            setState({initialData: x, loading: false})
-          )
-        }
-      }, 3000)
-    }
-  }, [])
-
-  // useEffect for user
-  useEffect(() => {
-    setUser(null)
-    me()
-      .then(x => setUser(x))
-      .catch(err => console.error(err))
-  }, [])
-
   return (
     <div className="App">
       <header className="App-header">
@@ -56,7 +14,9 @@ const Landing = () => {
         <button id="login">
           <div id="circle" />
           <img id="redditIcon" src="/images/reddit.png" />
-          <p id="loginText">Log In</p>
+          <a id="loginText" href="/auth/reddit">
+            Login
+          </a>
         </button>
         <button id="signup">Create An Account</button>
         <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
