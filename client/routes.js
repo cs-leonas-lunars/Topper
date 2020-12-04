@@ -52,7 +52,7 @@ const Routes = () => {
   return (
     // create a ternary operator which if the recipient address exists, render a new page to specify amount (choose amount, confirm, cancel => cancel clears recipient from state and returns user to main landing page)
     //if null load regular extension
-    state.initialData.recipientAddress ? (
+    state.initialData.recipient ? (
       <Switch>
         <Route
           path="/transaction"
