@@ -27,7 +27,10 @@ export const loadWeb3 = async data => {
     fm.getProvider().isFortmatic = true
     window.web3 = new Web3(fm.getProvider())
   }
-  return loadBlockchainData()
+  return chrome.storage.local.set({callEnable: true}, () => {
+    console.log('Successfully Stored!')
+    return loadBlockchainData()
+  })
 }
 
 export const loadBlockchainData = async () => {

@@ -1,7 +1,10 @@
 {
   "presets": [
     "@babel/react",
-    "@babel/env"
+    "@babel/env",
+    "es2015",
+    "stage-2",
+    "stage-3"
     /*
     Babel uses these "presets" to know how to transpile your Javascript code. Here's what we're saying with these:
 

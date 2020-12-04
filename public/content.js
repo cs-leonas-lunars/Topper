@@ -24,11 +24,11 @@ window.onload = () => {
   chrome.storage.local.set({ethereum, web3}, () => {
     console.log('Successfully Stored!')
   })
-  /*
+
   browser.storage.onChanged.addListener(() => {
-    window.localStorage.setItem("callEnable", true);
-  });
-  */
+    window.localStorage.setItem('callEnable', true)
+  })
+
   allPosts.map((post, idx) => {
     let tag = allHeaders[idx].children[0].children[0].innerText
     if (tag.toLowerCase() !== 'promoted') injectButton(post, idx)
