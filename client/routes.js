@@ -50,24 +50,40 @@ const Routes = () => {
   }, [])
 
   return (
-    // create a ternary operator which if the recipient address exists, render a new page to specify amount (choose amount, confirm, cancel => cancel clears recipient from state and returns user to main landing page)
-    //if null load regular extension
-    state.initialData && state.initialData.recipient ? (
-      <Switch>
-        <Route
-          path="/transaction"
-          render={() => <Transaction addresses={state.initialData} />}
-        />
-        <Redirect from="/" to="transaction" />
-      </Switch>
-    ) : (
-      <Switch>
-        <Route path="/home" render={() => <Home user={user} />} />
-        <Route path="/landing" component={Landing} />
-        <Redirect from="/" to="landing" />
-      </Switch>
-    )
+    <Switch>
+      <Route exact path="/" component={Landing} />
+      {user && (
+        <Switch>
+          <Route exact path="/home" render={() => <Home user={user} />} />
+          {/* <Route path="/" component={Home} /> */}
+        </Switch>
+      )}
+    </Switch>
   )
+
+  // return (
+  //   // create a ternary operator which if the recipient address exists, render a new page to specify amount (choose amount, confirm, cancel => cancel clears recipient from state and returns user to main landing page)
+  //   //if null load regular extension
+  //   state.initialData && state.initialData.recipient ? (
+  //     <Switch>
+  //       <Route
+  //         path="/transaction"
+  //         render={() => <Transaction addresses={state.initialData} />}
+  //       />
+  //       <Redirect from="/" to="transaction" />
+  //     </Switch>
+  //   ) : (
+  //     <Switch>
+  //       {user ? (
+  //         <Route path="/home" render={() => <Home user={user} />} />
+  //       ) : (
+  //         <Route path="/landing" component={Landing} />
+  //       )}
+
+  //       {/* <Redirect from="/" to="landing" /> */}
+  //     </Switch>
+  //   )
+  // )
 }
 
 export default withRouter(Routes)

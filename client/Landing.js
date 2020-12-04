@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
-
-import {loadBlockchainData} from './loadData'
+// import history from './history'
+import {loadBlockchainData, loadWeb3} from './loadData'
 
 import {me, login, logout} from './userActions'
 
-const Landing = () => {
+const Landing = ({history}) => {
   const [state, setState] = useState({initialData: null, loading: true})
   const [user, setUser] = useState(null)
 
@@ -38,6 +38,13 @@ const Landing = () => {
       .catch(err => console.error(err))
   }, [])
 
+  useEffect(
+    () => {
+      if (user) history.push('/home')
+    },
+    [history, user]
+  )
+
   return (
     <div className="App">
       <header className="App-header">
@@ -53,7 +60,6 @@ const Landing = () => {
           <a id="loginText" href="/auth/reddit">
             Login
           </a>
-
         </button>
         <button id="signup">Create An Account</button>
         <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
