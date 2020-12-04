@@ -1,4 +1,6 @@
+
 chrome.storage.local.clear()
+
 let start = 0
 let end = 0
 let allPosts = []
@@ -22,6 +24,7 @@ if (
   )
   end = allPosts.length
 
+
   window.onload = () => {
     let timer = setInterval(() => {
       let status = window.localStorage.getItem('status')
@@ -41,6 +44,7 @@ if (
         return clearInterval(timer)
       }
     }, 250)
+
 
     allPosts.map((post, idx) => {
       let tag = allHeaders[idx].children[0].children[0].innerText

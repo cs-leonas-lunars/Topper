@@ -4,11 +4,14 @@ import Fortmatic from 'fortmatic'
 
 let fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 
+
 export const loadBlockchainData = async data => {
+
   if (window.ethereum) {
     // New Metamask (WebPage)
     window.web3 = new Web3(window.ethereum)
     await window.ethereum.enable()
+
     const web3 = window.web3
     let account = web3.eth.accounts[0]
     console.log('METAMASK WEBPAGE: ', account)
@@ -25,6 +28,7 @@ export const loadBlockchainData = async data => {
   } else if (data) {
     // No Metamask - Fortmatic (Extension)
     window.web3 = new Web3(fm.getProvider())
+
     window.web3.eth.getAccounts((error, accounts) => {
       if (error) throw error
       console.log('FORTMATIC EXTENSION: ', accounts[0])
