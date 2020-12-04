@@ -4,9 +4,7 @@ import Fortmatic from 'fortmatic'
 
 let fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 
-
 export const loadBlockchainData = async data => {
-
   if (window.ethereum) {
     // New Metamask (WebPage)
     window.web3 = new Web3(window.ethereum)
@@ -33,9 +31,10 @@ export const loadBlockchainData = async data => {
       if (error) throw error
       console.log('FORTMATIC EXTENSION: ', accounts[0])
       console.log('RECIPIENT: ', data.recipient)
+      //get infortmation from routes, create an axios.get recipient wallet
       return {
         account: accounts[0],
-        recipient: data.recipient
+        recipient: data.recipient //recipient wallet
       }
     })
   } else {
