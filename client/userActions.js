@@ -26,3 +26,11 @@ export const signup = async info => {
     console.error(err)
   }
 }
+
+// export const hasSignedUp = async() => {
+//   try {
+
+//   } catch(err) {
+
+//   }
+// }
