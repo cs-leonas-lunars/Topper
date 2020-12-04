@@ -1,23 +1,27 @@
-window.localStorage.setItem(
-  'ethereum',
-  window.ethereum
-  // JSON.stringify(window.ethereum, (key, value) => {
-  //   if (typeof value === 'function') {
-  //     console.log('FUNCTION: ', value)
-  //     console.log('FUNCTION AS STRING: ', value.toString())
-  //     return value.toString()
-  //   } else {
-  //     return value
-  //   }
-  // })
-)
-window.localStorage.setItem('web3', window.web3)
 
-window.localStorage.setItem('callEnable', false)
+const enableFunc = async () => {
+  let account = ''
+  if (window.ethereum) {
+    window.web3 = new Web3(window.ethereum)
+    await window.ethereum.enable()
+    const web3 = window.web3
+    account = web3.eth.accounts[0]
+  }
+  window.localStorage.setItem('ethereum', JSON.stringify(window.ethereum))
+  window.localStorage.setItem('web3', window.web3)
+  window.localStorage.setItem('status', 'true')
+  window.localStorage.setItem('onReddit', 'true')
+  window.localStorage.setItem('account', account)
+}
 
-window.addEventListener('storage', () => {
-  // When local storage changes, dump the list to
-  // the console.
-  console.log('CALL ENABLE TRUE??')
-  console.log(JSON.parse(window.localStorage.getItem('callEnable')))
-})
+window.localStorage.clear()
+if (
+  window.location.href.split('/')[2] &&
+  window.location.href.split('/')[2] === 'www.reddit.com'
+) {
+  enableFunc()
+} else {
+  window.localStorage.setItem('status', 'true')
+  window.localStorage.setItem('onReddit', 'false')
+}
+

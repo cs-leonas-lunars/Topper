@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import {loadWeb3, loadBlockchainData} from './loadData'
+
+import {loadBlockchainData} from './loadData'
+
 import {me, login, logout} from './userActions'
 
 const Landing = () => {
@@ -47,7 +49,11 @@ const Landing = () => {
         <button id="login">
           <div id="circle" />
           <img id="redditIcon" src="/images/reddit.png" />
-          <p id="loginText">Log In</p>
+
+          <a id="loginText" href="/auth/reddit">
+            Login
+          </a>
+
         </button>
         <button id="signup">Create An Account</button>
         <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
