@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
+import Transaction from './Transaction'
 import Home from './Home'
 import {loadBlockchainData} from './loadData'
 import {me} from './userActions'
@@ -49,11 +50,23 @@ const Routes = () => {
   }, [])
 
   return (
-    <Switch>
-      <Route path="/home" render={() => <Home user={user} />} />
-      <Route path="/landing" component={Landing} />
-      <Redirect from="/" to="landing" />
-    </Switch>
+    // create a ternary operator which if the recipient address exists, render a new page to specify amount (choose amount, confirm, cancel => cancel clears recipient from state and returns user to main landing page)
+    //if null load regular extension
+    state.initialData.recipient ? (
+      <Switch>
+        <Route
+          path="/transaction"
+          render={() => <Transaction addresses={state.initialData} />}
+        />
+        <Redirect from="/" to="transaction" />
+      </Switch>
+    ) : (
+      <Switch>
+        <Route path="/home" render={() => <Home user={user} />} />
+        <Route path="/landing" component={Landing} />
+        <Redirect from="/" to="landing" />
+      </Switch>
+    )
   )
 }
 
