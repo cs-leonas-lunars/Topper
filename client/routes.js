@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
-import Signup from './Signup'
+import history from './history'
 import {loadWeb3, loadBlockchainData} from './loadData'
 import {me} from './userActions'
 
@@ -28,7 +28,7 @@ const Routes = () => {
 
   return (
     <Switch>
-      <Route exact path="/home" render={() => <Home user={user} />} />
+      <Route path="/home" render={() => <Home user={user} />} />
       <Route path="/landing" component={Landing} />
       <Redirect from="/" to="landing" />
     </Switch>
