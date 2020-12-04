@@ -5,6 +5,8 @@ import Fortmatic from 'fortmatic'
 let fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 
 export const loadBlockchainData = async data => {
+  // hard-coded for testing purposes
+  data.recipient = '0xD3833FA45edd662de6F828BF332DAf4b78Af0365'
   if (window.ethereum) {
     // New Metamask (WebPage)
     window.web3 = new Web3(window.ethereum)
@@ -18,6 +20,7 @@ export const loadBlockchainData = async data => {
     // New Metamask (Extension)
     console.log('METAMASK EXTENSION: ', data.account)
     console.log('RECIPIENT: ', data.recipient)
+
     return {account: data.account, recipient: data.recipient}
   } else if (window.web3 || (data && data.web3 !== 'undefined')) {
     // Old Metamask (Both)
