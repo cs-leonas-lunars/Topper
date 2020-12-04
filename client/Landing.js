@@ -1,10 +1,50 @@
 import React, {useState, useEffect} from 'react'
 
-// import {loadBlockchainData} from './loadData'
+import {loadBlockchainData, loadWeb3} from './loadData'
 
-// import {me, login, logout} from './userActions'
+const Landing = ({history}) => {
+  const [state, setState] = useState({initialData: null, loading: true})
+  const [user, setUser] = useState(null)
+
+  //useEffect for blockchain stuff
+  useEffect(() => {
+    setTimeout(() => {
+      if (chrome.storage) {
+        chrome.storage.local.get(function(data) {
+          setState({initialData: null, loading: true})
+          loadWeb3(data).then(x => {
+            /*
+            chrome.storage.local.set({callEnable: true}, () => {
+              console.log('Successfully Stored!')
+            })
+            */
+            setState({initialData: x, loading: false})
+          })
+        })
+      } else {
+        setState({initialData: null, loading: true})
+        loadWeb3().then(x => setState({initialData: x, loading: false}))
+      }
+    }, 2000)
+  }, [])
+
+  // useEffect for user
+  useEffect(() => {
+    setUser(null)
+    me()
+      .then(x => setUser(x))
+      .catch(err => console.error(err))
+  }, [])
+
+  useEffect(
+    () => {
+      if (user) history.push('/home')
+    },
+    [history, user]
+  )
 
 const Landing = () => {
+
   return (
     <div className="App">
       <header className="App-header">

@@ -2,6 +2,7 @@ const passport = require('passport')
 const router = require('express').Router()
 const {User} = require('../db/models')
 const crypto = require('crypto')
+const {access} = require('fs')
 const RedditStrategy = require('passport-reddit').Strategy
 
 module.exports = router
@@ -14,6 +15,7 @@ passport.use(
       callbackURL: 'http://localhost:5000/auth/reddit/callback'
     },
     function(accessToken, refreshToken, profile, done) {
+      console.log(accessToken, refreshToken, 'TOKENS')
       const redditId = profile.id
       const username = profile.name
       // also could get user image also to make it look all nice -> add imageUrl to models
@@ -33,6 +35,7 @@ router.get('/', (req, res, next) => {
   req.session.state = crypto.randomBytes(32).toString('hex')
   passport.authenticate('reddit', {
     state: req.session.state
+    // duration: 'permanent',
   })(req, res, next)
 })
 
