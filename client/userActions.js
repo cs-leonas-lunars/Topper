@@ -21,8 +21,16 @@ export const logout = async () => {
 export const signup = async info => {
   try {
     await axios.put('api/users/update', info)
-    history.push('/home')
+    window.location.reload()
   } catch (err) {
     console.error(err)
   }
 }
+
+// export const hasSignedUp = async() => {
+//   try {
+
+//   } catch(err) {
+
+//   }
+// }

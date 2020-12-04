@@ -1,27 +1,27 @@
-window.localStorage.setItem('ethereum', window.ethereum)
-window.localStorage.setItem('web3', window.web3)
 
-/*
-chrome.runtime.sendMessage(
-  "eldblkjfmbhajfladajjicjacccfheii",
-  { ethereum: window.ethereum, web3: window.web3 },
-  (res) => {
-    console.log("SENT!");
-    console.log(res);
+const enableFunc = async () => {
+  let account = ''
+  if (window.ethereum) {
+    window.web3 = new Web3(window.ethereum)
+    await window.ethereum.enable()
+    const web3 = window.web3
+    account = web3.eth.accounts[0]
   }
-);
-*/
+  window.localStorage.setItem('ethereum', JSON.stringify(window.ethereum))
+  window.localStorage.setItem('web3', window.web3)
+  window.localStorage.setItem('status', 'true')
+  window.localStorage.setItem('onReddit', 'true')
+  window.localStorage.setItem('account', account)
+}
 
-/*
-chrome.storage.local.set({ ethereum: window.ethereum }, () => {
-  chrome.storage.local.get("ethereum", (data) => {
-    console.log("STORED DATA ETHEREUM: ", data);
-  });
-});
+window.localStorage.clear()
+if (
+  window.location.href.split('/')[2] &&
+  window.location.href.split('/')[2] === 'www.reddit.com'
+) {
+  enableFunc()
+} else {
+  window.localStorage.setItem('status', 'true')
+  window.localStorage.setItem('onReddit', 'false')
+}
 
-chrome.storage.local.set({ web3: window.web3 }, () => {
-  chrome.storage.local.get("web3", (data) => {
-    console.log("STORED DATA WEB3: ", data);
-  });
-});
-*/

@@ -1,57 +1,58 @@
 import Web3 from 'web3'
 import Fortmatic from 'fortmatic'
-import chrome from 'sinon-chrome'
 // import EtherExchange from "../abis/EtherExchange.json";
 
 let fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 
-export const loadWeb3 = async () => {
-  setTimeout(async () => {
-    await chrome.storage.local.get('ethereum', data =>
-      console.log('Ethereum Data (loadData): ', data)
-    )
-    fm.getProvider().isFortmatic = false
-    if (window.ethereum) {
-      // || windowVariable.ethereum) {
-      console.log('New Metamask!')
-      window.web3 = new Web3(window.ethereum)
-      await window.ethereum.enable()
-    } else if (window.web3) {
-      console.log('Old Metamask!')
-      window.web3 = new Web3(window.web3.currentProvider)
-    } else {
-      console.log('Fortmatic!')
-      fm.getProvider().isFortmatic = true
-      window.web3 = new Web3(fm.getProvider())
-    }
-    return loadBlockchainData()
-  }, 2000)
-}
+export const loadBlockchainData = async data => {
+  if (window.ethereum) {
+    // New Metamask (WebPage)
+    window.web3 = new Web3(window.ethereum)
+    await window.ethereum.enable()
 
-export const loadBlockchainData = async () => {
-  if (fm.getProvider().isFortmatic) {
+    const web3 = window.web3
+    let account = web3.eth.accounts[0]
+    console.log('METAMASK WEBPAGE: ', account)
+    return {account}
+  } else if (data && data.ethereum !== 'undefined') {
+    // New Metamask (Extension)
+    console.log('METAMASK EXTENSION: ', data.account)
+    console.log('RECIPIENT: ', data.recipient)
+    return {account: data.account, recipient: data.recipient}
+  } else if (window.web3 || (data && data.web3 !== 'undefined')) {
+    // Old Metamask (Both)
+    console.log('Please update your Metamask!')
+    return {}
+  } else if (data) {
+    // No Metamask - Fortmatic (Extension)
+    window.web3 = new Web3(fm.getProvider())
+
     window.web3.eth.getAccounts((error, accounts) => {
       if (error) throw error
-      console.log('FORTMATIC: ', {
-        account: accounts[0]
-      })
+      console.log('FORTMATIC EXTENSION: ', accounts[0])
+      console.log('RECIPIENT: ', data.recipient)
+      //get infortmation from routes, create an axios.get recipient wallet
+      //also set user wallet to userdb entry
+      return {
+        account: accounts[0],
+        recipient: data.recipient //recipient wallet
+      }
+    })
+  } else {
+    // No Metamask - Fortmatic (WebPage)
+    window.web3 = new Web3(fm.getProvider())
+    window.web3.eth.getAccounts((error, accounts) => {
+      if (error) throw error
+      console.log('FORTMATIC WEBPAGE: ', accounts[0])
       return {
         account: accounts[0]
       }
     })
-  } else {
-    const web3 = window.web3
-    const accounts = await web3.eth.getAccounts()
-    const networkId = await web3.eth.net.getId()
-    console.log('METAMASK: ', {
-      account: accounts[0],
-      networkId: networkId
-    })
-    return {
-      account: accounts[0],
-      networkId: networkId
-    }
   }
+}
+
+/*
+export const loadBlockchainData = async () => {
   // load contract
   // const etherExchangeData = EtherExchange.networks[networkId];
   // change below
@@ -70,4 +71,5 @@ export const loadBlockchainData = async () => {
   // } else {
   //   window.alert("EtherExchange contract not deployed to detected network");
   // }
-}
+};
+*/

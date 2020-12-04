@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
+import Transaction from './Transaction'
 import Home from './Home'
-import Signup from './Signup'
-import {loadWeb3, loadBlockchainData} from './loadData'
+import {loadBlockchainData} from './loadData'
 import {me} from './userActions'
 
 const Routes = () => {
@@ -13,9 +13,32 @@ const Routes = () => {
   //useEffect for blockchain stuff
   useEffect(() => {
     setState({initialData: null, loading: true})
-    loadWeb3()
-      .then(() => loadBlockchainData())
-      .then(x => setState({initialData: x, loading: false}))
+    window.onload = () => {
+      setTimeout(() => {
+        if (chrome.storage) {
+          let timer = setInterval(() => {
+            chrome.storage.local.get(data => {
+              if (data.status && JSON.parse(data.status)) {
+                if (data.onReddit && JSON.parse(data.onReddit)) {
+                  loadBlockchainData(data).then(x => {
+                    setState({initialData: x, loading: false})
+                  })
+                } else {
+                  console.log('Not on Reddit')
+                  setState({initialData: null, loading: false})
+                  //Render NonReddit Extension Page
+                }
+                return clearInterval(timer)
+              }
+            })
+          }, 250)
+        } else {
+          loadBlockchainData().then(x =>
+            setState({initialData: x, loading: false})
+          )
+        }
+      }, 3000)
+    }
   }, [])
 
   // useEffect for user
@@ -27,13 +50,23 @@ const Routes = () => {
   }, [])
 
   return (
-    <Switch>
-      <Route exact path="/signup" component={Signup} />
-      {/* <Route exact path="/home" component={Home} /> */}
-      <Route exact path="/home" render={() => <Home user={user} />} />
-      <Route component={Landing} />
-      {/* <Redirect from="/" to="landing" /> */}
-    </Switch>
+    // create a ternary operator which if the recipient address exists, render a new page to specify amount (choose amount, confirm, cancel => cancel clears recipient from state and returns user to main landing page)
+    //if null load regular extension
+    state.initialData && state.initialData.recipient ? (
+      <Switch>
+        <Route
+          path="/transaction"
+          render={() => <Transaction addresses={state.initialData} />}
+        />
+        <Redirect from="/" to="transaction" />
+      </Switch>
+    ) : (
+      <Switch>
+        <Route path="/home" render={() => <Home user={user} />} />
+        <Route path="/landing" component={Landing} />
+        <Redirect from="/" to="landing" />
+      </Switch>
+    )
   )
 }
 

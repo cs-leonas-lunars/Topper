@@ -31,7 +31,7 @@ const Signup = () => {
           />
         </div>
         <div>
-          <label htmlFor="email">Recipient Address</label>
+          <label htmlFor="email">Email</label>
           <input
             onChange={e => setEmail(e.target.value)}
             type="email"
