@@ -7,7 +7,7 @@ import {me} from './userActions'
 
 const Transaction = props => {
   const [amount, setAmount] = useState(0)
-  const [cancelStatus, setCancelStatus] = useState(false)
+  const [cancelStatus, setCancelStatus] = useState(0)
   const [user, setUser] = useState({})
 
   const handleSubmit = async e => {
@@ -24,7 +24,7 @@ const Transaction = props => {
   }
 
   const cancelTransaction = () => {
-    setCancelStatus(true)
+    setCancelStatus(1)
   }
   // useEffect for user
   useEffect(() => {
@@ -39,9 +39,15 @@ const Transaction = props => {
     //divs for recipient and sender just used in the background
     cancelStatus ? (
       <Switch>
-        <Route path="/home" render={() => <Home user={user} />} />
-        <Route path="/landing" component={Landing} />
-        <Redirect from="/" to="landing" />
+        {user ? (
+          <Route>
+            <Home user={user} />
+          </Route>
+        ) : (
+          <Route>
+            <Landing />
+          </Route>
+        )}
       </Switch>
     ) : (
       <div>
