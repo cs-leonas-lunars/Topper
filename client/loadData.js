@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 import Fortmatic from 'fortmatic'
-//import axios from 'axios';
+import axios from 'axios'
 
 // import EtherExchange from "../abis/EtherExchange.json";
 
@@ -59,35 +59,86 @@ export const loadBlockchainData = async data => {
   } else {
     // No Metamask - Fortmatic (WebPage)
     window.web3 = new Web3(fm.getProvider())
-    return await window.web3.eth.getAccounts((error, accounts) => {
+    let account = ''
+    await window.web3.eth.getAccounts((error, accounts) => {
       if (error) throw error
       console.log('FORTMATIC WEBPAGE: ', accounts[0])
-      return {
-        account: accounts[0]
-      }
+      account = accounts[0]
     })
+    return {
+      account: accounts[0]
+    }
   }
 }
 
 /*
-export const loadBlockchainData = async () => {
-  // load contract
-  // const etherExchangeData = EtherExchange.networks[networkId];
-  // change below
-  // if (etherExchangeData) {
-  //   const etherExchange = new web3.eth.Contract(
-  //     EtherExchange.abi,
-  //     etherExchangeData.address
-  //   );
-  //   let balance = await etherExchange.methods.balanceOf(accounts[0]).call();
-  //   return {
-  //     account: accounts[0],
-  //     networkId: networkId,
-  //     exchange: etherExchange,
-  //     balance: balance.toString(),
-  //   };
-  // } else {
-  //   window.alert("EtherExchange contract not deployed to detected network");
-  // }
-};
+// New Metamask (WebPage)
+    window.web3 = new Web3(window.ethereum)
+    await window.ethereum.enable()
+    const web3 = window.web3
+    account = await axios.get(`/users/${session.user.username}`) // current user on the session (Dunney)
+    let browserAddress = web3.eth.accounts[0]
+    if (account.address !== browserAddress) {
+      account.address = browserAddress
+      await axios.put('/users', account)
+    }
+    return {
+      account: account.address,
+    }
+*/
+
+/*
+// New Metamask (Extension)
+    let account = await axios.get(`/users/${session.user.username}`) // current user on the session (Dunney)
+    let browserAddress = data.account;
+    if (account.address !== browserAddress) {
+      account.address = browserAddress
+      await axios.put('/users', account)
+    }
+    let recipientUsername = data.recipient;
+    let recipient = await axios.get(`/users/${recipientUsername}`)
+    return {
+      account: account.address,
+      recipient: recipient.address,
+    }
+*/
+
+/*
+// No Metamask - Fortmatic (Extension)
+    window.web3 = new Web3(fm.getProvider())
+    let account = {}
+    let recipient = {}
+    await window.web3.eth.getAccounts(async (error, accounts) => {
+      if (error) throw error
+      account = await axios.get(`/users/${session.user.username}`) // current user on the session (Dunney)
+      let browserAddress = accounts[0]
+      if (account.address !== browserAddress) {
+        account.address = browserAddress
+        await axios.put('/users', account)
+      }
+      let recipientUsername = data.recipient
+      recipient = await axios.get(`/users/${recipientUsername}`)
+    })
+    return {
+      account: account.address,
+      recipient: recipient.address,
+    }
+*/
+
+/*
+// No Metamask - Fortmatic (WebPage)
+    window.web3 = new Web3(fm.getProvider())
+    let account = {}
+    await window.web3.eth.getAccounts(async (error, accounts) => {
+      if (error) throw error
+      account = await axios.get(`/users/${session.user.username}`) // current user on the session (Dunney)
+      let browserAddress = accounts[0]
+      if (account.address !== browserAddress) {
+        account.address = browserAddress
+        await axios.put('/users', account)
+      }
+      return {
+        account: account.address,
+      }
+    })
 */

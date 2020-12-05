@@ -13,7 +13,11 @@ const Routes = () => {
   useEffect(() => {
     setUser(null)
     me()
-      .then(x => setUser(x))
+      .then(x => {
+        console.log(x)
+        setUser(x)
+        //window.localStorage.setItem("username", x.)
+      })
       .catch(err => console.error(err))
   }, [])
 
