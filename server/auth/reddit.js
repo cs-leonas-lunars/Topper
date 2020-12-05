@@ -44,7 +44,7 @@ router.get('/callback', (req, res, next) => {
   if (req.query.state === req.session.state) {
     passport.authenticate('reddit', {
       failureRedirect: '/',
-      successRedirect: '/home'
+      successRedirect: '/'
     })(req, res, next)
   } else {
     next(new Error(403))
