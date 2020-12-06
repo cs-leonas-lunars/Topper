@@ -36,6 +36,16 @@ export const createTransaction = async details => {
   }
 }
 
+export const createUser = async userInfo => {
+  try {
+    const res = await axios.post('/api/users', userInfo)
+    return res.data
+    // window.location.reload() ?
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 // export const hasSignedUp = async() => {
 //   try {
 
