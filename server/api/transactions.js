@@ -6,25 +6,28 @@ module.exports = router
 
 //GET USER TRANSACTION HISTORY
 //is it necessary to send the user id?
-router.get('/:id', async (req, res, next) => {
-  try {
-    const transactions = await Transaction.findAll({
-      where: {
-        userId: req.params.id
-      }
-    })
-    res.send(transactions)
-  } catch (err) {
-    console.error(err)
-    next(err) // <-- do we need that
-  }
-})
+// router.get('/', async (req, res, next) => {
+//   try {
+//     const transactions = await Transaction.findAll({
+//       where: {
+//         userId: req.user.id,
+//       },
+//     })
+//     res.send(transactions)
+//   } catch (err) {
+//     console.error(err)
+//     next(err) // <-- do we need that
+//   }
+// })
 
 //NEW TRANSACTION
 
 router.post('/', async (req, res, next) => {
   try {
-    const newTransaction = await Transaction.create(req.body)
+    const newTransaction = await Transaction.create(req.body, {
+      userId: req.user.id
+    })
+    console.log(newTransaction, 'NEW TRANSACTION')
     res.send(newTransaction)
   } catch (err) {
     console.error(err)
