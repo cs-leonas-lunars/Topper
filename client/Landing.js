@@ -4,41 +4,52 @@ import Transaction from './Transaction'
 import {loadBlockchainData} from './loadData'
 
 const Landing = () => {
-  const [state, setState] = useState({initialData: null, loading: true})
+  const [state, setState] = useState({
+    initialData: null,
+    loading: true,
+    onReddit: false
+  })
 
   useEffect(() => {
-    window.onload = () => {
-      setTimeout(() => {
-        if (chrome.storage) {
-          let timer = setInterval(() => {
-            chrome.storage.local.get(data => {
-              if (data.status && JSON.parse(data.status)) {
-                if (data.onReddit && JSON.parse(data.onReddit)) {
-                  loadBlockchainData(data).then(x => {
-                    setState({initialData: x, loading: false})
-                  })
-                } else {
-                  console.log('Not on Reddit')
-                  setState({initialData: null, loading: false})
-                  //Render NonReddit Extension Page
-                }
-                return clearInterval(timer)
+    setTimeout(() => {
+      if (chrome.storage) {
+        let timer = setInterval(() => {
+          chrome.storage.local.get(data => {
+            if (data.status && JSON.parse(data.status)) {
+              if (data.onReddit && JSON.parse(data.onReddit)) {
+                loadBlockchainData(data).then(x => {
+                  setState({initialData: x, loading: false, onReddit: true})
+                })
+              } else {
+                console.log('Not on Reddit')
+                setState({initialData: null, loading: false, onReddit: false})
+                //Render NonReddit Extension Page
               }
-            })
-          }, 250)
-        } else {
-          loadBlockchainData().then(x =>
-            setState({initialData: x, loading: false})
-          )
-        }
-      }, 3000)
-    }
+              return clearInterval(timer)
+            }
+          })
+        }, 250)
+      } else {
+        loadBlockchainData().then(x =>
+          setState({initialData: x, loading: false, onReddit: true})
+        )
+      }
+    }, 3000)
   }, [])
 
   return (
     // create a ternary operator which if the recipient address exists, render a new page to specify amount (choose amount, confirm, cancel => cancel clears recipient from state and returns user to main landing page)
     //if null load regular extension
-    state.initialData && state.initialData.recipient ? (
+    state.loading ? (
+      <div className="App">
+        <header className="App-header">
+          <img id="background" src="/images/topperBackground.gif" />
+          <div id="overlay" onClick={() => toggleMenu(true)} />
+          <img id="loadIcon" src="/images/loadGif.gif" />
+          <img id="loadJar" src="/images/loadJar.png" />
+        </header>
+      </div>
+    ) : state.initialData && state.initialData.recipient ? (
       <Switch>
         <Route>
           <Transaction addresses={state.initialData} />
@@ -52,39 +63,51 @@ const Landing = () => {
           <img id="brandIcon" src="/images/TipJar.png" />
           <h1 id="logoText">Topper</h1>
           <p id="paraText">Please Log In With Reddit</p>
-          <a id="login" href="/auth/reddit">
-            <div id="circle" />
-            <img id="redditIcon" src="/images/reddit.png" />
-
-            <p id="loginText" href="/auth/reddit">
-              Login
-            </p>
-          </a>
-          <button id="signup">Create An Account</button>
+          {chrome.storage ? (
+            <div
+              id="login"
+              onClick={() => {
+                let tabId = null
+                chrome.tabs.query({currentWindow: true, active: true}, tabs => {
+                  tabId = tabs[0].id
+                  setTimeout(() => {
+                    chrome.tabs.remove(tabId)
+                  }, 10)
+                  window.open('https://www.reddit.com/login')
+                })
+              }}
+            >
+              <div id="circle" />
+              <img id="redditIcon" src="/images/reddit.png" />
+              <p id="loginText">Login</p>
+            </div>
+          ) : (
+            <a id="login" href="/auth/reddit">
+              <div id="circle" />
+              <img id="redditIcon" src="/images/reddit.png" />
+              <p id="loginText">Login</p>
+            </a>
+          )}
+          <button
+            id="signup"
+            onClick={() => {
+              let tabId = null
+              chrome.tabs.query({currentWindow: true, active: true}, tabs => {
+                tabId = tabs[0].id
+                setTimeout(() => {
+                  chrome.tabs.remove(tabId)
+                }, 10)
+                window.open('https://www.reddit.com/register')
+              })
+            }}
+          >
+            Create An Account
+          </button>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
-          <button id="menuButton" onClick={() => toggleMenu(false)}>
-            =
-          </button>
-          <div id="menu" />
-          <button id="closeMenu" onClick={() => toggleMenu(true)}>
-            +
-          </button>
         </header>
       </div>
     )
   )
-}
-
-function toggleMenu(status) {
-  if (status) {
-    document.getElementById('menu').style.cssText =
-      'width: 0vw; box-shadow: 0px 0px 0px 0px #000'
-    document.getElementById('closeMenu').style.cssText = 'right: -75vw'
-  } else {
-    document.getElementById('menu').style.cssText =
-      'width: 80vw; box-shadow: -20px 0px 40px -40px #000'
-    document.getElementById('closeMenu').style.cssText = 'right: 5vw'
-  }
 }
 
 export default Landing

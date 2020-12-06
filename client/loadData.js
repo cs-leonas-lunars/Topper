@@ -66,7 +66,7 @@ export const loadBlockchainData = async data => {
         account: account,
         recipient: recipient.data.address
       }
-    } else
+    } else if (data.recipient)
       window.open(
         `https://www.reddit.com/message/compose?to=${
           data.recipient
@@ -74,6 +74,10 @@ export const loadBlockchainData = async data => {
           data.recipient
         },%20I%20liked%20your%20post.%20Download%20the%20Topper%20Chrome%20Extension%20to%20receive%20your%20tip%20in%20ETH.%20Link%20to%20download:%20https://topper-fsa.herokuapp.com`
       )
+    else
+      return {
+        account: account
+      }
   } else {
     // No Metamask - Fortmatic (WebPage)
     window.web3 = new Web3(fm.getProvider())

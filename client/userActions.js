@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from './history'
+
 export const me = async () => {
   try {
     const res = await axios.get('/auth/me')

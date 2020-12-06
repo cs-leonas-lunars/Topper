@@ -1,4 +1,3 @@
-
 const enableFunc = async () => {
   let account = ''
   if (window.ethereum) {
@@ -24,4 +23,3 @@ if (
   window.localStorage.setItem('status', 'true')
   window.localStorage.setItem('onReddit', 'false')
 }
-
