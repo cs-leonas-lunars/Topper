@@ -14,7 +14,7 @@ const Routes = () => {
     setUser(null)
     me()
       .then(x => {
-        console.log(x)
+        console.log('USER: ', x)
         setUser(x)
         //window.localStorage.setItem("username", x.)
       })

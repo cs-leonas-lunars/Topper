@@ -17,17 +17,12 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:username', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.username)
+    const user = await User.findOne({
+      where: {
+        username: req.params.username
+      }
+    })
     res.json(user)
-  } catch (err) {
-    next(err)
-  }
-})
-
-// CHECK THIS LOGIC
-router.put('/', async (req, res, next) => {
-  try {
-    await User.update(req.body.account)
   } catch (err) {
     next(err)
   }

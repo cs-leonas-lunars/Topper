@@ -1,4 +1,3 @@
-
 chrome.storage.local.clear()
 
 let start = 0
@@ -24,7 +23,6 @@ if (
   )
   end = allPosts.length
 
-
   window.onload = () => {
     let timer = setInterval(() => {
       let status = window.localStorage.getItem('status')
@@ -44,7 +42,6 @@ if (
         return clearInterval(timer)
       }
     }, 250)
-
 
     allPosts.map((post, idx) => {
       let tag = allHeaders[idx].children[0].children[0].innerText
@@ -124,7 +121,29 @@ function injectButton(post, idx) {
   btn.appendChild(image)
   btn.appendChild(text)
   btn.onclick = () => {
-    let recipient = allUsers[btn.id].children[3].innerText.split('/')[1]
+    let location = window.location.href.split('/')[3]
+    let recipient = ''
+    if (
+      location === '' ||
+      location === 'best' ||
+      location === 'hot' ||
+      location === 'top' ||
+      location === 'new'
+    ) {
+      console.log(allUsers[btn.id])
+      recipient = allUsers[btn.id].children[3].innerText.split('/')[1]
+    } else if (
+      window.location.href.split('/')[4] === 'popular' ||
+      window.location.href.split('/')[3] === 'all'
+    ) {
+      console.log(allUsers[btn.id])
+      recipient = allUsers[btn.id].children[3].innerText.split('/')[1]
+    } else {
+      console.log(allUsers[btn.id])
+      recipient = allUsers[btn.id].children[1].children[0].innerText.split(
+        '/'
+      )[1]
+    }
     chrome.storage.local.set({recipient})
     //initiateTransaction(recipient);
   }
