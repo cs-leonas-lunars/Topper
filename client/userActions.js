@@ -12,7 +12,7 @@ export const me = async () => {
 export const logout = async () => {
   try {
     await axios.post('/auth/logout')
-    history.push('/')
+    window.location.reload()
   } catch (err) {
     console.error(err)
   }
@@ -21,6 +21,15 @@ export const logout = async () => {
 export const signup = async info => {
   try {
     await axios.put('api/users/update', info)
+    window.location.reload()
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const createTransaction = async details => {
+  try {
+    await axios.post('/api/transactions', details)
     window.location.reload()
   } catch (err) {
     console.error(err)
