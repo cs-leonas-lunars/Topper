@@ -9,8 +9,8 @@ async function seed() {
 
   const user1 = await User.create({
     email: faker.internet.email(),
-    username: faker.internet.userName(),
-    address: '0x7803D96d9701F380F69210447F1BBCF7264dC909'
+    username: 'UnfairBoysenberry190',
+    address: '0xc19100527eeA6B56a58542B56D18944021cfD181'
   })
 
   const user2 = await User.create({

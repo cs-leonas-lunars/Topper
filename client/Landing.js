@@ -52,14 +52,14 @@ const Landing = () => {
           <img id="brandIcon" src="/images/TipJar.png" />
           <h1 id="logoText">Topper</h1>
           <p id="paraText">Please Log In With Reddit</p>
-          <button id="login">
+          <a id="login" href="/auth/reddit">
             <div id="circle" />
             <img id="redditIcon" src="/images/reddit.png" />
 
-            <a id="loginText" href="/auth/reddit">
+            <p id="loginText" href="/auth/reddit">
               Login
-            </a>
-          </button>
+            </p>
+          </a>
           <button id="signup">Create An Account</button>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
           <button id="menuButton" onClick={() => toggleMenu(false)}>
