@@ -41,13 +41,21 @@ const Signup = () => {
             required
           />
         </div>
-
+        {/*}
         <div className="submit-exchange">
           <button className="submit-button" type="submit" value="submit">
             Finish!
           </button>
         </div>
+        */}
       </form>
+      <button
+        className="submit-button"
+        type="button"
+        onClick={() => window.close()}
+      >
+        Finish!
+      </button>
     </div>
   )
 }

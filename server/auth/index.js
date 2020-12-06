@@ -39,9 +39,13 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', async (req, res) => {
-  const user = await User.findByPk(req.user.id, {
-    include: Transaction
-  })
-
+  let user = {}
+  if (chrome.storage) {
+    user = {}
+  } else {
+    user = await User.findByPk(req.user.id, {
+      include: Transaction
+    })
+  }
   res.json(user)
 })

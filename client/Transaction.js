@@ -25,6 +25,7 @@ const Transaction = props => {
 
   const cancelTransaction = () => {
     setCancelStatus(1)
+    window.close()
   }
   // useEffect for user
   useEffect(() => {
@@ -50,35 +51,48 @@ const Transaction = props => {
         )}
       </Switch>
     ) : (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="ethAmount">ETH Amount</label>
-            <input
-              onChange={e => setAmount(e.target.value)}
-              type="float"
-              name="amount"
-              placeholder="0.1"
-              value={amount}
-              required
-            />
-          </div>
-
-          <div className="submit-transaction">
-            <button className="submit-amount" type="submit" value="submit">
-              Submit
+      <div className="App">
+        <header className="App-header">
+          <img id="background" src="/images/topperBackground.gif" />
+          <div id="overlay" />
+          {console.log(props.addresses)}
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label id="setAmountLabel" htmlFor="ethAmount">
+                ETH Amount
+              </label>
+              <input
+                id="setAmountInput"
+                onChange={e => setAmount(e.target.value)}
+                type="float"
+                name="amount"
+                autoComplete="off"
+                value={amount}
+                required
+              />
+            </div>
+            <div className="submit-transaction">
+              <button
+                className="submit-amount"
+                id="submitTransaction"
+                type="submit"
+                value="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+          <div className="cancel-transaction">
+            <button
+              type="button"
+              id="cancelTransaction"
+              className="submit-amount"
+              onClick={cancelTransaction}
+            >
+              Cancel
             </button>
           </div>
-        </form>
-        <div className="cancel-transaction">
-          <button
-            type="button"
-            className="submit-amount"
-            onClick={cancelTransaction}
-          >
-            Cancel
-          </button>
-        </div>
+        </header>
       </div>
     )
   )

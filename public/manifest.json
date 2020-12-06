@@ -15,7 +15,7 @@
   },
   "content_security_policy":
     "script-src 'self' 'sha256-2f2/1D0emiWe/SLg6UTAOT3O6C6C61kbslq01Bv7g+A='; object-src 'self'",
-  "permissions": ["activeTab", "tabs", "storage"],
+  "permissions": ["activeTab", "tabs", "storage", "notifications"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
