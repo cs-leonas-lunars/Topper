@@ -55,6 +55,7 @@ const Transaction = props => {
         <header className="App-header">
           <img id="background" src="/images/topperBackground.gif" />
           <div id="overlay" />
+          {console.log(props.addresses)}
           <form onSubmit={handleSubmit}>
             <div>
               <label id="setAmountLabel" htmlFor="ethAmount">

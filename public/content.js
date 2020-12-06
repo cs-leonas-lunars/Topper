@@ -151,16 +151,13 @@ function injectButton(post, idx) {
       location === 'top' ||
       location === 'new'
     ) {
-      console.log(allUsers[btn.id])
       recipient = allUsers[btn.id].children[3].innerText.split('/')[1]
     } else if (
       window.location.href.split('/')[4] === 'popular' ||
       window.location.href.split('/')[3] === 'all'
     ) {
-      console.log(allUsers[btn.id])
       recipient = allUsers[btn.id].children[3].innerText.split('/')[1]
     } else {
-      console.log(allUsers[btn.id])
       recipient = allUsers[btn.id].children[1].children[0].innerText.split(
         '/'
       )[1]

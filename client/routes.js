@@ -17,7 +17,6 @@ const Routes = () => {
           chrome.storage.local.get(data => {
             if (data.status && JSON.parse(data.status)) {
               if (data.onReddit && JSON.parse(data.onReddit)) {
-                console.log('USER ROUTES: ', data.currentUser)
                 setUser(data.currentUser)
               } else {
                 console.log('Not on Reddit')

@@ -8,6 +8,7 @@ let fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 
 export const loadBlockchainData = async data => {
   if (window.ethereum) {
+    console.log('New Metamask (Webpage)')
     // New Metamask (WebPage)
     window.web3 = new Web3(window.ethereum)
     await window.ethereum.enable()
@@ -16,6 +17,7 @@ export const loadBlockchainData = async data => {
       account: web3.eth.accounts[0]
     }
   } else if (data && data.ethereum !== 'undefined') {
+    console.log('New Metamask (Extension)')
     // New Metamask (Extension)
     let recipient = await axios.get(
       `http://localhost:5000/api/users/${data.recipient}`
@@ -29,7 +31,7 @@ export const loadBlockchainData = async data => {
         account: data.account,
         recipient: recipient.data.address
       }
-    } else
+    } else if (data.recipient)
       window.open(
         `https://www.reddit.com/message/compose?to=${
           data.recipient
@@ -37,11 +39,18 @@ export const loadBlockchainData = async data => {
           data.recipient
         },%20I%20liked%20your%20post.%20Download%20the%20Topper%20Chrome%20Extension%20to%20receive%20your%20tip%20in%20ETH.%20Link%20to%20download:%20https://topper-fsa.herokuapp.com`
       )
-  } else if (window.web3 || (data && data.web3 !== 'undefined')) {
+    else
+      return {
+        account: data.account
+      }
+  } else if (data) {
+    /*else if (window.web3 || (data && data.web3 !== 'undefined')) {
     // Old Metamask (Both)
     console.log('Please update your Metamask!')
     return {}
-  } else if (data) {
+  }*/ console.log(
+      'Fortmatic (Extension)'
+    )
     // No Metamask - Fortmatic (Extension)
     window.web3 = new Web3(fm.getProvider())
     let account = {}
@@ -79,6 +88,7 @@ export const loadBlockchainData = async data => {
         account: account
       }
   } else {
+    console.log('Fortmatic (Webpage)')
     // No Metamask - Fortmatic (WebPage)
     window.web3 = new Web3(fm.getProvider())
     let account = {}
