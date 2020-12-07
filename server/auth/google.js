@@ -56,8 +56,8 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   router.get(
     '/callback',
     passport.authenticate('google', {
-      successRedirect: '/home',
-      failureRedirect: '/login'
+      successRedirect: '/',
+      failureRedirect: '/'
     })
   )
 }

@@ -2,29 +2,33 @@ import React, {useState, useEffect} from 'react'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
+import Signup from './Signup'
+import Transaction from './Transaction'
 import {me} from './userActions'
 import Signup from './Signup'
 
 const Routes = () => {
-  const [user, setUser] = useState({})
-
-  //useEffect for blockchain stuff
+  const [user, setUser] = useState(null)
 
   // useEffect for user
   useEffect(() => {
-    setUser(null)
     me()
       .then(x => {
-        console.log('USER: ', x)
         setUser(x)
-        //window.localStorage.setItem("username", x.)
       })
       .catch(err => console.error(err))
   }, [])
 
   return (
     <Switch>
-      {user ? (
+      {window.location.href.split('/')[3] === 'send-transaction' ? (
+        <Route>
+          <Transaction
+            user={user}
+            recipient={window.location.href.split('=')[1]}
+          />
+        </Route>
+      ) : user ? (
         <Route>
           <Home user={user} />
         </Route>

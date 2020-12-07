@@ -31,13 +31,21 @@ const Signup = () => {
           </label>
           <input name="password" type="password" />
         </div>
-
+        {/*}
         <div className="submit-exchange">
           <button id="signup-button" type="submit" value="submit">
             Finish!
           </button>
         </div>
+        */}
       </form>
+      <button
+        className="submit-button"
+        type="button"
+        onClick={() => window.close()}
+      >
+        Finish!
+      </button>
     </div>
   )
 }
