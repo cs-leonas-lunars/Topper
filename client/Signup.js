@@ -17,33 +17,23 @@ const Signup = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div id="signup-component">
+      <form onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor="address">Wallet Address</label>
-          <input
-            onChange={e => setAddress(e.target.value)}
-            type="text"
-            name="address"
-            placeholder="0x7803..."
-            value={address}
-            required
-          />
+          <label htmlFor="email">
+            <small>Email</small>
+          </label>
+          <input name="email" type="text" />
         </div>
         <div>
-          <label htmlFor="email">Email</label>
-          <input
-            onChange={e => setEmail(e.target.value)}
-            type="email"
-            name="email"
-            placeholder="bob@topper.com"
-            value={email}
-            required
-          />
+          <label htmlFor="password">
+            <small>Password</small>
+          </label>
+          <input name="password" type="password" />
         </div>
         {/*}
         <div className="submit-exchange">
-          <button className="submit-button" type="submit" value="submit">
+          <button id="signup-button" type="submit" value="submit">
             Finish!
           </button>
         </div>

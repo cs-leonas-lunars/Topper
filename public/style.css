@@ -233,6 +233,28 @@ form div {
   z-index: 2;
 }
 
+#signup-component {
+  z-index: 4;
+}
+
+#signup-button {
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  left: 50%;
+  margin-left: -75px;
+  bottom: 25vh;
+  background-color: transparent;
+  backdrop-filter: blur(35px);
+  border-radius: 100vh;
+  border-width: 0;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 0px 35px -17.5px #000;
+  transition: background-color 0.35s, box-shadow 0.35s;
+  z-index: 2;
+}
+
 #signup:hover {
   color: #ccc;
 }
