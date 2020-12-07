@@ -42,19 +42,21 @@ form div {
 
 #loadIcon {
   position: absolute;
-  width: 30%;
+  width: 120px;
   height: auto;
-  left: 34%;
-  top: 40%;
+  top: 42%;
+  left: 50%;
+  margin-left: -70px;
   z-index: 3;
 }
 
 #loadJar {
   position: absolute;
-  width: 50%;
+  width: 200px;
   height: auto;
-  left: 26%;
-  top: 25%;
+  top: 30%;
+  left: 50%;
+  margin-left: -100px;
   z-index: 2;
 }
 
