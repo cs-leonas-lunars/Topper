@@ -3,59 +3,54 @@ import fortmaticTransaction from './fortmaticTransaction'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
-import {me} from './userActions'
+import {loadBlockchainData} from './loadData'
 
 const Transaction = props => {
   const [amount, setAmount] = useState(0)
   const [cancelStatus, setCancelStatus] = useState(0)
-  const [user, setUser] = useState({})
+  const [data, setData] = useState({initialData: null, loading: true})
+
+  useEffect(() => {
+    loadBlockchainData(props.recipient).then(x => {
+      console.log(x)
+      setData({initialData: x, loading: false})
+    })
+  }, [])
 
   const handleSubmit = async e => {
     e.preventDefault()
     const info = {
-      account: props.addresses.account,
-      recipient: props.addresses.recipient,
+      account: data.initialData.account,
+      recipient: data.initialData.recipient,
       amount
     }
-    //await signup(info)  //actually execute the transaction (open Fortmatic)
-    fortmaticTransaction(info.recipient, info.amount, info.account).then(() => {
-      console.log('SUCCESS!')
-    })
+    fortmaticTransaction(info.recipient, info.amount, info.account)
   }
 
   const cancelTransaction = () => {
     setCancelStatus(1)
-    window.close()
   }
-  // useEffect for user
-  useEffect(() => {
-    setUser(null)
-    me()
-      .then(x => setUser(x))
-      .catch(err => console.error(err))
-  }, [])
 
   return (
     // 5 USD = 0.0085 Ethereum, add exchange rate div
     //divs for recipient and sender just used in the background
-    cancelStatus ? (
-      <Switch>
-        {user ? (
-          <Route>
-            <Home user={user} />
-          </Route>
-        ) : (
-          <Route>
-            <Landing />
-          </Route>
-        )}
-      </Switch>
-    ) : (
+    data.loading ? (
       <div className="App">
         <header className="App-header">
           <img id="background" src="/images/topperBackground.gif" />
+          <div id="overlay" onClick={() => toggleMenu(true)} />
+          <img id="loadIcon" src="/images/loadGif.gif" />
+          <img id="loadJar" src="/images/loadJar.png" />
+        </header>
+      </div>
+    ) : cancelStatus ? (
+      <div>{window.close()}</div>
+    ) : (
+      <div className="App">
+        {console.log(props.recipient)}
+        <header className="App-header">
+          <img id="background" src="/images/topperBackground.gif" />
           <div id="overlay" />
-          {console.log(props.addresses)}
           <form onSubmit={handleSubmit}>
             <div>
               <label id="setAmountLabel" htmlFor="ethAmount">
@@ -89,7 +84,7 @@ const Transaction = props => {
               className="submit-amount"
               onClick={cancelTransaction}
             >
-              Cancel
+              Close
             </button>
           </div>
         </header>
