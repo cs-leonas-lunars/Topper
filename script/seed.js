@@ -10,7 +10,7 @@ async function seed() {
   const user1 = await User.create({
     email: faker.internet.email(),
     username: 'UnfairBoysenberry190',
-    address: '0xc19100527eeA6B56a58542B56D18944021cfD181'
+    address: '0xE9508ea6E2BfEC43e90B8cf911284118E93D9F5E'
   })
 
   const user2 = await User.create({
@@ -35,6 +35,12 @@ async function seed() {
     email: faker.internet.email(),
     username: faker.internet.userName(),
     address: '0x4F463ee218bA7403d963Fa314C3760302Ca7D749'
+  })
+
+  const user6 = await User.create({
+    email: faker.internet.email(),
+    username: 'jessalexandria',
+    address: '0x6137bB3E12b2a1DaeA6240b71F5DA195a0D84B87'
   })
 
   const transaction1 = await Transaction.create({
