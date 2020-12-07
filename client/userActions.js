@@ -29,6 +29,7 @@ export const signup = async info => {
 }
 
 export const createTransaction = async details => {
+  // details -> {recipient, amount, sender}
   try {
     await axios.post('/api/transactions', details)
     window.location.reload()

@@ -3,7 +3,7 @@ import fortmaticTransaction from './fortmaticTransaction'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
-import {me} from './userActions'
+import {me, createTransaction} from './userActions'
 
 const Transaction = props => {
   const [amount, setAmount] = useState(0)
@@ -17,6 +17,7 @@ const Transaction = props => {
       recipient: props.addresses.recipient,
       amount
     }
+    //await createTransaction(info)
     //await signup(info)  //actually execute the transaction (open Fortmatic)
     fortmaticTransaction(info.recipient, info.amount, info.account).then(() => {
       console.log('SUCCESS!')

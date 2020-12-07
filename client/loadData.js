@@ -9,7 +9,6 @@ let fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 export const loadBlockchainData = async data => {
   if (window.ethereum) {
     console.log('New Metamask (Webpage)')
-    // New Metamask (WebPage)
     window.web3 = new Web3(window.ethereum)
     await window.ethereum.enable()
     const web3 = window.web3
@@ -18,8 +17,8 @@ export const loadBlockchainData = async data => {
     }
   } else if (data && data.ethereum !== 'undefined') {
     console.log('New Metamask (Extension)')
-    // New Metamask (Extension)
-    let recipient = await axios.get(
+    let recipient = ''
+    recipient = await axios.get(
       `http://localhost:5000/api/users/${data.recipient}`
     )
     if (data.recipient && recipient.data) {
@@ -51,7 +50,6 @@ export const loadBlockchainData = async data => {
   }*/ console.log(
       'Fortmatic (Extension)'
     )
-    // No Metamask - Fortmatic (Extension)
     window.web3 = new Web3(fm.getProvider())
     let account = {}
     let recipient = {}
@@ -89,7 +87,6 @@ export const loadBlockchainData = async data => {
       }
   } else {
     console.log('Fortmatic (Webpage)')
-    // No Metamask - Fortmatic (WebPage)
     window.web3 = new Web3(fm.getProvider())
     let account = {}
     await window.web3.eth.getAccounts(async (error, accounts) => {

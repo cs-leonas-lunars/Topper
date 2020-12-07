@@ -2,7 +2,7 @@ chrome.storage.local.clear()
 
 let start = 0
 let end = 0
-let currentUser = ''
+let currentUser = null
 let allPosts = []
 let allUsers = []
 let allHeaders = []
@@ -10,8 +10,9 @@ var currentURL = ''
 document.addEventListener('scroll', () => findPosts())
 
 if (
-  window.location.href.split('/')[2] &&
-  window.location.href.split('/')[2] === 'www.reddit.com'
+  (window.location.href.split('/')[2] &&
+    window.location.href.split('/')[2] === 'www.reddit.com') ||
+  window.location.href.split('/')[2] === 'reddit.com'
 ) {
   start = 0
   allPosts = Array.from(
@@ -31,11 +32,7 @@ if (
     if (
       Array.from(document.getElementsByClassName('_1pHyKCBktIf_9WFW9jjM3P'))[0]
     ) {
-      currentUser = Array.from(
-        document.getElementsByClassName('_1pHyKCBktIf_9WFW9jjM3P')
-      )[0].children[0].innerText
-    } else {
-      currentUser = null
+      currentUser = 'yes'
     }
 
     let timer = setInterval(() => {
@@ -45,13 +42,15 @@ if (
         if (ethereum !== 'undefined') ethereum = JSON.parse(ethereum)
         let web3 = window.localStorage.getItem('web3')
         let account = window.localStorage.getItem('account')
-        let onReddit = window.localStorage.getItem('onReddit')
+        let onPage = window.localStorage.getItem('onPage')
+        let currentPage = window.localStorage.getItem('currentPage')
         chrome.storage.local.set({
           ethereum,
           web3,
           account,
           status,
-          onReddit,
+          onPage,
+          currentPage,
           currentUser
         })
         return clearInterval(timer)
@@ -71,21 +70,6 @@ if (
       }
     }, 250)
   }
-} else {
-  let timer = setInterval(() => {
-    let status = window.localStorage.getItem('status')
-    if (status) {
-      let ethereum = JSON.parse(window.localStorage.getItem('ethereum'))
-      let web3 = window.localStorage.getItem('web3')
-      let onReddit = window.localStorage.getItem('onReddit')
-      return chrome.storage.local.set(
-        {ethereum, web3, status, onReddit},
-        () => {
-          return clearInterval(timer)
-        }
-      )
-    }
-  }, 250)
 }
 
 function findPosts() {
@@ -214,6 +198,12 @@ function injectButton(post, idx) {
 }
 
 const pageNavigation = () => {
+  if (
+    Array.from(document.getElementsByClassName('_1pHyKCBktIf_9WFW9jjM3P'))[0]
+  ) {
+    currentUser = 'yes'
+  }
+
   let timer = setInterval(() => {
     let status = window.localStorage.getItem('status')
     if (status) {
@@ -221,13 +211,16 @@ const pageNavigation = () => {
       if (ethereum !== 'undefined') ethereum = JSON.parse(ethereum)
       let web3 = window.localStorage.getItem('web3')
       let account = window.localStorage.getItem('account')
-      let onReddit = window.localStorage.getItem('onReddit')
+      let onPage = window.localStorage.getItem('onPage')
+      let currentPage = window.localStorage.getItem('currentPage')
       chrome.storage.local.set({
         ethereum,
         web3,
         account,
         status,
-        onReddit
+        onPage,
+        currentPage,
+        currentUser
       })
       return clearInterval(timer)
     }
