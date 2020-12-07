@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
+import {withRouter, Route, Switch, Link, Redirect} from 'react-router-dom'
 import Transaction from './Transaction'
 import {loadBlockchainData} from './loadData'
+import Signup from './Signup'
 
 const Landing = () => {
   const [state, setState] = useState({initialData: null, loading: true})
+  const [component, setComponent] = useState(0)
 
   useEffect(() => {
     window.onload = () => {
@@ -35,16 +37,10 @@ const Landing = () => {
     }
   }, [])
 
-  return (
-    // create a ternary operator which if the recipient address exists, render a new page to specify amount (choose amount, confirm, cancel => cancel clears recipient from state and returns user to main landing page)
-    //if null load regular extension
-    state.initialData && state.initialData.recipient ? (
-      <Switch>
-        <Route>
-          <Transaction addresses={state.initialData} />
-        </Route>
-      </Switch>
-    ) : (
+  // create a ternary operator which if the recipient address exists, render a new page to specify amount (choose amount, confirm, cancel => cancel clears recipient from state and returns user to main landing page)
+  //if null load regular extension
+  if (component === 0) {
+    return (
       <div className="App">
         <header className="App-header">
           <img id="background" src="/images/topperBackground.gif" />
@@ -55,12 +51,14 @@ const Landing = () => {
           <a id="login" href="/auth/reddit">
             <div id="circle" />
             <img id="redditIcon" src="/images/reddit.png" />
-
             <p id="loginText" href="/auth/reddit">
               Login
             </p>
           </a>
-          <button id="signup">Create An Account</button>
+          <button id="signup" onClick={() => setComponent(1)}>
+            Create An Account
+          </button>
+
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
           <button id="menuButton" onClick={() => toggleMenu(false)}>
             =
@@ -72,7 +70,65 @@ const Landing = () => {
         </header>
       </div>
     )
-  )
+  } else if (component === 1) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img id="background" src="/images/topperBackground.gif" />
+          <div id="overlay" onClick={() => toggleMenu(true)} />
+          <img id="brandIcon" src="/images/TipJar.png" />
+
+          {/* <h1 id="logoText">Topper</h1> */}
+          <Signup />
+          <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
+          <button id="menuButton" onClick={() => toggleMenu(false)}>
+            =
+          </button>
+          <div id="menu" />
+          <button id="closeMenu" onClick={() => toggleMenu(true)}>
+            +
+          </button>
+        </header>
+      </div>
+    )
+  }
+  //   if (state.initialData && state.initialData.recipient) {
+  //     return (
+  //       <Transaction addresses={state.initialData} />
+  //     )
+  //   } else if () {
+  //     return (
+  //       <div className="App">
+  //         <header className="App-header">
+  //           <img id="background" src="/images/topperBackground.gif" />
+  //           <div id="overlay" onClick={() => toggleMenu(true)} />
+  //           <img id="brandIcon" src="/images/TipJar.png" />
+  //           <h1 id="logoText">Topper</h1>
+  //           <p id="paraText">Please Log In With Reddit</p>
+  //           <a id="login" href="/auth/reddit">
+  //             <div id="circle" />
+  //             <img id="redditIcon" src="/images/reddit.png" />
+
+  //             <p id="loginText" href="/auth/reddit">
+  //               Login
+  //             </p>
+  //           </a>
+
+  //           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
+  //           <button id="menuButton" onClick={() => toggleMenu(false)}>
+  //             =
+  //           </button>
+  //           <div id="menu" />
+  //           <button id="closeMenu" onClick={() => toggleMenu(true)}>
+  //             +
+  //           </button>
+  //         </header>
+  //       </div>
+  //     )
+  //   }
+  //   else if (signup) {
+
+  //   }
 }
 
 function toggleMenu(status) {

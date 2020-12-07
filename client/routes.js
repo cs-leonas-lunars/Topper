@@ -3,6 +3,7 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
 import {me} from './userActions'
+import Signup from './Signup'
 
 const Routes = () => {
   const [user, setUser] = useState({})
