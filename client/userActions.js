@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from './history'
+
 export const me = async () => {
   try {
     const res = await axios.get('/auth/me')
@@ -9,10 +10,10 @@ export const me = async () => {
   }
 }
 
-export const logout = async () => {
+export const login = async credentials => {
   try {
-    await axios.post('/auth/logout')
-    window.location.reload()
+    const res = await axios.post('/auth/login', credentials)
+    return res.data
   } catch (err) {
     console.error(err)
   }
@@ -20,7 +21,16 @@ export const logout = async () => {
 
 export const signup = async info => {
   try {
-    await axios.put('api/users/update', info)
+    await axios.put('/auth/signup', info)
+    window.location.reload()
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const logout = async () => {
+  try {
+    await axios.post('/auth/logout')
     window.location.reload()
   } catch (err) {
     console.error(err)
@@ -36,15 +46,22 @@ export const createTransaction = async details => {
   }
 }
 
-export const createUser = async userInfo => {
-  try {
-    const res = await axios.post('/api/users', userInfo)
-    return res.data
-    // window.location.reload() ?
-  } catch (err) {
-    console.error(err)
-  }
+export const getRecipient = async username => {
+  //   try {
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
 }
+
+// export const createUser = async (userInfo) => {
+//   try {
+//     const res = await axios.post('/api/users', userInfo)
+//     return res.data
+//     // window.location.reload() ?
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
 
 // export const hasSignedUp = async() => {
 //   try {
