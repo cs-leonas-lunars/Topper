@@ -1,11 +1,10 @@
-import React from 'react'
 import React, {useState, useEffect} from 'react'
 import Signup from './Signup'
-  
+
 const Landing = () => {
   const [component, setComponent] = useState(0)
- 
-    if (component === 0) {
+
+  if (component === 0) {
     return (
       <div className="App">
         <header className="App-header">
