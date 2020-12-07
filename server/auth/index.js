@@ -43,7 +43,7 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', async (req, res) => {
-  user = {}
+  user = null
   if (req.user) {
     user = await User.findByPk(req.user.id, {
       include: Transaction

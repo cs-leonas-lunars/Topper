@@ -2,10 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
-import Signup from './Signup'
 import Transaction from './Transaction'
 import {me} from './userActions'
-import Signup from './Signup'
 
 const Routes = () => {
   const [user, setUser] = useState(null)
@@ -28,7 +26,7 @@ const Routes = () => {
             recipient={window.location.href.split('=')[1]}
           />
         </Route>
-      ) : user ? (
+      ) : user && user.id ? (
         <Route>
           <Home user={user} />
         </Route>
