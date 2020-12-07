@@ -37,6 +37,29 @@ export const logout = async () => {
   }
 }
 
+// export const redditAuth = async () => {
+//   try {
+//     await axios.get('/auth')
+//   } catch(err) {
+//     console.error(err)
+//   }
+// }
+
+// export const googleAuth = async () => {
+//   try {
+
+//   } catch(err) {
+//     console.error(err)
+//   }
+// }
+
+// export const redditAuth = async () => {
+//   try {
+
+//   } catch(err) {
+//     console.error(err)
+//   }
+// }
 export const createTransaction = async details => {
   try {
     await axios.post('/api/transactions', details)

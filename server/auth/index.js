@@ -4,7 +4,7 @@ module.exports = router
 
 router.use('/reddit', require('./reddit'))
 router.use('/google', require('./google'))
-router.use('/twitter', require('./twitter'))
+// router.use('/twitter', require('./twitter'))
 
 router.post('/login', async (req, res, next) => {
   try {
