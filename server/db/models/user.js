@@ -25,22 +25,18 @@ const User = db.define('user', {
       return () => this.getDataValue('salt')
     }
   },
+  address: {
+    type: Sequelize.STRING
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true
+    // }
+  },
   redditHandle: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   redditId: {
-    type: Sequelize.STRING,
-    address: {
-      type: Sequelize.STRING
-      // allowNull: false,
-      // validate: {
-      //   notEmpty: true
-      // }
-    }
+    type: Sequelize.STRING
   },
   twitterHandle: {
     type: Sequelize.STRING
