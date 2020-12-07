@@ -11,34 +11,23 @@ const Routes = () => {
 
   // useEffect for user
   useEffect(() => {
-    if (chrome.storage) {
-      setTimeout(() => {
-        let timer = setInterval(() => {
-          chrome.storage.local.get(data => {
-            if (data.status && JSON.parse(data.status)) {
-              if (data.onReddit && JSON.parse(data.onReddit)) {
-                setUser(data.currentUser)
-              } else {
-                console.log('Not on Reddit')
-                //Render NonReddit Extension Page
-              }
-              return clearInterval(timer)
-            }
-          })
-        }, 250)
-      }, 3000)
-    } else {
-      me()
-        .then(x => {
-          setUser(x)
-        })
-        .catch(err => console.error(err))
-    }
+    me()
+      .then(x => {
+        setUser(x)
+      })
+      .catch(err => console.error(err))
   }, [])
 
   return (
     <Switch>
-      {user ? (
+      {window.location.href.split('/')[3] === 'send-transaction' ? (
+        <Route>
+          <Transaction
+            user={user}
+            recipient={window.location.href.split('=')[1]}
+          />
+        </Route>
+      ) : user ? (
         <Route>
           <Home user={user} />
         </Route>

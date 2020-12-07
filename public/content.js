@@ -28,6 +28,7 @@ if (
   end = allPosts.length
 
   window.onload = () => {
+    /*
     if (
       Array.from(document.getElementsByClassName('_1pHyKCBktIf_9WFW9jjM3P'))[0]
     ) {
@@ -57,6 +58,7 @@ if (
         return clearInterval(timer)
       }
     }, 250)
+    */
 
     allPosts.map((post, idx) => {
       let tag = allHeaders[idx].children[0].children[0].innerText
@@ -72,6 +74,7 @@ if (
     }, 250)
   }
 } else {
+  /*
   let timer = setInterval(() => {
     let status = window.localStorage.getItem('status')
     if (status) {
@@ -86,6 +89,7 @@ if (
       )
     }
   }, 250)
+  */
 }
 
 function findPosts() {
@@ -162,8 +166,9 @@ function injectButton(post, idx) {
         '/'
       )[1]
     }
-    chrome.storage.local.set({recipient})
-    //alert('Please open your Topper Extension to send your ETH!')
+    window.open(`http://localhost:5000/send-transaction/to=${recipient}`)
+    //chrome.storage.local.set({recipient})
+    /*
     var menu = document.createElement('div')
     menu.style.cssText =
       'position: fixed; width: 2000px; height: 2000px; left: 0vw; top: 0vh; background-color: #fff; overflow: hidden; z-index: 999'
@@ -209,11 +214,13 @@ function injectButton(post, idx) {
     menu.appendChild(title)
     menu.appendChild(paragraph)
     document.body.appendChild(menu)
+    */
   }
   post.appendChild(btn)
 }
 
 const pageNavigation = () => {
+  /*
   let timer = setInterval(() => {
     let status = window.localStorage.getItem('status')
     if (status) {
@@ -232,6 +239,7 @@ const pageNavigation = () => {
       return clearInterval(timer)
     }
   }, 250)
+  */
 
   allPosts.map((post, idx) => {
     let tag = allHeaders[idx].children[0].children[0].innerText
