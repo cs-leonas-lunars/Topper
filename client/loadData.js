@@ -17,7 +17,8 @@ export const loadBlockchainData = async recipientUsername => {
     )
     return {
       account: ethereum.selectedAddress,
-      recipient: recipient.data.address
+      recipient: recipient.data.address,
+      walletType: 'Metamask'
     }
   } else if (window.web3) {
     console.log('Old Metamask!')
@@ -42,7 +43,8 @@ export const loadBlockchainData = async recipientUsername => {
     )
     return {
       account: account[0],
-      recipient: recipient.data.address
+      recipient: recipient.data.address,
+      walletType: 'Fortmatic'
     }
   }
 

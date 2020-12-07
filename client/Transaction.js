@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import fortmaticTransaction from './fortmaticTransaction'
+import metaMaskTransaction from './metaMaskTransaction'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
@@ -24,7 +25,11 @@ const Transaction = props => {
       recipient: data.initialData.recipient,
       amount
     }
-    fortmaticTransaction(info.recipient, info.amount, info.account)
+    if (data.initialData.walletType === 'Metamask') {
+      metaMaskTransaction(info.recipient, info.amount, info.account)
+    } else {
+      fortmaticTransaction(info.recipient, info.amount, info.account)
+    }
   }
 
   const cancelTransaction = () => {
