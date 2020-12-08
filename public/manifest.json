@@ -2,6 +2,8 @@
   "manifest_version": 2,
 
   "name": "Topper",
+  "short_name": "Topper",
+  "start_url": "./index.html",
   "description":
     "Tip your favorite Reddit contributors over the Ethereum Network",
   "version": "0.0.1",
@@ -10,9 +12,22 @@
     "default_popup": "index.html",
     "default_title": "Open the popup"
   },
-  "icons": {
-    "128": "./images/icon128.png"
-  },
+  "icons": [
+    {
+      "src": "./images/icon128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {"src": "./images/icon144.png", "sizes": "144x144", "type": "image/png"},
+    {
+      "src": "./images/icon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#3E4EB8",
+  "display": "standalone",
+  "theme_color": "#2E3AA1",
   "content_security_policy":
     "script-src 'self' 'sha256-2f2/1D0emiWe/SLg6UTAOT3O6C6C61kbslq01Bv7g+A='; object-src 'self'",
   "permissions": ["activeTab", "tabs", "storage", "notifications"],
