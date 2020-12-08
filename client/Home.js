@@ -1,4 +1,5 @@
 import React from 'react'
+import {logout} from './userActions'
 
 const Home = props => {
   return (
@@ -6,17 +7,17 @@ const Home = props => {
       <header className="App-header">
         <img id="background" src="/images/topperBackground.gif" />
         <div id="overlay" onClick={() => toggleMenu(true)} />
-        <div>
-          username: {props.user.username}
-          <button onClick={() => logout()}>Logout</button>
-        </div>
-        <button id="menuButton" onClick={() => toggleMenu(false)}>
-          =
+        <img id="profileIcon" src="/images/profile.png" />
+        <h1 id="logoText">Topper</h1>
+        <h1 id="titleText" onClick={() => setComponent(0)}>
+          Username
+        </h1>
+        <p id="paraText">0 ETH</p>
+        <button id="learnHome">Learn More</button>
+        <button id="logout" onClick={() => logout()}>
+          Logout
         </button>
-        <div id="menu" />
-        <button id="closeMenu" onClick={() => toggleMenu(true)}>
-          +
-        </button>
+        <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
       </header>
     </div>
   )
