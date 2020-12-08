@@ -2,13 +2,13 @@ import React, {useState} from 'react'
 import {login} from './userActions'
 
 const Login = () => {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = async e => {
     e.preventDefault()
     const credentials = {
-      email,
+      username,
       password
     }
     await login(credentials)
@@ -18,12 +18,12 @@ const Login = () => {
     <div className="signup-component">
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">
-            <small>Email</small>
+          <label htmlFor="username">
+            <small>Username</small>
           </label>
           <input
-            onChange={e => setEmail(e.target.value)}
-            name="email"
+            onChange={e => setUsername(e.target.value)}
+            name="username"
             type="text"
           />
         </div>

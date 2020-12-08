@@ -3,6 +3,7 @@ import {signup} from './userActions'
 
 // local signup
 const Signup = () => {
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -10,6 +11,7 @@ const Signup = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     const info = {
+      username,
       email,
       password
     }
@@ -19,6 +21,16 @@ const Signup = () => {
   return (
     <div className="signup-component">
       <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="username">
+            <small>Username</small>
+          </label>
+          <input
+            onChange={e => setUsername(e.target.value)}
+            name="username"
+            type="text"
+          />
+        </div>
         <div>
           <label htmlFor="email">
             <small>Email</small>
