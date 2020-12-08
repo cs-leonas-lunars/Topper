@@ -22,7 +22,7 @@ passport.use(
 
       User.findOrCreate({
         where: {redditId},
-        defaults: {username}
+        defaults: {redditHandle: username}
       })
 
         .then(([user]) => done(null, user))

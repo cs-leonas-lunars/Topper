@@ -11,10 +11,8 @@ import Routes from './Routes'
 // import './socket'
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <Routes />
-    </Router>
-  </Provider>,
+  <Router history={history}>
+    <Routes />
+  </Router>,
   document.getElementById('app')
 )
