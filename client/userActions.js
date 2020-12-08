@@ -5,7 +5,6 @@ import history from './history'
 export const me = async () => {
   try {
     const res = await axios.get('/auth/me')
-    console.log('USER ACTIONS: ', res.data)
     return res.data
   } catch (err) {
     console.error(err)
@@ -62,6 +61,7 @@ export const logout = async () => {
 //     console.error(err)
 //   }
 // }
+
 export const createTransaction = async details => {
   try {
     await axios.post('/api/transactions', details)
