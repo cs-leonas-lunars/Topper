@@ -12,7 +12,7 @@ const Home = props => {
         <img id="profileIcon" src="/images/profile.png" />
         <h1 id="logoText">Topper</h1>
         <h1 id="titleText" onClick={() => setComponent(0)}>
-          Username
+          {props.user.username}
         </h1>
         <p id="paraText">0 ETH</p>
         <button id="learnHome">Learn More</button>
