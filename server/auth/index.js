@@ -2,6 +2,8 @@ const router = require('express').Router()
 const {User, Transaction} = require('../db/models')
 module.exports = router
 
+// to use oauth strategies
+// mostly from FS boilermaker
 router.use('/reddit', require('./reddit'))
 router.use('/google', require('./google'))
 router.use('/twitter', require('./twitter'))
@@ -43,7 +45,7 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', async (req, res) => {
-  user = null
+  user = null // to remove 404 error when '/auth/me' runs each time site is reloaded
   if (req.user) {
     user = await User.findByPk(req.user.id, {
       include: Transaction

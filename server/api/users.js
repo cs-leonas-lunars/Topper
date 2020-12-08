@@ -3,7 +3,7 @@ const {User} = require('../db/models')
 
 module.exports = router
 
-//FIND USERS ROUTE
+// FIND USERS ROUTE
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -15,6 +15,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// for extension auth functionality
 router.get('/:username', async (req, res, next) => {
   try {
     const user = await User.findOne({
@@ -28,21 +29,23 @@ router.get('/:username', async (req, res, next) => {
   }
 })
 
-router.put('/update', async (req, res, next) => {
-  try {
-    const user = await User.findByPk(req.user.id)
-    const {address, email} = req.body
+// was initially for for user to manually update db with their address and email
+// no longer necessary
+// router.put('/update', async (req, res, next) => {
+//   try {
+//     const user = await User.findByPk(req.user.id)
+//     const {address, email} = req.body
 
-    await user.update({address, email})
-    res.sendStatus(200)
-  } catch (err) {
-    console.error(err)
-  }
-})
+//     await user.update({address, email})
+//     res.sendStatus(200)
+//   } catch (err) {
+//     console.error(err)
+//   }
+// })
 
+// create user route
 router.post('/', async (req, res, next) => {
   try {
-    // const { username, address } = req.body
     const user = await User.create(req.body)
     console.log(user, 'NEW USER')
     res.send(user)
