@@ -24,8 +24,10 @@ const Routes = () => {
       <header className="App-header">
         <img id="background" src="/images/topperBackground.gif" />
         <div id="overlay" onClick={() => toggleMenu(true)} />
-        <img id="loadIcon" src="/images/loadGif.gif" />
-        <img id="loadJar" src="/images/loadJar.png" />
+        <div id="loadContainer">
+          <img id="loadIcon" src="/images/loadGif.gif" />
+          <img id="loadJar" src="/images/loadJar.png" />
+        </div>
       </header>
     </div>
   ) : (

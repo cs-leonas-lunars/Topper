@@ -40,11 +40,22 @@ form div {
   src: url('/fonts/Montserrat-ExtraThin.otf');
 }
 
+#loadContainer {
+  position: absolute;
+  width: 150px;
+  height: 250px;
+  top: 45%;
+  left: 50%;
+  margin-top: -125px;
+  margin-left: -75px;
+  z-index: 3;
+}
+
 #loadIcon {
   position: absolute;
   width: 120px;
   height: auto;
-  top: 42%;
+  top: 37%;
   left: 50%;
   margin-left: -70px;
   z-index: 3;
@@ -54,7 +65,7 @@ form div {
   position: absolute;
   width: 200px;
   height: auto;
-  top: 30%;
+  top: 0%;
   left: 50%;
   margin-left: -100px;
   z-index: 2;
