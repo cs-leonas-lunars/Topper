@@ -14,7 +14,7 @@ const Landing = () => {
           <h1 id="logoText">Topper</h1>
           <p id="paraText">Please Log In With Reddit</p>
           <a id="login" href="/auth/reddit">
-            <div id="circle" />
+            <div className="circle" />
             <img id="redditIcon" src="/images/reddit.png" />
             <p id="loginText" href="/auth/reddit">
               Login

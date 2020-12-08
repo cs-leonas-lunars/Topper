@@ -193,7 +193,7 @@ form div {
   box-shadow: 0px 0px 50px -17.5px #000;
 }
 
-#circle {
+.circle {
   position: absolute;
   background-color: #eb6c6c;
   height: 40px;
@@ -234,11 +234,13 @@ form div {
 }
 
 #signup-component {
-  z-index: 4;
+  z-index: 2;
+  font-family: Montserrat-Thin;
 }
 
 #signup-button {
   position: absolute;
+  color: #fff;
   width: 150px;
   height: 50px;
   left: 50%;
@@ -253,6 +255,11 @@ form div {
   box-shadow: 0px 0px 35px -17.5px #000;
   transition: background-color 0.35s, box-shadow 0.35s;
   z-index: 2;
+}
+
+#signup-button:hover {
+  background-color: rgb(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 50px -17.5px #000;
 }
 
 #signup:hover {
