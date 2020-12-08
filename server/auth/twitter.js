@@ -3,6 +3,8 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 const TwitterStrategy = require('passport-twitter').Strategy
 
+module.exports = router
+
 passport.use(
   new TwitterStrategy(
     {
@@ -20,7 +22,7 @@ passport.use(
 
 router.get('/', passport.authenticate('twitter'))
 
-app.get(
+router.get(
   '/callback',
   passport.authenticate('twitter', {failureRedirect: '/login'}),
   function(req, res) {
