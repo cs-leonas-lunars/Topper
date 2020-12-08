@@ -21,7 +21,7 @@ export const login = async credentials => {
 
 export const signup = async info => {
   try {
-    await axios.put('/auth/signup', info)
+    await axios.post('/auth/signup', info)
     window.location.reload()
   } catch (err) {
     console.error(err)
