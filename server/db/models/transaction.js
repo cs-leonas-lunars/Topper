@@ -16,6 +16,12 @@ const Transaction = db.define('transaction', {
       notEmpty: true
     }
   }
+  // recipientId: {
+  //   type: Sequelize.STRING,
+  // },
+  // senderId: {
+  //   type: Sequelize.STRING,
+  // },
   /*
   status: {
     type: Sequelize.ENUM('Sent', 'Received'),

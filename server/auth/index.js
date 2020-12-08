@@ -49,15 +49,25 @@ router.post('/logout', (req, res) => {
 router.get('/me', async (req, res) => {
   user = null // to remove 404 error when '/auth/me' runs each time site is reloaded
   if (req.user) {
-    console.log('ME ROUTE: ', req.user)
-    user = await User.findByPk(req.user.id, {
-      include: {
-        model: Transaction,
-        where: {
-          [Op.or]: [{senderId: req.user.id}, {recipientId: req.user.id}]
-        }
+    user = await User.findByPk(req.user.id)
+    const transactions = await Transaction.findAll({
+      where: {
+        [Op.or]: [{recipientId: req.user.id}, {senderId: req.user.id}]
       }
     })
+    res.json({user, transactions})
   }
-  res.json(user)
 })
+
+// Tag.findByPk(id, {
+//   include: [
+//     {
+//       model: Tutorial,
+//       as: "tutorials",
+//       attributes: ["title"],
+//       through: {
+//         attributes: ["tag_id", "tutorial_id"],
+//       },
+//     },
+//   ],
+// })
