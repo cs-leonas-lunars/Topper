@@ -2,30 +2,46 @@ import React, {useState, useEffect} from 'react'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
+import Transaction from './Transaction'
 import {me} from './userActions'
 
 const Routes = () => {
-  const [user, setUser] = useState({})
-
-  //useEffect for blockchain stuff
+  const [data, setData] = useState({user: null, loading: true})
 
   // useEffect for user
   useEffect(() => {
-    setUser(null)
     me()
       .then(x => {
-        console.log('USER: ', x)
-        setUser(x)
-        //window.localStorage.setItem("username", x.)
+        setTimeout(() => {
+          setData({user: x, loading: false})
+        }, 3000)
       })
       .catch(err => console.error(err))
   }, [])
 
-  return (
+  return data.loading ? (
+    <div className="App">
+      <header className="App-header">
+        <img id="background" src="/images/topperBackground.gif" />
+        <div id="overlay" onClick={() => toggleMenu(true)} />
+        <div id="loadContainer">
+          <img id="loadIcon" src="/images/loadGif.gif" />
+          <img id="loadJar" src="/images/loadJar.png" />
+        </div>
+      </header>
+    </div>
+  ) : (
     <Switch>
-      {user ? (
+      {window.location.href.split('/')[3] === 'send-transaction' ? (
         <Route>
-          <Home user={user} />
+          <Transaction
+            user={data.user}
+            recipient={window.location.href.split('=')[1]}
+          />
+        </Route>
+      ) : data.user && data.user.id ? (
+        <Route>
+          <Home user={data.user} />
         </Route>
       ) : (
         <Route>

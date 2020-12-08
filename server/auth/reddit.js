@@ -12,7 +12,7 @@ passport.use(
     {
       clientID: process.env.REDDIT_CLIENT_ID,
       clientSecret: process.env.REDDIT_CLIENT_SECRET,
-      callbackURL: 'http://localhost:5000/auth/reddit/callback'
+      callbackURL: process.env.REDDIT_CALLBACK
     },
     function(accessToken, refreshToken, profile, done) {
       console.log(accessToken, refreshToken, 'TOKENS')
@@ -22,7 +22,7 @@ passport.use(
 
       User.findOrCreate({
         where: {redditId},
-        defaults: {username}
+        defaults: {redditHandle: username}
       })
 
         .then(([user]) => done(null, user))
