@@ -5,6 +5,7 @@ import {signup} from './userActions'
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -16,8 +17,8 @@ const Signup = () => {
   }
 
   return (
-    <div id="signup-component">
-      <form onSubmit={handleSubmit} name={name}>
+    <div className="signup-component">
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">
             <small>Email</small>
@@ -38,12 +39,17 @@ const Signup = () => {
             type="password"
           />
         </div>
-        <button
-          id="signup-button"
-          type="submit"
-          value="submit"
-          onClick={() => window.close()}
-        >
+        <div>
+          <label htmlFor="confirmPassword">
+            <small>Confirm Password</small>
+          </label>
+          <input
+            onChange={e => setConfirmPassword(e.target.value)}
+            name="confirmPassword"
+            type="password"
+          />
+        </div>
+        <button className="signup-button" type="submit" value="submit">
           Sign up
         </button>
       </form>

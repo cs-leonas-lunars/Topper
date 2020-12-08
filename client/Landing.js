@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Signup from './Signup'
+import Login from './Login'
 
 const Landing = () => {
   // component variable is arbitrary number to decide what should be shown, depending on what the user is trying to do
@@ -12,18 +13,18 @@ const Landing = () => {
           <img id="background" src="/images/topperBackground.gif" />
           <div id="overlay" onClick={() => toggleMenu(true)} />
           <img id="brandIcon" src="/images/TipJar.png" />
-          <h1 id="logoText">Topper</h1>
-          <h1 id="titleText" onClick={() => setComponent(0)}>
-            Reward The Right Way.
+          <h1 id="logoText" onClick={() => setComponent(0)}>
+            Topper
           </h1>
+          <h1 id="titleText">Reward The Right Way.</h1>
           <p id="paraText">
             Send Crypto To Your Favorite Content Creators Like Never Before
           </p>
-          <a id="login" href="/auth/reddit">
-            <p id="loginText" href="/auth/reddit">
+          <div id="login">
+            <p id="loginText" onClick={() => setComponent(2)}>
               Login
             </p>
-          </a>
+          </div>
           <button id="signup" onClick={() => setComponent(1)}>
             Create An Account
           </button>
@@ -40,11 +41,26 @@ const Landing = () => {
           <div id="overlay" onClick={() => toggleMenu(true)} />
           <img id="brandIcon" src="/images/TipJar.png" />
           <h1 id="logoText" onClick={() => setComponent(0)}>
-            Topper
+            ← Back
           </h1>
           <Signup />
-          <button id="about">About Us</button>
-          <button id="learn">Learn More</button>
+          <button id="learnLanding">Learn More</button>
+          <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
+        </header>
+      </div>
+    )
+  } else {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img id="background" src="/images/topperBackground.gif" />
+          <div id="overlay" onClick={() => toggleMenu(true)} />
+          <img id="brandIcon" src="/images/TipJar.png" />
+          <h1 id="logoText" onClick={() => setComponent(0)}>
+            ← Back
+          </h1>
+          <Login />
+          <button id="learnLanding">Learn More</button>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
         </header>
       </div>
