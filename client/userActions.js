@@ -13,8 +13,8 @@ export const me = async () => {
 
 export const login = async credentials => {
   try {
-    const res = await axios.post('/auth/login', credentials)
-    return res.data
+    await axios.post('/auth/login', credentials)
+    window.location.reload()
   } catch (err) {
     console.error(err)
   }
