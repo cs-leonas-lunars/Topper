@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const {User, Transaction} = require('../db/models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 module.exports = router
 
 // to use oauth strategies
@@ -47,8 +49,14 @@ router.post('/logout', (req, res) => {
 router.get('/me', async (req, res) => {
   user = null // to remove 404 error when '/auth/me' runs each time site is reloaded
   if (req.user) {
+    console.log('ME ROUTE: ', req.user)
     user = await User.findByPk(req.user.id, {
-      include: Transaction
+      include: {
+        model: Transaction,
+        where: {
+          [Op.or]: [{senderId: req.user.id}, {recipientId: req.user.id}]
+        }
+      }
     })
   }
   res.json(user)

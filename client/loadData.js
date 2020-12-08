@@ -21,7 +21,7 @@ export const loadBlockchainData = async recipientUsername => {
     } else {
       return {
         account: ethereum.selectedAddress,
-        recipient: recipient.data.address,
+        recipient: recipient.data,
         walletType: 'Metamask'
       }
     }
@@ -53,7 +53,7 @@ export const loadBlockchainData = async recipientUsername => {
     } else {
       return {
         account: account[0],
-        recipient: recipient.data.address,
+        recipient: recipient.data,
         walletType: 'Fortmatic'
       }
     }

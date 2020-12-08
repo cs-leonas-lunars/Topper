@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import fortmaticTransaction from './fortmaticTransaction'
 import metaMaskTransaction from './metaMaskTransaction'
 import {loadBlockchainData} from './loadData'
+import {createTransaction} from './userActions'
 
 // transaction component
 const Transaction = props => {
@@ -20,9 +21,15 @@ const Transaction = props => {
     e.preventDefault()
     const info = {
       account: data.initialData.account,
-      recipient: data.initialData.recipient,
+      recipient: data.initialData.recipient.address,
       amount
     }
+    await createTransaction({
+      recipientId: recipient.id,
+      senderId: props.user.id,
+      amount,
+      link: props.link
+    })
     if (data.initialData.walletType === 'Metamask') {
       // user has metamask --> use metamask
       // fortmatic --> use fortmatic
