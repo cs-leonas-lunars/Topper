@@ -10,7 +10,6 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 5000
 const app = express()
 const dotenv = require('dotenv')
-const cors = require('cors')
 
 module.exports = app
 
@@ -36,8 +35,6 @@ passport.deserializeUser(async (id, done) => {
 
 const createApp = () => {
   app.use(morgan('dev'))
-
-  app.use(cors({origin: true, credentials: true}))
 
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))
