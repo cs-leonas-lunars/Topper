@@ -166,7 +166,11 @@ function injectButton(post, idx) {
         '/'
       )[1]
     }
-    window.open(`http://localhost:5000/send-transaction/to=${recipient}`)
+    window.open(
+      `http://localhost:5000/send-transaction?to=${recipient}?link=${
+        window.location.href
+      }`
+    )
     //chrome.storage.local.set({recipient})
     /*
     var menu = document.createElement('div')

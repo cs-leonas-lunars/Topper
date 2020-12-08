@@ -12,6 +12,7 @@ const Routes = () => {
   useEffect(() => {
     me()
       .then(x => {
+        console.log(x)
         setTimeout(() => {
           setData({user: x, loading: false})
         }, 3000)
@@ -33,11 +34,13 @@ const Routes = () => {
     </div>
   ) : (
     <Switch>
-      {window.location.href.split('/')[3] === 'send-transaction' ? (
+      {window.location.href.split('/')[3].split('?')[0] ===
+      'send-transaction' ? (
         <Route>
           <Transaction
             user={data.user}
-            recipient={window.location.href.split('=')[1]}
+            recipient={window.location.href.split('?')[1].split('=')[1]}
+            link={window.location.href.split('?')[2].split('=')[1]}
           />
         </Route>
       ) : data.user && data.user.id ? (
