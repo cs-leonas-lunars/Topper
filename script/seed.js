@@ -10,36 +10,42 @@ async function seed() {
   const user1 = await User.create({
     email: faker.internet.email(),
     username: 'UnfairBoysenberry190',
+    password: faker.internet.password(),
     address: '0xE9508ea6E2BfEC43e90B8cf911284118E93D9F5E'
   })
 
   const user2 = await User.create({
     email: faker.internet.email(),
     username: faker.internet.userName(),
+    password: faker.internet.password(),
     address: '0xF1c335aC2B8586321B71965D3b7109a011dbA22d'
   })
 
   const user3 = await User.create({
     email: faker.internet.email(),
     username: faker.internet.userName(),
+    password: faker.internet.password(),
     address: '0xB8a31D32114cFe92CD5c44fe6e33e83E26204A45'
   })
 
   const user4 = await User.create({
     email: faker.internet.email(),
     username: faker.internet.userName(),
+    password: faker.internet.password(),
     address: '0x953700289fc5138Aa3721686Ec20e696bcb0D86c'
   })
 
   const user5 = await User.create({
     email: faker.internet.email(),
     username: faker.internet.userName(),
+    password: faker.internet.password(),
     address: '0x4F463ee218bA7403d963Fa314C3760302Ca7D749'
   })
 
   const user6 = await User.create({
     email: faker.internet.email(),
     username: 'jessalexandria',
+    password: faker.internet.password(),
     address: '0x6137bB3E12b2a1DaeA6240b71F5DA195a0D84B87'
   })
 
