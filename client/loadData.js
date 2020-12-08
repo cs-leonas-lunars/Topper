@@ -2,10 +2,9 @@ import Web3 from 'web3'
 import Fortmatic from 'fortmatic'
 import axios from 'axios'
 
-// import EtherExchange from "../abis/EtherExchange.json";
-
 let fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 
+// beginning transaction logic
 export const loadBlockchainData = async recipientUsername => {
   if (window.ethereum) {
     console.log('New Metamask')

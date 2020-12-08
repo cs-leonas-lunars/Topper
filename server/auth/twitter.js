@@ -5,6 +5,9 @@ const TwitterStrategy = require('passport-twitter').Strategy
 
 module.exports = router
 
+// twitter passport strategy
+// http://www.passportjs.org/packages/passport-twitter/
+
 passport.use(
   new TwitterStrategy(
     {
@@ -20,6 +23,7 @@ passport.use(
   )
 )
 
+//might need to add scope here similar to google auth
 router.get('/', passport.authenticate('twitter'))
 
 router.get(

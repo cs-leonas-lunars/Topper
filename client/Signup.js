@@ -1,8 +1,7 @@
-import axios from 'axios'
-import React, {useState, useEffect} from 'react'
-import history from './history'
+import React, {useState} from 'react'
 import {signup} from './userActions'
 
+// local signup
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

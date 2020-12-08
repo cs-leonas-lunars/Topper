@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Signup from './Signup'
 
 const Landing = () => {
+  // component variable is arbitrary number to decide what should be shown, depending on what the user is trying to do
   const [component, setComponent] = useState(0)
 
   if (component === 0) {

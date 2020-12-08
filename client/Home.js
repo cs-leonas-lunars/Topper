@@ -1,6 +1,8 @@
 import React from 'react'
 import {logout} from './userActions'
 
+// all components are functional
+// no React.Component
 const Home = props => {
   return (
     <div className="App">
@@ -23,6 +25,7 @@ const Home = props => {
   )
 }
 
+//sidebar
 function toggleMenu(status) {
   if (status) {
     document.getElementById('menu').style.cssText =
