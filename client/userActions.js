@@ -1,6 +1,7 @@
 import axios from 'axios'
 import history from './history'
 
+// axios calls to use routes, no store to simplify everything and because redux advantages dont apply to Topper needs
 export const me = async () => {
   try {
     const res = await axios.get('/auth/me')

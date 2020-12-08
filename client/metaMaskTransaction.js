@@ -1,5 +1,6 @@
 const ethereum = window.ethereum
 
+// actual transaction logic once it has been established that the addresses and amounts are valid
 export default async function metamaskTransaction(recipient, amount, sender) {
   console.log(window.ethereum)
   const transactionParameters = {

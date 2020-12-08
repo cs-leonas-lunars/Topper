@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import fortmaticTransaction from './fortmaticTransaction'
 import metaMaskTransaction from './metaMaskTransaction'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import Landing from './Landing'
-import Home from './Home'
 import {loadBlockchainData} from './loadData'
 
+// transaction component
 const Transaction = props => {
   const [amount, setAmount] = useState(0)
   const [cancelStatus, setCancelStatus] = useState(0)
@@ -26,6 +24,8 @@ const Transaction = props => {
       amount
     }
     if (data.initialData.walletType === 'Metamask') {
+      // user has metamask --> use metamask
+      // fortmatic --> use fortmatic
       metaMaskTransaction(info.recipient, info.amount, info.account)
     } else {
       fortmaticTransaction(info.recipient, info.amount, info.account)

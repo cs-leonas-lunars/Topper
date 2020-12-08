@@ -19,6 +19,7 @@ const Routes = () => {
       .catch(err => console.error(err))
   }, [])
 
+  // conditional render for landing v transaction v home v landing
   return data.loading ? (
     <div className="App">
       <header className="App-header">
