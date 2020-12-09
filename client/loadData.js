@@ -10,8 +10,7 @@ export const loadBlockchainData = async recipientUsername => {
     console.log('New Metamask')
     window.web3 = new Web3(window.ethereum)
     await window.ethereum.enable()
-    const web3 = window.web3
-    let recipient = {}
+    let recipient = null
     if (recipientUsername)
       recipient = await axios.get(
         `http://localhost:5000/api/users/${recipientUsername}`
