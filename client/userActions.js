@@ -16,7 +16,7 @@ export const login = async credentials => {
     await axios.post('/auth/login', credentials)
     window.location.reload()
   } catch (err) {
-    console.error(err)
+    return 1
   }
 }
 

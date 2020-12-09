@@ -4,6 +4,7 @@ import {login} from './userActions'
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [status, setStatus] = useState(true)
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -11,7 +12,10 @@ const Login = () => {
       username,
       password
     }
-    await login(credentials)
+    const status = await login(credentials)
+    if (status === 1) {
+      setStatus(false)
+    }
   }
 
   return (
@@ -41,6 +45,7 @@ const Login = () => {
           Login
         </button>
       </form>
+      {!status && <div>Incorrect Username and/or Password</div>}
     </div>
   )
 }
