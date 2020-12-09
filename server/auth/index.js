@@ -57,6 +57,7 @@ router.get('/me', async (req, res) => {
     })
     res.json({user, transactions})
   }
+  res.json({user})
 })
 
 // Tag.findByPk(id, {
