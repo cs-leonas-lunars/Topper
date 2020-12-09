@@ -21,7 +21,7 @@ export const loadBlockchainData = async recipientUsername => {
       )
     } else if (!recipient) {
       return {
-        account: account[0],
+        account: ethereum.selectedAddress,
         walletType: 'Metamask'
       }
     } else if (recipient && recipientUsername) {
