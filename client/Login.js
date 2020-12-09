@@ -45,7 +45,7 @@ const Login = () => {
           Login
         </button>
       </form>
-      {!status && <div>Something went wrong, try again</div>}
+      {!status && <div>Incorrect Username and/or Password</div>}
     </div>
   )
 }

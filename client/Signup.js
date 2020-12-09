@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {signup} from './userActions'
 
 // local signup
@@ -8,6 +8,18 @@ const Signup = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [status, setStatus] = useState(true)
+  const [validatePassword, setValidatePassword] = useState(true)
+
+  useEffect(
+    () => {
+      if (confirmPassword === password) {
+        setValidatePassword(false)
+      } else {
+        setValidatePassword(true)
+      }
+    },
+    [password, confirmPassword]
+  )
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -65,10 +77,16 @@ const Signup = () => {
             type="password"
           />
         </div>
-        <button className="signup-button" type="submit" value="submit">
+        <button
+          className="signup-button"
+          type="submit"
+          value="submit"
+          disabled={validatePassword}
+        >
           Sign up
         </button>
       </form>
+      {validatePassword && <div>Passwords must match</div>}
       {!status && <div>Signup Failed</div>}
     </div>
   )
