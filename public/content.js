@@ -146,6 +146,11 @@ function injectButton(post, idx) {
   btn.appendChild(image)
   btn.appendChild(text)
   btn.onclick = () => {
+    let linkTo = Array.from(
+      document.querySelectorAll(
+        'div[class="y8HYJ-y_lTUHkQIc1mdCq _2INHSNB8V5eaWp4P0rY_mE"] > a'
+      )
+    )[idx].href
     let location = window.location.href.split('/')[3]
     let recipient = ''
     if (
@@ -167,9 +172,7 @@ function injectButton(post, idx) {
       )[1]
     }
     window.open(
-      `http://localhost:5000/send-transaction?to=${recipient}?link=${
-        window.location.href
-      }`
+      `http://localhost:5000/send-transaction?to=${recipient}?link=${linkTo}`
     )
     //chrome.storage.local.set({recipient})
     /*

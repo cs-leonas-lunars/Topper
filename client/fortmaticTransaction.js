@@ -8,7 +8,7 @@ const fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 // web3 is for communicating with extensions
 let web3 = new Web3(fm.getProvider())
 
-export default function fortmaticTransaction(
+export default async function fortmaticTransaction(
   // necessary variables for transaction
   recipientAddress,
   amount,
@@ -26,7 +26,7 @@ export default function fortmaticTransaction(
   }
 
   // Send Ether transaction with web3
-  web3.eth.sendTransaction(txnParams, (error, txnHash) => {
+  await web3.eth.sendTransaction(txnParams, (error, txnHash) => {
     if (error) throw error
     console.log(txnHash)
   })

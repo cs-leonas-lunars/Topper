@@ -65,7 +65,6 @@ export const logout = async () => {
 export const createTransaction = async details => {
   try {
     await axios.post('/api/transactions', details)
-    window.location.reload()
   } catch (err) {
     console.error(err)
   }
