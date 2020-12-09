@@ -24,7 +24,9 @@ const Home = props => {
         console.error(err)
       }
     }
-    findData()
+    setTimeout(() => {
+      findData()
+    }, 2000)
   }, [])
 
   return data.loading ? (
@@ -37,16 +39,16 @@ const Home = props => {
         />
         <div id="overlay" />
         <div id="loadContainer">
-          <img
-            id="loadIcon"
+          <video
             src="/images/loadGif.gif"
-            alt="loading animation"
+            id="loadIcon"
+            playsInline
+            muted
+            loop
+            style={{pointerEvents: 'none'}}
+            poster="/images/loadGif.gif"
           />
-          <img
-            id="loadJar"
-            src="/images/loadJar.png"
-            alt="loading screen jar"
-          />
+          <img id="loadJar" src="/images/loadJar.png" />
         </div>
       </header>
     </div>

@@ -11,9 +11,11 @@ const Transaction = props => {
   const [data, setData] = useState({transferData: null, loading: true})
 
   useEffect(() => {
-    loadBlockchainData(props.recipient).then(x => {
-      setData({transferData: x, loading: false})
-    })
+    setTimeout(() => {
+      loadBlockchainData(props.recipient).then(x => {
+        setData({transferData: x, loading: false})
+      })
+    }, 2000)
   }, [])
 
   const handleSubmit = async e => {
@@ -54,16 +56,16 @@ const Transaction = props => {
           />
           <div id="overlay" />
           <div id="loadContainer">
-            <img
-              id="loadIcon"
+            <video
               src="/images/loadGif.gif"
-              alt="loading animation"
+              id="loadIcon"
+              playsInline
+              muted
+              loop
+              style={{pointerEvents: 'none'}}
+              poster="/images/loadGif.gif"
             />
-            <img
-              id="loadJar"
-              src="/images/loadJar.png"
-              alt="loading jar icon"
-            />
+            <img id="loadJar" src="/images/loadJar.png" />
           </div>
         </header>
       </div>
@@ -81,7 +83,10 @@ const Transaction = props => {
           <form onSubmit={handleSubmit}>
             <div>
               <label id="setAmountLabel" htmlFor="ethAmount">
-                ETH Amount
+                <span style={{fontFamily: 'Montserrat-Thin'}}>
+                  Send Ether To{'\n'}
+                </span>
+                {data.transferData.recipient.username}
               </label>
               <input
                 id="setAmountInput"

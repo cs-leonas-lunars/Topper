@@ -26,7 +26,9 @@ const Routes = () => {
         console.error(err)
       }
     }
-    findData()
+    setTimeout(() => {
+      findData()
+    }, 2000)
   }, [])
 
   // conditional render for landing v transaction v home v landing
@@ -40,12 +42,16 @@ const Routes = () => {
         />
         <div id="overlay" />
         <div id="loadContainer">
-          <img
-            id="loadIcon"
+          <video
             src="/images/loadGif.gif"
-            alt="loading animation"
+            id="loadIcon"
+            playsInline
+            muted
+            loop
+            style={{pointerEvents: 'none'}}
+            poster="/images/loadGif.gif"
           />
-          <img id="loadJar" src="/images/loadJar.png" alt="loading jar image" />
+          <img id="loadJar" src="/images/loadJar.png" />
         </div>
       </header>
     </div>
