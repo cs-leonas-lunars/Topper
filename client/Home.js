@@ -49,7 +49,9 @@ const Home = props => {
           {props.user.username}
         </h1>
         <p id="paraText">0 ETH</p>
-        <button id="learnHome">Learn More</button>
+        <a href="/auth/reddit">
+          <button id="learnHome">Test Auth</button>
+        </a>
         <button id="logout" onClick={() => logout()}>
           Logout
         </button>
