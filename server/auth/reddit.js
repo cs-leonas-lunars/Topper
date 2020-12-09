@@ -2,7 +2,7 @@ const passport = require('passport')
 const router = require('express').Router()
 const {User} = require('../db/models')
 const crypto = require('crypto')
-const {access} = require('fs')
+const axios = require('axios')
 const RedditStrategy = require('passport-reddit').Strategy
 
 module.exports = router
@@ -18,19 +18,22 @@ passport.use(
       clientSecret: process.env.REDDIT_CLIENT_SECRET,
       callbackURL: process.env.REDDIT_CALLBACK
     },
-    function(accessToken, refreshToken, profile, done) {
-      console.log(accessToken, refreshToken, 'TOKENS')
+    async function(accessToken, refreshToken, profile, done) {
       const redditId = profile.id
       const username = profile.name
       // also could get user image also to make it look all nice -> add imageUrl to models
 
-      User.findOrCreate({
-        where: {redditId},
-        defaults: {redditHandle: username}
-      })
+      // User.findOrCreate({
+      //   where: {redditId},
+      //   defaults: {redditHandle: username},
+      // })
 
-        .then(([user]) => done(null, user))
-        .catch(done)
+      const user = await axios.put('/api/users/update/reddit', {
+        redditHandle: username
+      })
+      done(null, user)
+      // .then(([user]) => done(null, user))
+      // .catch(done)
     }
   )
 )
