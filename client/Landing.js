@@ -10,9 +10,13 @@ const Landing = props => {
     return (
       <div className="App">
         <header className="App-header">
-          <img id="background" src="/images/topperBackground.gif" />
+          <img
+            id="background"
+            src="/images/topperBackground.gif"
+            alt="background gradient"
+          />
           <div id="overlay" />
-          <img id="brandIcon" src="/images/TipJar.png" />
+          <img id="brandIcon" src="/images/TipJar.png" alt="Topper Logo" />
           <h1 id="logoText" onClick={() => setComponent(0)}>
             Topper
           </h1>
@@ -37,9 +41,13 @@ const Landing = props => {
     return (
       <div className="App">
         <header className="App-header">
-          <img id="background" src="/images/topperBackground.gif" />
+          <img
+            id="background"
+            src="/images/topperBackground.gif"
+            alt="background gradient"
+          />
           <div id="overlay" />
-          <img id="brandIcon" src="/images/TipJar.png" />
+          <img id="brandIcon" src="/images/TipJar.png" alt="topper logo" />
           <h1 id="logoText" onClick={() => setComponent(0)}>
             ← Back
           </h1>
@@ -53,9 +61,13 @@ const Landing = props => {
     return (
       <div className="App">
         <header className="App-header">
-          <img id="background" src="/images/topperBackground.gif" />
+          <img
+            id="background"
+            src="/images/topperBackground.gif"
+            alt="background gradient"
+          />
           <div id="overlay" />
-          <img id="brandIcon" src="/images/TipJar.png" />
+          <img id="brandIcon" src="/images/TipJar.png" alt="topper logo" />
           <h1 id="logoText" onClick={() => setComponent(0)}>
             ← Back
           </h1>

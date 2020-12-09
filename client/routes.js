@@ -35,7 +35,11 @@ const Routes = () => {
   return data.loading ? (
     <div className="App">
       <header className="App-header">
-        <img id="background" src="/images/topperBackground.gif" />
+        <img
+          id="background"
+          src="/images/topperBackground.gif"
+          alt="background gradient"
+        />
         <div id="overlay" />
         <div id="loadContainer">
           <video

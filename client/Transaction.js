@@ -49,10 +49,13 @@ const Transaction = props => {
     data.loading ? (
       <div className="App">
         <header className="App-header">
-          <img id="background" src="/images/topperBackground.gif" />
+          <img
+            id="background"
+            src="/images/topperBackground.gif"
+            alt="background gradient"
+          />
           <div id="overlay" />
           <div id="loadContainer">
-            <img id="loadIcon" src="/images/loadGif.gif" />
             <video
               src="/images/loadGif.gif"
               id="loadIcon"
@@ -71,7 +74,11 @@ const Transaction = props => {
     ) : (
       <div className="App">
         <header className="App-header">
-          <img id="background" src="/images/topperBackground.gif" />
+          <img
+            id="background"
+            src="/images/topperBackground.gif"
+            alt="background gradient"
+          />
           <div id="overlay" />
           <form onSubmit={handleSubmit}>
             <div>

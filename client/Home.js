@@ -32,7 +32,11 @@ const Home = props => {
   return data.loading ? (
     <div className="App">
       <header className="App-header">
-        <img id="background" src="/images/topperBackground.gif" />
+        <img
+          id="background"
+          src="/images/topperBackground.gif"
+          alt="background gradient"
+        />
         <div id="overlay" />
         <div id="loadContainer">
           <video
@@ -51,9 +55,13 @@ const Home = props => {
   ) : (
     <div className="App">
       <header className="App-header">
-        <img id="background" src="/images/topperBackground.gif" />
+        <img
+          id="background"
+          src="/images/topperBackground.gif"
+          alt="background gradient"
+        />
         <div id="overlay" onClick={() => toggleMenu(true)} />
-        <img id="profileIcon" src="/images/profile.png" />
+        <img id="profileIcon" src="/images/profile.png" alt="profile icon" />
         <h1 id="logoText">Topper</h1>
         <h1 id="titleText" onClick={() => setComponent(0)}>
           {props.user.username}
