@@ -31,17 +31,17 @@ router.get('/:username', async (req, res, next) => {
 
 // was initially for for user to manually update db with their address and email
 // no longer necessary
-// router.put('/update', async (req, res, next) => {
-//   try {
-//     const user = await User.findByPk(req.user.id)
-//     const {address, email} = req.body
+router.put('/update', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.user.id)
+    const {address} = req.body
 
-//     await user.update({address, email})
-//     res.sendStatus(200)
-//   } catch (err) {
-//     console.error(err)
-//   }
-// })
+    await user.update({address})
+    res.sendStatus(200)
+  } catch (err) {
+    console.error(err)
+  }
+})
 
 // create user route
 router.post('/', async (req, res, next) => {

@@ -1,10 +1,44 @@
-import React from 'react'
-import {logout} from './userActions'
+import React, {useState, useEffect} from 'react'
+import {logout, pushAddress} from './userActions'
+import {loadBlockchainData} from './loadData'
 
 // all components are functional
 // no React.Component
 const Home = props => {
-  return (
+  const [data, setData] = useState({
+    accountData: null,
+    loading: true
+  })
+
+  // useEffect for user
+  useEffect(() => {
+    const findData = async () => {
+      try {
+        let accountData = await loadBlockchainData()
+        await pushAddress(accountData.account)
+        setData({
+          accountData,
+          loading: false
+        })
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    findData()
+  }, [])
+
+  return data.loading ? (
+    <div className="App">
+      <header className="App-header">
+        <img id="background" src="/images/topperBackground.gif" />
+        <div id="overlay" />
+        <div id="loadContainer">
+          <img id="loadIcon" src="/images/loadGif.gif" />
+          <img id="loadJar" src="/images/loadJar.png" />
+        </div>
+      </header>
+    </div>
+  ) : (
     <div className="App">
       <header className="App-header">
         <img id="background" src="/images/topperBackground.gif" />
