@@ -43,13 +43,13 @@ const Routes = () => {
         <div id="overlay" />
         <div id="loadContainer">
           <video
-            src="/images/loadGif.gif"
+            src="/images/loader.mp4"
             id="loadIcon"
             playsInline
             muted
+            autoPlay
             loop
             style={{pointerEvents: 'none'}}
-            poster="/images/loadGif.gif"
           />
           <img id="loadJar" src="/images/loadJar.png" />
         </div>
