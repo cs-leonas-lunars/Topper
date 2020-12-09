@@ -3,28 +3,28 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
 import Transaction from './Transaction'
-import {loadBlockchainData} from './loadData'
 import {me} from './userActions'
 
 const Routes = () => {
   const [data, setData] = useState({
     userData: null,
     transactionData: null,
-    accountData: null,
     loading: true
   })
 
   // useEffect for user
   useEffect(() => {
     const findData = async () => {
-      let resData = await me()
-      let accountData = await loadBlockchainData()
-      setData({
-        userData: resData.user,
-        transactionData: resData.transactions,
-        accountData,
-        loading: false
-      })
+      try {
+        let resData = await me()
+        setData({
+          userData: resData.user,
+          transactionData: resData.transactions,
+          loading: false
+        })
+      } catch (err) {
+        console.error(err)
+      }
     }
     findData()
   }, [])
@@ -58,7 +58,7 @@ const Routes = () => {
         </Route>
       ) : (
         <Route>
-          <Landing account={data.accountData.account} />
+          <Landing />
         </Route>
       )}
     </Switch>

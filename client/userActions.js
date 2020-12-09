@@ -71,6 +71,16 @@ export const createTransaction = async details => {
   }
 }
 
+export const pushAddress = async address => {
+  console.log(address)
+  try {
+    const res = await axios.put('/api/users/update', {address})
+    console.log(res.data)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const getRecipient = async username => {
   //   try {
   //   } catch (err) {

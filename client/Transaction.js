@@ -8,20 +8,19 @@ import {createTransaction} from './userActions'
 const Transaction = props => {
   const [amount, setAmount] = useState(0)
   const [cancelStatus, setCancelStatus] = useState(0)
-  const [data, setData] = useState({initialData: null, loading: true})
+  const [data, setData] = useState({transferData: null, loading: true})
 
   useEffect(() => {
     loadBlockchainData(props.recipient).then(x => {
-      console.log(x)
-      setData({initialData: x, loading: false})
+      setData({transferData: x, loading: false})
     })
   }, [])
 
   const handleSubmit = async e => {
     e.preventDefault()
     const info = {
-      account: data.initialData.account,
-      recipient: data.initialData.recipient.address,
+      account: data.transferData.account,
+      recipient: data.transferData.recipient.address,
       amount
     }
     await createTransaction({
@@ -30,7 +29,7 @@ const Transaction = props => {
       amount,
       link: props.link
     })
-    if (data.initialData.walletType === 'Metamask') {
+    if (data.transferData.walletType === 'Metamask') {
       // user has metamask --> use metamask
       // fortmatic --> use fortmatic
       metaMaskTransaction(info.recipient, info.amount, info.account)

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Signup from './Signup'
 import Login from './Login'
 
-const Landing = props => {
+const Landing = () => {
   // component variable is arbitrary number to decide what should be shown, depending on what the user is trying to do
   const [component, setComponent] = useState(0)
 
@@ -43,7 +43,7 @@ const Landing = props => {
           <h1 id="logoText" onClick={() => setComponent(0)}>
             ← Back
           </h1>
-          <Signup account={props.account} />
+          <Signup />
           <button id="learnLanding">Learn More</button>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
         </header>
