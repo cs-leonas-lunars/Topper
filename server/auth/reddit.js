@@ -2,7 +2,6 @@ const passport = require('passport')
 const router = require('express').Router()
 const {User} = require('../db/models')
 const crypto = require('crypto')
-const axios = require('axios')
 const RedditStrategy = require('passport-reddit').Strategy
 
 module.exports = router
@@ -27,11 +26,13 @@ passport.use(
       //   where: {redditId},
       //   defaults: {redditHandle: username},
       // })
+      global.localStorage.setItem('username', username)
+      done(null)
 
-      const user = await axios.put('/api/users/update/reddit', {
-        redditHandle: username
-      })
-      done(null, user)
+      // await axios.put('/api/users/update/reddit', {
+      //   redditHandle: username,
+      // })
+      // console.log('USER AFTER AXIOS')
       // .then(([user]) => done(null, user))
       // .catch(done)
     }
@@ -52,7 +53,7 @@ router.get('/callback', (req, res, next) => {
   if (req.query.state === req.session.state) {
     passport.authenticate('reddit', {
       failureRedirect: '/',
-      successRedirect: '/'
+      successRedirect: '/updateReddit'
     })(req, res, next)
   } else {
     next(new Error(403))

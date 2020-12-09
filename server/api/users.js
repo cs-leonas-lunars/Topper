@@ -42,7 +42,7 @@ router.put('/update/reddit', async (req, res, next) => {
 
 // was initially for for user to manually update db with their address and email
 // no longer necessary
-router.put('/update', async (req, res, next) => {
+router.put('/update/address', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id)
     const {address} = req.body

@@ -75,8 +75,19 @@ export const createTransaction = async details => {
 export const pushAddress = async address => {
   console.log(address)
   try {
-    const res = await axios.put('/api/users/update', {address})
+    const res = await axios.put('/api/users/update/address', {address})
     console.log(res.data)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updateRedditHandle = async () => {
+  try {
+    const redditHandle = global.localStorage.getItem('username')
+    console.log(redditHandle, 'REDDIT HANDLE')
+    await axios.put('/api/users/update/reddit', {redditHandle})
+    window.location.replace('localhost:5000')
   } catch (err) {
     console.error(err)
   }
