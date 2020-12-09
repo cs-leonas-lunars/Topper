@@ -33,11 +33,19 @@ const Routes = () => {
   return data.loading ? (
     <div className="App">
       <header className="App-header">
-        <img id="background" src="/images/topperBackground.gif" />
+        <img
+          id="background"
+          src="/images/topperBackground.gif"
+          alt="background gradient"
+        />
         <div id="overlay" />
         <div id="loadContainer">
-          <img id="loadIcon" src="/images/loadGif.gif" />
-          <img id="loadJar" src="/images/loadJar.png" />
+          <img
+            id="loadIcon"
+            src="/images/loadGif.gif"
+            alt="loading animation"
+          />
+          <img id="loadJar" src="/images/loadJar.png" alt="loading jar image" />
         </div>
       </header>
     </div>

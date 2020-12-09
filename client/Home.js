@@ -30,20 +30,36 @@ const Home = props => {
   return data.loading ? (
     <div className="App">
       <header className="App-header">
-        <img id="background" src="/images/topperBackground.gif" />
+        <img
+          id="background"
+          src="/images/topperBackground.gif"
+          alt="background gradient"
+        />
         <div id="overlay" />
         <div id="loadContainer">
-          <img id="loadIcon" src="/images/loadGif.gif" />
-          <img id="loadJar" src="/images/loadJar.png" />
+          <img
+            id="loadIcon"
+            src="/images/loadGif.gif"
+            alt="loading animation"
+          />
+          <img
+            id="loadJar"
+            src="/images/loadJar.png"
+            alt="loading screen jar"
+          />
         </div>
       </header>
     </div>
   ) : (
     <div className="App">
       <header className="App-header">
-        <img id="background" src="/images/topperBackground.gif" />
+        <img
+          id="background"
+          src="/images/topperBackground.gif"
+          alt="background gradient"
+        />
         <div id="overlay" onClick={() => toggleMenu(true)} />
-        <img id="profileIcon" src="/images/profile.png" />
+        <img id="profileIcon" src="/images/profile.png" alt="profile icon" />
         <h1 id="logoText">Topper</h1>
         <h1 id="titleText" onClick={() => setComponent(0)}>
           {props.user.username}
