@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Signup from './Signup'
 import Login from './Login'
 
-const Landing = () => {
+const Landing = props => {
   // component variable is arbitrary number to decide what should be shown, depending on what the user is trying to do
   const [component, setComponent] = useState(0)
 
@@ -11,7 +11,7 @@ const Landing = () => {
       <div className="App">
         <header className="App-header">
           <img id="background" src="/images/topperBackground.gif" />
-          <div id="overlay" onClick={() => toggleMenu(true)} />
+          <div id="overlay" />
           <img id="brandIcon" src="/images/TipJar.png" />
           <h1 id="logoText" onClick={() => setComponent(0)}>
             Topper
@@ -38,12 +38,12 @@ const Landing = () => {
       <div className="App">
         <header className="App-header">
           <img id="background" src="/images/topperBackground.gif" />
-          <div id="overlay" onClick={() => toggleMenu(true)} />
+          <div id="overlay" />
           <img id="brandIcon" src="/images/TipJar.png" />
           <h1 id="logoText" onClick={() => setComponent(0)}>
             ← Back
           </h1>
-          <Signup />
+          <Signup account={props.account} />
           <button id="learnLanding">Learn More</button>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
         </header>
@@ -54,7 +54,7 @@ const Landing = () => {
       <div className="App">
         <header className="App-header">
           <img id="background" src="/images/topperBackground.gif" />
-          <div id="overlay" onClick={() => toggleMenu(true)} />
+          <div id="overlay" />
           <img id="brandIcon" src="/images/TipJar.png" />
           <h1 id="logoText" onClick={() => setComponent(0)}>
             ← Back

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {signup} from './userActions'
 
 // local signup
-const Signup = () => {
+const Signup = props => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,12 +13,13 @@ const Signup = () => {
     const info = {
       username,
       email,
-      password
+      password,
+      address: props.account
     }
     await signup(info)
   }
 
-  return (
+  return props.account ? (
     <div className="signup-component">
       <form onSubmit={handleSubmit}>
         <div>
@@ -65,6 +66,11 @@ const Signup = () => {
           Sign up
         </button>
       </form>
+    </div>
+  ) : (
+    <div id="connectWallet">
+      Connect Your Wallet
+      {console.log('Connect a wallet first!')}
     </div>
   )
 }
