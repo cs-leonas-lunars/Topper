@@ -49,10 +49,14 @@ const Transaction = props => {
     data.loading ? (
       <div className="App">
         <header className="App-header">
-          <img
+          <video
+            src="/images/background.mp4"
             id="background"
-            src="/images/topperBackground.gif"
-            alt="background gradient"
+            playsInline
+            muted
+            autoPlay
+            loop
+            style={{pointerEvents: 'none'}}
           />
           <div id="overlay" />
           <div id="loadContainer">
