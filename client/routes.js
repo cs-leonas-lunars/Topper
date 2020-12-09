@@ -45,13 +45,17 @@ const Routes = () => {
     <Switch>
       {window.location.href.split('/')[3].split('?')[0] ===
       'send-transaction' ? (
-        <Route>
-          <Transaction
-            user={data.userData}
-            recipient={window.location.href.split('?')[1].split('=')[1]}
-            link={window.location.href.split('?')[2].split('=')[1]}
-          />
-        </Route>
+        data.userData ? (
+          <Route>
+            <Transaction
+              user={data.userData}
+              recipient={window.location.href.split('?')[1].split('=')[1]}
+              link={window.location.href.split('?')[2].split('=')[1]}
+            />
+          </Route>
+        ) : (
+          <Landing />
+        )
       ) : data.userData && data.userData.id ? (
         <Route>
           <Home user={data.userData} transactions={data.transactionData} />

@@ -3,7 +3,7 @@ const db = require('../db')
 
 const Transaction = db.define('transaction', {
   amount: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     allowNull: false,
     validate: {
       notEmpty: true
@@ -15,13 +15,21 @@ const Transaction = db.define('transaction', {
     validate: {
       notEmpty: true
     }
+  },
+  recipientId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  senderId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   }
-  // recipientId: {
-  //   type: Sequelize.STRING,
-  // },
-  // senderId: {
-  //   type: Sequelize.STRING,
-  // },
   /*
   status: {
     type: Sequelize.ENUM('Sent', 'Received'),

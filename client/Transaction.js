@@ -23,19 +23,18 @@ const Transaction = props => {
       recipient: data.transferData.recipient.address,
       amount
     }
+    if (data.transferData.walletType === 'Metamask') {
+      await metaMaskTransaction(info.recipient, info.amount, info.account)
+    } else {
+      await fortmaticTransaction(info.recipient, info.amount, info.account)
+    }
     await createTransaction({
-      recipientId: recipient.id,
+      recipientId: data.transferData.recipient.id,
       senderId: props.user.id,
       amount,
-      link: props.link
+      linkToPost: props.link
     })
-    if (data.transferData.walletType === 'Metamask') {
-      // user has metamask --> use metamask
-      // fortmatic --> use fortmatic
-      metaMaskTransaction(info.recipient, info.amount, info.account)
-    } else {
-      fortmaticTransaction(info.recipient, info.amount, info.account)
-    }
+    window.close()
   }
 
   const cancelTransaction = () => {
@@ -60,7 +59,6 @@ const Transaction = props => {
       <div>{window.close()}</div>
     ) : (
       <div className="App">
-        {console.log(props.recipient)}
         <header className="App-header">
           <img id="background" src="/images/topperBackground.gif" />
           <div id="overlay" />
