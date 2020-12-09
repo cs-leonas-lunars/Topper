@@ -19,7 +19,6 @@ passport.use(
       callbackURL: process.env.REDDIT_CALLBACK
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log(accessToken, refreshToken, 'TOKENS')
       const redditId = profile.id
       const username = profile.name
       // also could get user image also to make it look all nice -> add imageUrl to models
