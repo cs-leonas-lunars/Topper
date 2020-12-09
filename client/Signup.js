@@ -1,5 +1,7 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {signup} from './userActions'
+
+const Checkbox = props => <input type="checkbox" {...props} />
 
 // local signup
 const Signup = () => {
@@ -7,6 +9,20 @@ const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [status, setStatus] = useState(true)
+  const [validatePassword, setValidatePassword] = useState(true)
+  const [checked, setChecked] = useState(false)
+
+  useEffect(
+    () => {
+      if (confirmPassword === password) {
+        setValidatePassword(false)
+      } else {
+        setValidatePassword(true)
+      }
+    },
+    [password, confirmPassword]
+  )
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -15,8 +31,13 @@ const Signup = () => {
       email,
       password
     }
-    await signup(info)
+    const signupStatus = await signup(info)
+    if (signupStatus === 1) {
+      setStatus(false)
+    }
   }
+
+  console.log(validatePassword, checked, 'both should be true')
 
   return (
     <div className="signup-component">
@@ -61,10 +82,25 @@ const Signup = () => {
             type="password"
           />
         </div>
-        <button className="signup-button" type="submit" value="submit">
+        <button
+          className="signup-button"
+          type="submit"
+          value="submit"
+          disabled={validatePassword || !checked}
+        >
           Sign up
         </button>
       </form>
+      <label>
+        <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
+        <small>
+          By checking this box, I agree to Topper's terms and conditions
+        </small>
+      </label>
+      <div>
+        {validatePassword && <div>Passwords must match</div>}
+        {!status && <div>Signup Failed</div>}
+      </div>
     </div>
   )
 }

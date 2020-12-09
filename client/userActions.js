@@ -17,6 +17,7 @@ export const login = async credentials => {
     window.location.reload()
   } catch (err) {
     console.error(err)
+    return 1
   }
 }
 
@@ -26,6 +27,7 @@ export const signup = async info => {
     window.location.reload()
   } catch (err) {
     console.error(err)
+    return 1
   }
 }
 

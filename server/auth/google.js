@@ -18,6 +18,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   const strategy = new GoogleStrategy(
     googleConfig,
     (token, refreshToken, profile, done) => {
+      console.log(process.env.USER_ID, 'HEEEEEEEERE')
       const googleId = profile.id
       const email = profile.emails[0].value
       const imgUrl = profile.photos[0].value
@@ -25,10 +26,22 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       const lastName = profile.name.familyName
       const fullName = profile.displayName
 
+      // const user = await User.findByPk(req.user.id)
+      // user.update({ googleId, googleEmail: email })
+
+      // let user = await User.findOne({
+      //   where: {
+      //     email
+      //   }
+      // })
+
+      // await user.update({ google})
+
       User.findOrCreate({
         where: {googleId},
         defaults: {email, imgUrl, firstName, lastName, fullName}
       })
+
         .then(([user]) => done(null, user))
         .catch(done)
     }
