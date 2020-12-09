@@ -7,6 +7,7 @@ const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [status, setStatus] = useState(true)
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -15,7 +16,10 @@ const Signup = () => {
       email,
       password
     }
-    await signup(info)
+    const signupStatus = await signup(info)
+    if (signupStatus === 1) {
+      setStatus(false)
+    }
   }
 
   return (
@@ -65,6 +69,7 @@ const Signup = () => {
           Sign up
         </button>
       </form>
+      {!status && <div>Signup Failed</div>}
     </div>
   )
 }

@@ -12,8 +12,8 @@ const Login = () => {
       username,
       password
     }
-    const status = await login(credentials)
-    if (status === 1) {
+    const loginStatus = await login(credentials)
+    if (loginStatus === 1) {
       setStatus(false)
     }
   }
@@ -45,7 +45,7 @@ const Login = () => {
           Login
         </button>
       </form>
-      {!status && <div>Incorrect Username and/or Password</div>}
+      {!status && <div>Something went wrong, try again</div>}
     </div>
   )
 }
