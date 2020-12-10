@@ -1,7 +1,7 @@
 const passport = require('passport')
 const router = require('express').Router()
 const crypto = require('crypto')
-var CryptoJS = require('crypto-js')
+const CryptoJS = require('crypto-js')
 const RedditStrategy = require('passport-reddit').Strategy
 const usernames = require('./usernames')
 
@@ -40,7 +40,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/callback', async (req, res, next) => {
   let username = usernames.reddit
-  var ciphertext = CryptoJS.AES.encrypt(username, 'g3tth3n4m3').toString()
+  let ciphertext = CryptoJS.AES.encrypt(username, 'g3tth3n4m3').toString()
   // Check for origin via state token
   if (req.query.state === req.session.state) {
     await passport.authenticate('reddit', {
