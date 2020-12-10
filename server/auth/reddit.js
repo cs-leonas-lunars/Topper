@@ -30,8 +30,10 @@ passport.use(
       //console.log('TYPE OF ', typeof userCode)
       //usernames['reddit'] = userCode
 
-      usernames.reddit = username
-
+      // usernames.reddit = await username
+      async function addToArr() {
+        usernames.reddit = username
+      }
       // also could get user image also to make it look all nice -> add imageUrl to models
 
       // User.findOrCreate({
@@ -53,6 +55,7 @@ passport.use(
       })
       console.log(user)
       */
+      await addToArr()
       done()
     }
   )
