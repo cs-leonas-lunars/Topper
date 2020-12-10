@@ -33,7 +33,7 @@ router.put('/update/reddit', async (req, res, next) => {
   console.log(req.body, 'REQ BODY')
   try {
     let user = await User.findByPk(req.user.id)
-    await user.update({redditHandle: req.body.redditHandle})
+    await user.update({redditHandle: req.body.originalText})
     res.status(200).send(user)
   } catch (err) {
     console.error(err)

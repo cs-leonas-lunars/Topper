@@ -37,7 +37,7 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   redditHandle: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   },
   redditId: {
     type: Sequelize.STRING
