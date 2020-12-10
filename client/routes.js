@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, lazy} from 'react'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import Landing from './Landing'
-import Home from './Home'
-import Transaction from './Transaction'
+const Landing = lazy(() => import('./Landing'))
+const Home = lazy(() => import('./Home'))
+const Transaction = lazy(() => import('.Transaction'))
 import {me, updateRedditUsername} from './userActions'
 
 const Routes = () => {
