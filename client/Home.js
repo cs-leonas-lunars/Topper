@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {logout, pushAddress} from './userActions'
 import {loadBlockchainData} from './loadData'
+import AuthButtons from './AuthButtons'
 
 // all components are functional
 // no React.Component
@@ -69,11 +70,10 @@ const Home = props => {
         <h1 id="logoText">Topper</h1>
         <h1 id="titleText" onClick={() => setComponent(0)}>
           {props.user.username}
+          <AuthButtons />
         </h1>
         <p id="paraText">0 ETH</p>
-        <a href="/auth/reddit">
-          <button id="learnHome">Test Auth</button>
-        </a>
+        <button id="learnHome">Learn More</button>
         <button id="logout" onClick={() => logout()}>
           Logout
         </button>

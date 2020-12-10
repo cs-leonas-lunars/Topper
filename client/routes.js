@@ -3,7 +3,7 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
 import Transaction from './Transaction'
-import {me, updateRedditUsername} from './userActions'
+import {me, updateSocialUsername} from './userActions'
 
 const Routes = () => {
   const [data, setData] = useState({
@@ -75,9 +75,12 @@ const Routes = () => {
           <Landing />
         )
       ) : window.location.href.split('/')[3].split('?')[0] ===
-      'updateRedditUsername' ? (
+      'updateSocialUsername' ? (
         <div>
-          {updateRedditUsername(window.location.href.split('?')[1]).then(() => {
+          {updateSocialUsername(
+            window.location.href.split('?')[1],
+            window.location.href.split('?')[2]
+          ).then(() => {
             window.location.replace('http://localhost:5000')
           })}
         </div>
