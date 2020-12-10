@@ -56,7 +56,9 @@ passport.use(
       console.log(user)
       */
       await addToArr()
-      done()
+      setTimeout(() => {
+        done()
+      }, 2000)
     }
   )
 )
