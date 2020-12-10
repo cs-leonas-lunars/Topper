@@ -2,6 +2,9 @@ const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const {User} = require('../db/models')
+const CryptoJS = require('crypto-js')
+const usernames = require('./usernames')
+
 module.exports = router
 
 // from FS boilermaker
@@ -17,33 +20,14 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
   const strategy = new GoogleStrategy(
     googleConfig,
-    (token, refreshToken, profile, done) => {
-      console.log(process.env.USER_ID, 'HEEEEEEEERE')
-      const googleId = profile.id
-      const email = profile.emails[0].value
-      const imgUrl = profile.photos[0].value
-      const firstName = profile.name.givenName
-      const lastName = profile.name.familyName
-      const fullName = profile.displayName
+    async (token, refreshToken, profile, done) => {
+      const username = profile.emails[0].value
 
-      // const user = await User.findByPk(req.user.id)
-      // user.update({ googleId, googleEmail: email })
-
-      // let user = await User.findOne({
-      //   where: {
-      //     email
-      //   }
-      // })
-
-      // await user.update({ google})
-
-      User.findOrCreate({
-        where: {googleId},
-        defaults: {email, imgUrl, firstName, lastName, fullName}
-      })
-
-        .then(([user]) => done(null, user))
-        .catch(done)
+      async function addToArr() {
+        usernames.google = username
+      }
+      await addToArr()
+      done()
     }
   )
 
@@ -54,11 +38,13 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     passport.authenticate('google', {scope: ['email', 'profile']})
   )
 
-  router.get(
-    '/callback',
-    passport.authenticate('google', {
-      successRedirect: '/',
-      failureRedirect: '/'
-    })
-  )
+  router.get('/callback', async (req, res, next) => {
+    let username = usernames.google
+    let ciphertext = CryptoJS.AES.encrypt(username, 'g3tth3n4m3').toString()
+
+    await passport.authenticate('google', {
+      failureRedirect: `/updateSocialUsername?google?${ciphertext}`,
+      successRedirect: '/updateSocialUsername'
+    })(req, res, next)
+  })
 }

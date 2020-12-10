@@ -29,11 +29,19 @@ router.get('/:username', async (req, res, next) => {
   }
 })
 
-router.put('/update/reddit', async (req, res, next) => {
-  console.log(req.body, 'REQ BODY')
+router.put('/update/social', async (req, res, next) => {
   try {
     let user = await User.findByPk(req.user.id)
-    await user.update({redditHandle: req.body.originalText})
+    const {platform, originalText} = req.body
+
+    if (platform === 'reddit') {
+      await user.update({reddit: originalText})
+    } else if (platform === 'google') {
+      await user.update({google: originalText})
+    } else {
+      await user.update({twitter: originalText})
+    }
+
     res.status(200).send(user)
   } catch (err) {
     console.error(err)

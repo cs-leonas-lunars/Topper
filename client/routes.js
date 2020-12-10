@@ -1,9 +1,12 @@
 import React, {useState, useEffect, lazy} from 'react'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
+
 const Landing = lazy(() => import('./Landing'))
 const Home = lazy(() => import('./Home'))
 const Transaction = lazy(() => import('.Transaction'))
 import {me, updateRedditUsername} from './userActions'
+
+
 
 const Routes = () => {
   const [data, setData] = useState({
@@ -75,9 +78,12 @@ const Routes = () => {
           <Landing />
         )
       ) : window.location.href.split('/')[3].split('?')[0] ===
-      'updateRedditUsername' ? (
+      'updateSocialUsername' ? (
         <div>
-          {updateRedditUsername(window.location.href.split('?')[1]).then(() => {
+          {updateSocialUsername(
+            window.location.href.split('?')[1],
+            window.location.href.split('?')[2]
+          ).then(() => {
             window.location.replace('http://localhost:5000')
           })}
         </div>

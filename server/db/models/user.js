@@ -36,14 +36,17 @@ const User = db.define('user', {
   address: {
     type: Sequelize.STRING
   },
-  redditHandle: {
-    type: Sequelize.TEXT
+  reddit: {
+    type: Sequelize.TEXT,
+    unique: true
   },
-  twitterHandle: {
-    type: Sequelize.STRING
+  twitter: {
+    type: Sequelize.STRING,
+    unique: true
   },
-  googleEmail: {
-    type: Sequelize.STRING
+  google: {
+    type: Sequelize.STRING,
+    unique: true
   }
 })
 
