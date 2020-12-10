@@ -84,16 +84,14 @@ export const pushAddress = async address => {
   }
 }
 
-export const updateRedditUsername = async redditHandle => {
-  console.log('Pre-Decryption: ', redditHandle)
+export const updateSocialUsername = async (platform, redditHandle) => {
   var bytes = CryptoJS.AES.decrypt(redditHandle, 'g3tth3n4m3')
   var originalText = bytes.toString(CryptoJS.enc.Utf8)
-  console.log('Post-Decryption: ', originalText)
   try {
-    const res = await axios.put('/api/users/update/reddit', {
+    await axios.put('/api/users/update/social', {
+      platform,
       originalText
     })
-    console.log(res.data)
   } catch (err) {
     console.error(err)
   }
