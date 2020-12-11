@@ -68,7 +68,8 @@ const Routes = () => {
             <Transaction
               user={data.userData}
               recipient={window.location.href.split('?')[1].split('=')[1]}
-              link={window.location.href.split('?')[2].split('=')[1]}
+              link={window.location.href.split('?')[3].split('=')[1]}
+              platform={window.location.href.split('?')[2].split('=')[1]}
             />
           </Route>
         ) : (

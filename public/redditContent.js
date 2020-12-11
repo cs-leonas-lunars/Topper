@@ -1,136 +1,143 @@
-let start = 0
-let end = 0
-let currentUser = ''
-let allPosts = []
-let allUsers = []
-let allHeaders = []
-var currentURL = ''
-document.addEventListener('scroll', () => findPosts())
+let startReddit = 0
+let endReddit = 0
+let currentRedditUser = ''
+let allRedditPosts = []
+let allRedditUsers = []
+let allRedditHeaders = []
+var currentRedditURL = ''
+document.addEventListener('scroll', () => findRedditPosts())
 
 if (
   window.location.href.split('/')[2] &&
   (window.location.href.split('/')[2] === 'www.reddit.com' ||
     window.location.href.split('/')[2] === 'reddit.com')
 ) {
-  start = 0
-  allPosts = Array.from(
+  startReddit = 0
+  allRedditPosts = Array.from(
     document.getElementsByClassName('_3-miAEojrCvx_4FQ8x3P-s')
   )
-  allUsers = Array.from(
+  allRedditUsers = Array.from(
     document.querySelectorAll(
       "div[class='_3AStxql1mQsrZuUIFP9xSg nU4Je7n-eSXStTBAPMYt8']"
     )
   )
-  allHeaders = Array.from(
+  allRedditHeaders = Array.from(
     document.querySelectorAll("div[class='cZPZhMe-UCZ8htPodMyJ5']")
   )
-  end = allPosts.length
+  endReddit = allRedditPosts.length
 
   window.onload = () => {
-    allPosts.map((post, idx) => {
-      let tag = allHeaders[idx].children[0].children[0].innerText
-      if (tag.toLowerCase() !== 'promoted') injectButton(post, idx)
+    allRedditPosts.map((post, idx) => {
+      let tagReddit = allRedditHeaders[idx].children[0].children[0].innerText
+      if (tagReddit.toLowerCase() !== 'promoted') injectRedditButton(post, idx)
     })
 
-    currentURL = location.href
-    setInterval(function() {
-      if (location.href != currentURL) {
-        pageNavigation()
-        currentURL = location.href
+    currentRedditURL = location.href
+    setInterval(function () {
+      if (location.href != currentRedditURL) {
+        pageNavigationReddit()
+        currentRedditURL = location.href
       }
     }, 250)
   }
 }
 
-function findPosts() {
-  start = end
-  allPosts = Array.from(
+function findRedditPosts() {
+  startReddit = endReddit
+  allRedditPosts = Array.from(
     document.getElementsByClassName('_3-miAEojrCvx_4FQ8x3P-s')
   )
-  allUsers = Array.from(
+  allRedditUsers = Array.from(
     document.querySelectorAll(
       "div[class='_3AStxql1mQsrZuUIFP9xSg nU4Je7n-eSXStTBAPMYt8']"
     )
   )
-  allHeaders = Array.from(
+  allRedditHeaders = Array.from(
     document.querySelectorAll("div[class='cZPZhMe-UCZ8htPodMyJ5']")
   )
-  end = allPosts.length
+  endReddit = allRedditPosts.length
 
-  let posts = allPosts.slice(start, end)
-  posts.map((post, idx) => {
-    let tag = allHeaders[idx + start].children[0].children[0].innerText
-    if (tag.toLowerCase() !== 'promoted') injectButton(post, idx + start)
+  let redditPosts = allRedditPosts.slice(start, end)
+  redditPosts.map((post, idx) => {
+    let tagReddit =
+      allRedditHeaders[idx + startReddit].children[0].children[0].innerText
+    if (tagReddit.toLowerCase() !== 'promoted')
+      injectRedditButton(post, idx + startReddit)
   })
 }
 
-function injectButton(post, idx) {
-  let btn = document.createElement('BUTTON')
-  let image = document.createElement('IMG')
-  let text = document.createElement('P')
-  btn.onmouseover = () => {
-    btn.style.cssText =
+function injectRedditButton(post, idx) {
+  let btnReddit = document.createElement('BUTTON')
+  let imageReddit = document.createElement('IMG')
+  let textReddit = document.createElement('P')
+  btnReddit.onmouseover = () => {
+    btnReddit.style.cssText =
       'border-radius: 4px; position: absolute; width: 90px; height: 25px; right: 1px; border-width: 0; cursor: pointer; outline: none; transition: background-color 0.35s, box-shadow 0.35s; background-color: #E8E8E8; z-index: 2;'
-    text.style.cssText =
+    textReddit.style.cssText =
       'position: absolute; width: 75%; top: 17.5%; right: 0%; fontSize: 0.9rem; fontFamily: Montserrat-Bold; textAlign: center; color: #878A8C; cursor: pointer; zIndex: 3;'
   }
 
-  btn.onmouseout = () => {
-    btn.style.cssText =
+  btnReddit.onmouseout = () => {
+    btnReddit.style.cssText =
       'border-radius: 4px; position: absolute; width: 90px; height: 25px; right: 1px; border-width: 0; cursor: pointer; outline: none; transition: background-color 0.35s, box-shadow 0.35s; background-color: white; z-index: 2;'
-    text.style.cssText =
+    textReddit.style.cssText =
       'position: absolute; width: 75%; top: 17.5%; right: 0%; fontSize: 0.9rem; fontFamily: Montserrat-Bold; textAlign: center; color: #878A8C; cursor: pointer; zIndex: 3;'
   }
-  image.src = 'https://i.imgur.com/iQz1gwF.png'
-  btn.style.cssText =
+  imageReddit.src = 'https://i.imgur.com/iQz1gwF.png'
+  btnReddit.style.cssText =
     'border-radius: 4px; position: absolute; width: 90px; height: 25px; right: 1px; border-width: 0; cursor: pointer; outline: none; transition: background-color 0.35s, box-shadow 0.35s; background-color: white; z-index: 2;'
 
-  image.style.cssText =
+  imageReddit.style.cssText =
     'position: absolute; height: 20px; width: 20px; top: 2.5px; left: 5px; zIndex: 3;'
 
-  text.style.cssText =
+  textReddit.style.cssText =
     'position: absolute; width: 75%; top: 17.5%; right: 0%; fontSize: 0.9rem; fontFamily: Montserrat-Bold; textAlign: center; color: #878A8C; cursor: pointer; zIndex: 3;'
 
-  btn.id = idx.toString()
-  text.innerHTML = 'Tip ETH'
-  btn.appendChild(image)
-  btn.appendChild(text)
-  btn.onclick = () => {
-    let linkTo = Array.from(
+  btnReddit.id = idx.toString()
+  textReddit.innerHTML = 'Tip ETH'
+  btnReddit.appendChild(imageReddit)
+  btnReddit.appendChild(textReddit)
+  btnReddit.onclick = () => {
+    let platformReddit = window.location.href.split('/')[2].split('.')[1]
+    let linkToReddit = Array.from(
       document.querySelectorAll(
         'div[class="y8HYJ-y_lTUHkQIc1mdCq _2INHSNB8V5eaWp4P0rY_mE"] > a'
       )
     )[idx].href
-    let location = window.location.href.split('/')[3]
-    let recipient = ''
+    let locationReddit = window.location.href.split('/')[3]
+    let recipientReddit = ''
     if (
-      location === '' ||
-      location === 'best' ||
-      location === 'hot' ||
-      location === 'top' ||
-      location === 'new'
+      locationReddit === '' ||
+      locationReddit === 'best' ||
+      locationReddit === 'hot' ||
+      locationReddit === 'top' ||
+      locationReddit === 'new'
     ) {
-      recipient = allUsers[btn.id].children[3].innerText.split('/')[1]
+      recipientReddit = allRedditUsers[
+        btnReddit.id
+      ].children[3].innerText.split('/')[1]
     } else if (
       window.location.href.split('/')[4] === 'popular' ||
       window.location.href.split('/')[3] === 'all'
     ) {
-      recipient = allUsers[btn.id].children[3].innerText.split('/')[1]
+      recipientReddit = allRedditUsers[
+        btnReddit.id
+      ].children[3].innerText.split('/')[1]
     } else {
-      recipient = allUsers[btn.id].children[1].children[0].innerText.split(
-        '/'
-      )[1]
+      recipientReddit = allRedditUsers[
+        btnReddit.id
+      ].children[1].children[0].innerText.split('/')[1]
     }
     window.open(
-      `http://localhost:5000/send-transaction?to=${recipient}?link=${linkTo}`
+      `https://topper-fsa.herokuapp.com/send-transaction?to=${recipientReddit}?platform=${platformReddit}?link=${linkToReddit}`
     )
   }
-  post.appendChild(btn)
+  post.appendChild(btnReddit)
 }
 
-const pageNavigation = () => {
-  allPosts.map((post, idx) => {
-    let tag = allHeaders[idx].children[0].children[0].innerText
-    if (tag.toLowerCase() !== 'promoted') injectButton(post, idx)
+const pageNavigationReddit = () => {
+  allRedditPosts.map((post, idx) => {
+    let tagReddit = allRedditHeaders[idx].children[0].children[0].innerText
+    if (tagReddit.toLowerCase() !== 'promoted') injectRedditButton(post, idx)
   })
 }

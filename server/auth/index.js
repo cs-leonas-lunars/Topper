@@ -14,7 +14,11 @@ router.use('/instagram', require('./instagram'))
 
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({where: {username: req.body.username}})
+    const user = await User.findOne({
+      where: {
+        [Op.or]: [{email: req.body.username}, {username: req.body.username}]
+      }
+    })
     if (!user) {
       console.log('No such user found:', req.body.username)
       res.status(401).send('Wrong username and/or password')
