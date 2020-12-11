@@ -78,6 +78,7 @@ function injectYoutubeButton(post, idx) {
   btnYoutube.appendChild(imageYoutube)
   btnYoutube.appendChild(textYoutube)
   btnYoutube.onclick = () => {
+    let platformYoutube = window.location.href.split('/')[2].split('.')[1]
     let linkToYoutube = Array.from(
       document.querySelectorAll(
         'div[class="y8HYJ-y_lTUHkQIc1mdCq _2INHSNB8V5eaWp4P0rY_mE"] > a'
@@ -106,7 +107,7 @@ function injectYoutubeButton(post, idx) {
       */
     }
     window.open(
-      `http://localhost:5000/send-transaction?to=${recipientYoutube}?link=${linkToYoutube}`
+      `http://localhost:5000/send-transaction?to=${recipientYoutube}?platform=${platformYoutube}?link=${linkToYoutube}`
     )
   }
   post.appendChild(btnYoutube)

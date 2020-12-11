@@ -23,7 +23,7 @@ const Login = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">
-            <small>Username</small>
+            <small>Username or Email</small>
           </label>
           <input
             onChange={e => setUsername(e.target.value)}

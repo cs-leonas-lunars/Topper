@@ -96,6 +96,7 @@ function injectButton(post, idx) {
   btn.appendChild(image)
   btn.appendChild(text)
   btn.onclick = () => {
+    let platform = window.location.href.split('/')[2].split('.')[1]
     let linkTo = Array.from(
       document.querySelectorAll(
         'div[class="y8HYJ-y_lTUHkQIc1mdCq _2INHSNB8V5eaWp4P0rY_mE"] > a'
@@ -122,7 +123,7 @@ function injectButton(post, idx) {
       )[1]
     }
     window.open(
-      `http://localhost:5000/send-transaction?to=${recipient}?link=${linkTo}`
+      `http://localhost:5000/send-transaction?to=${recipient}?platform=${platform}?link=${linkTo}`
     )
   }
   post.appendChild(btn)

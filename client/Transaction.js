@@ -34,7 +34,8 @@ const Transaction = props => {
       recipientId: data.transferData.recipient.id,
       senderId: props.user.id,
       amount,
-      linkToPost: props.link
+      linkToPost: props.link,
+      platform: props.platform
     })
     window.close()
   }
