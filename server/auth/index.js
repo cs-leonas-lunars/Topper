@@ -9,6 +9,8 @@ module.exports = router
 router.use('/reddit', require('./reddit'))
 router.use('/google', require('./google'))
 router.use('/twitter', require('./twitter'))
+router.use('/twitch', require('./twitch'))
+router.use('/instagram', require('./instagram'))
 
 router.post('/login', async (req, res, next) => {
   try {
@@ -59,16 +61,3 @@ router.get('/me', async (req, res) => {
   }
   res.json({user})
 })
-
-// Tag.findByPk(id, {
-//   include: [
-//     {
-//       model: Tutorial,
-//       as: "tutorials",
-//       attributes: ["title"],
-//       through: {
-//         attributes: ["tag_id", "tutorial_id"],
-//       },
-//     },
-//   ],
-// })

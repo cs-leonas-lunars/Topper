@@ -8,6 +8,8 @@ const AuthButtons = () => {
       <a href="/auth/reddit">Connect to Reddit</a>
       <a href="/auth/google">Connect to Google</a>
       <a href="/auth/twitter">Connect to Twitter</a>
+      <a href="auth/twitch">Connect to Twitch</a>
+      <a href="auth/instagram">Connect to Instagram</a>
     </div>
   )
   // after the user connects there should be a brief message saying

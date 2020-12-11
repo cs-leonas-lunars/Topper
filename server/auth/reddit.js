@@ -1,12 +1,12 @@
 const passport = require('passport')
 const router = require('express').Router()
 const crypto = require('crypto')
-const CryptoJS = require('crypto-js')
 const RedditStrategy = require('passport-reddit').Strategy
-const usernames = require('./usernames')
+const {User} = require('../db/models')
 
 module.exports = router
 
+let userId = null
 // reddit strategy
 // http://www.passportjs.org/packages/passport-reddit/
 // https://github.com/Slotos/passport-reddit/blob/master/examples/login/app.js
@@ -20,11 +20,9 @@ passport.use(
     },
     async function(accessToken, refreshToken, profile, done) {
       const username = profile.name
-      async function addToArr() {
-        usernames.reddit = username
-      }
-      await addToArr()
-      done()
+      let user = await User.findByPk(userId)
+      await user.update({reddit: username})
+      done(null, user)
     }
   )
 )
@@ -39,13 +37,11 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/callback', async (req, res, next) => {
-  let username = usernames.reddit
-  let ciphertext = CryptoJS.AES.encrypt(username, 'g3tth3n4m3').toString()
-  // Check for origin via state token
+  userId = req.user.id
   if (req.query.state === req.session.state) {
     await passport.authenticate('reddit', {
-      failureRedirect: `/updateSocialUsername?reddit?${ciphertext}`,
-      successRedirect: '/updateSocialUsername'
+      failureRedirect: '/',
+      successRedirect: '/'
     })(req, res, next)
   } else {
     next(new Error(403))

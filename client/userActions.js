@@ -1,7 +1,4 @@
 import axios from 'axios'
-import history from './history'
-import usernames from '../server/auth/usernames.json'
-import CryptoJS from 'crypto-js'
 
 // axios calls to use routes, no store to simplify everything and because redux advantages dont apply to Topper needs
 export const me = async () => {
@@ -42,30 +39,6 @@ export const logout = async () => {
   }
 }
 
-// export const redditAuth = async () => {
-//   try {
-//     await axios.get('/auth')
-//   } catch(err) {
-//     console.error(err)
-//   }
-// }
-
-// export const googleAuth = async () => {
-//   try {
-
-//   } catch(err) {
-//     console.error(err)
-//   }
-// }
-
-// export const redditAuth = async () => {
-//   try {
-
-//   } catch(err) {
-//     console.error(err)
-//   }
-// }
-
 export const createTransaction = async details => {
   try {
     await axios.post('/api/transactions', details)
@@ -83,41 +56,3 @@ export const pushAddress = async address => {
     console.error(err)
   }
 }
-
-export const updateSocialUsername = async (platform, redditHandle) => {
-  var bytes = CryptoJS.AES.decrypt(redditHandle, 'g3tth3n4m3')
-  var originalText = bytes.toString(CryptoJS.enc.Utf8)
-  try {
-    await axios.put('/api/users/update/social', {
-      platform,
-      originalText
-    })
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-export const getRecipient = async username => {
-  //   try {
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-}
-
-// export const createUser = async (userInfo) => {
-//   try {
-//     const res = await axios.post('/api/users', userInfo)
-//     return res.data
-//     // window.location.reload() ?
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
-
-// export const hasSignedUp = async() => {
-//   try {
-
-//   } catch(err) {
-
-//   }
-// }

@@ -3,7 +3,7 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
 import Transaction from './Transaction'
-import {me, updateSocialUsername} from './userActions'
+import {me} from './userActions'
 
 const Routes = () => {
   const [data, setData] = useState({
@@ -74,16 +74,6 @@ const Routes = () => {
         ) : (
           <Landing />
         )
-      ) : window.location.href.split('/')[3].split('?')[0] ===
-      'updateSocialUsername' ? (
-        <div>
-          {updateSocialUsername(
-            window.location.href.split('?')[1],
-            window.location.href.split('?')[2]
-          ).then(() => {
-            window.location.replace('http://localhost:5000')
-          })}
-        </div>
       ) : data.userData && data.userData.id ? (
         <Route>
           <Home user={data.userData} transactions={data.transactionData} />
