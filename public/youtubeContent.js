@@ -1,3 +1,4 @@
+/*
 let startYoutube = 0
 let endYoutube = 0
 let currentYoutubeUser = ''
@@ -18,13 +19,18 @@ if (
       "div[class='style-scope ytd-rich-grid-media'] > div"
     )
   )
+  allYoutubeUsers = Array.from(
+    document.getElementsByClassName(
+      'yt-simple-endpoint style-scope yt-formatted-string'
+    )
+  )
   endYoutube = allYoutubePosts.length
 
   window.onload = () => {
     allYoutubePosts.map((post, idx) => injectYoutubeButton(post, idx))
 
     currentYoutubeURL = location.href
-    setInterval(function() {
+    setInterval(function () {
       if (location.href != currentYoutubeURL) {
         pageNavigationYoutube()
         currentYoutubeURL = location.href
@@ -38,6 +44,11 @@ function findYoutubePosts() {
   allYoutubePosts = Array.from(
     document.querySelectorAll(
       "div[class='style-scope ytd-rich-grid-media'] > div"
+    )
+  )
+  allYoutubeUsers = Array.from(
+    document.getElementsByClassName(
+      'yt-simple-endpoint style-scope yt-formatted-string'
     )
   )
   endYoutube = allYoutubePosts.length
@@ -79,33 +90,13 @@ function injectYoutubeButton(post, idx) {
   btnYoutube.appendChild(textYoutube)
   btnYoutube.onclick = () => {
     let platformYoutube = window.location.href.split('/')[2].split('.')[1]
+    console.log('Clicked on button from ' + platformYoutube)
     let linkToYoutube = Array.from(
-      document.querySelectorAll(
-        'div[class="y8HYJ-y_lTUHkQIc1mdCq _2INHSNB8V5eaWp4P0rY_mE"] > a'
+      document.getElementsByClassName(
+        'yt-simple-endpoint style-scope ytd-rich-grid-media'
       )
     )[idx].href
-    let locationYoutube = window.location.href.split('/')[3]
-    let recipientYoutube = ''
-    if (
-      locationYoutube === '' ||
-      locationYoutube === 'best' ||
-      locationYoutube === 'hot' ||
-      locationYoutube === 'top' ||
-      locationYoutube === 'new'
-    ) {
-      //recipientYoutube = allYoutubeUsers[btnYoutube.id].children[3].innerText.split('/')[1]
-    } else if (
-      window.location.href.split('/')[4] === 'popular' ||
-      window.location.href.split('/')[3] === 'all'
-    ) {
-      //recipientYoutube = allYoutubeUsers[btnYoutube.id].children[3].innerText.split('/')[1]
-    } else {
-      /*
-      recipientYoutube = allYoutubeUsers[btnYoutube.id].children[1].children[0].innerText.split(
-        '/'
-      )[1]
-      */
-    }
+    let recipientYoutube = allYoutubeUsers[btnYoutube.id].innerHTML
     window.open(
       `http://localhost:5000/send-transaction?to=${recipientYoutube}?platform=${platformYoutube}?link=${linkToYoutube}`
     )
@@ -116,3 +107,4 @@ function injectYoutubeButton(post, idx) {
 const pageNavigationYoutube = () => {
   allYoutubePosts.map((post, idx) => injectYoutubeButton(post, idx))
 }
+*/
