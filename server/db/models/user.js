@@ -47,6 +47,14 @@ const User = db.define('user', {
   google: {
     type: Sequelize.STRING,
     unique: true
+  },
+  twitch: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  instagram: {
+    type: Sequelize.STRING,
+    unique: true
   }
 })
 

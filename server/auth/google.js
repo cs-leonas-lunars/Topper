@@ -2,9 +2,8 @@ const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const {User} = require('../db/models')
-const CryptoJS = require('crypto-js')
-const usernames = require('./usernames')
 
+let userId = null
 module.exports = router
 
 // from FS boilermaker
@@ -21,13 +20,10 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   const strategy = new GoogleStrategy(
     googleConfig,
     async (token, refreshToken, profile, done) => {
-      const username = profile.emails[0].value
-
-      async function addToArr() {
-        usernames.google = username
-      }
-      await addToArr()
-      done()
+      const email = profile.emails[0].value
+      let user = await User.findByPk(userId)
+      await user.update({google: email})
+      done(null, user)
     }
   )
 
@@ -39,12 +35,10 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   )
 
   router.get('/callback', async (req, res, next) => {
-    let username = usernames.google
-    let ciphertext = CryptoJS.AES.encrypt(username, 'g3tth3n4m3').toString()
-
+    userId = req.user.id
     await passport.authenticate('google', {
-      failureRedirect: `/updateSocialUsername?google?${ciphertext}`,
-      successRedirect: '/updateSocialUsername'
+      failureRedirect: '/',
+      successRedirect: '/'
     })(req, res, next)
   })
 }

@@ -2,10 +2,9 @@ const passport = require('passport')
 const router = require('express').Router()
 const {User} = require('../db/models')
 const TwitterStrategy = require('passport-twitter').Strategy
-const CryptoJS = require('crypto-js')
-const usernames = require('./usernames')
 
 module.exports = router
+let userId = null
 
 // twitter passport strategy
 // http://www.passportjs.org/packages/passport-twitter/
@@ -19,11 +18,9 @@ passport.use(
     },
     async function(accessToken, refreshToken, profile, done) {
       const username = profile.username
-      async function addToArr() {
-        usernames.twitter = username
-      }
-      await addToArr()
-      done()
+      let user = await User.findByPk(userId)
+      await user.update({twitter: username})
+      done(null, user)
     }
   )
 )
@@ -32,11 +29,10 @@ passport.use(
 router.get('/', passport.authenticate('twitter'))
 
 router.get('/callback', async (req, res, next) => {
-  let username = usernames.twitter
-  let ciphertext = CryptoJS.AES.encrypt(username, 'g3tth3n4m3').toString()
+  userId = req.user.id
 
   await passport.authenticate('twitter', {
-    failureRedirect: `/updateSocialUsername?twitter?${ciphertext}`,
-    successRedirect: '/updateSocialUsername'
+    failureRedirect: '/',
+    successRedirect: '/'
   })(req, res, next)
 })

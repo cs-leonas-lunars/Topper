@@ -29,25 +29,6 @@ router.get('/:username', async (req, res, next) => {
   }
 })
 
-router.put('/update/social', async (req, res, next) => {
-  try {
-    let user = await User.findByPk(req.user.id)
-    const {platform, originalText} = req.body
-
-    if (platform === 'reddit') {
-      await user.update({reddit: originalText})
-    } else if (platform === 'google') {
-      await user.update({google: originalText})
-    } else {
-      await user.update({twitter: originalText})
-    }
-
-    res.status(200).send(user)
-  } catch (err) {
-    console.error(err)
-  }
-})
-
 // was initially for for user to manually update db with their address and email
 // no longer necessary
 router.put('/update', async (req, res, next) => {
