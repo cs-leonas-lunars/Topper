@@ -29,6 +29,13 @@ const Transaction = db.define('transaction', {
     validate: {
       notEmpty: true
     }
+  },
+  platform: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   }
   /*
   status: {
