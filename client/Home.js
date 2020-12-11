@@ -72,7 +72,7 @@ const Home = props => {
           {props.user.username}
           <AuthButtons />
         </h1>
-        <p id="paraText">0 ETH</p>
+        <p id="paraText">{data.accountData.balance}</p>
         <button id="learnHome">Learn More</button>
         <button id="logout" onClick={() => logout()}>
           Logout

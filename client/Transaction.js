@@ -84,6 +84,10 @@ const Transaction = props => {
             alt="background gradient"
           />
           <div id="overlay" />
+          <p id="transferBalance">
+            <span style={{fontFamily: 'Montserrat-Thin'}}>Your Balance: </span>
+            {data.transferData.balance}
+          </p>
           <form onSubmit={handleSubmit}>
             <div>
               <label id="setAmountLabel" htmlFor="ethAmount">
