@@ -5,14 +5,16 @@ const Checkbox = props => <input type="checkbox" {...props} />
 
 // local signup
 const Signup = () => {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [status, setStatus] = useState(true)
-  const [validatePassword, setValidatePassword] = useState(true)
-  const [checked, setChecked] = useState(false)
+  const [username, setUsername] = useState('') // username
+  const [email, setEmail] = useState('') // user email
+  const [password, setPassword] = useState('') // user password
+  const [confirmPassword, setConfirmPassword] = useState('') // confirm password
+  const [status, setStatus] = useState(true) // signup success/failure
+  const [validatePassword, setValidatePassword] = useState(true) // confirm password boolean
+  const [checked, setChecked] = useState(false) // terms and conditions box
+  const [strength, setStrength] = useState(false) // require strong password
 
+  // useEffect for confirm password
   useEffect(
     () => {
       if (confirmPassword === password) {
@@ -22,6 +24,22 @@ const Signup = () => {
       }
     },
     [password, confirmPassword]
+  )
+
+  // useEffect to require strong password
+  useEffect(
+    () => {
+      const strongRegex = new RegExp(
+        '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+      )
+      const test = password.match(strongRegex)
+      if (!test) {
+        setStrength(false)
+      } else {
+        setStrength(true)
+      }
+    },
+    [password]
   )
 
   const handleSubmit = async e => {
@@ -86,7 +104,7 @@ const Signup = () => {
           className="signup-button"
           type="submit"
           value="submit"
-          disabled={validatePassword || !checked}
+          disabled={validatePassword || !checked || !strength}
         >
           Sign up
         </button>
@@ -100,6 +118,12 @@ const Signup = () => {
       <div>
         {validatePassword && <div>Passwords must match</div>}
         {!status && <div>Signup Failed</div>}
+        {!strength && (
+          <small>
+            Password must contain 1 lowercase, 1 uppcase, 1 numeric, and 1
+            special character and must be 8 characters or longer
+          </small>
+        )}
       </div>
     </div>
   )
