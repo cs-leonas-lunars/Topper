@@ -10,6 +10,9 @@ export const loadBlockchainData = async recipientUsername => {
     console.log('New Metamask')
     window.web3 = new Web3(window.ethereum)
     await window.ethereum.enable()
+    let ethBalance = await window.web3.eth.getBalance(ethereum.selectedAddress)
+    ethBalance = web3.utils.fromWei(ethBalance)
+    ethBalance = Number.parseFloat(ethBalance).toFixed(4) + ' ETH'
     let recipient = null
     if (recipientUsername)
       recipient = await axios.get(
@@ -22,13 +25,15 @@ export const loadBlockchainData = async recipientUsername => {
     } else if (!recipient) {
       return {
         account: ethereum.selectedAddress,
-        walletType: 'Metamask'
+        walletType: 'Metamask',
+        balance: ethBalance
       }
     } else if (recipient && recipientUsername) {
       return {
         account: ethereum.selectedAddress,
         recipient: recipient.data,
-        walletType: 'Metamask'
+        walletType: 'Metamask',
+        balance: ethBalance
       }
     }
   } else if (window.web3) {
@@ -49,6 +54,9 @@ export const loadBlockchainData = async recipientUsername => {
     window.web3 = new Web3(fm.getProvider())
     await web3.currentProvider.enable()
     let account = await web3.eth.getAccounts()
+    let ethBalance = await window.web3.eth.getBalance(account[0])
+    ethBalance = web3.utils.fromWei(ethBalance)
+    ethBalance = Number.parseFloat(ethBalnce).toFixed(4) + ' ETH'
     let recipient = null
     if (recipientUsername)
       recipient = await axios.get(
@@ -61,13 +69,15 @@ export const loadBlockchainData = async recipientUsername => {
     } else if (!recipient) {
       return {
         account: account[0],
-        walletType: 'Fortmatic'
+        walletType: 'Fortmatic',
+        balance: ethBalance
       }
     } else if (recipient && recipientUsername) {
       return {
         account: account[0],
         recipient: recipient.data,
-        walletType: 'Fortmatic'
+        walletType: 'Fortmatic',
+        balance: ethBalance
       }
     }
   }
