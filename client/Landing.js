@@ -1,6 +1,10 @@
 import React, {useState, lazy} from 'react'
-import Login from './Login'
+
+// const Signup = lazy(() => import('./Signup'))
+// const Login = lazy(() => import('./Login'))
+
 import Signup from './Signup'
+import Login from './Login'
 
 const Landing = props => {
   // component variable is arbitrary number to decide what should be shown, depending on what the user is trying to do
