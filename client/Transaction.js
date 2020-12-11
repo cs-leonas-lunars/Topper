@@ -5,25 +5,25 @@ import {loadBlockchainData} from './loadData'
 import {createTransaction} from './userActions'
 
 // transaction component
-const Transaction = props => {
+const Transaction = (props) => {
   const [amount, setAmount] = useState(0)
   const [cancelStatus, setCancelStatus] = useState(0)
   const [data, setData] = useState({transferData: null, loading: true})
 
   useEffect(() => {
     setTimeout(() => {
-      loadBlockchainData(props.recipient).then(x => {
+      loadBlockchainData(props.recipient).then((x) => {
         setData({transferData: x, loading: false})
       })
     }, 2000)
   }, [])
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const info = {
       account: data.transferData.account,
       recipient: data.transferData.recipient.address,
-      amount
+      amount,
     }
     if (data.transferData.walletType === 'Metamask') {
       await metaMaskTransaction(info.recipient, info.amount, info.account)
@@ -35,7 +35,7 @@ const Transaction = props => {
       senderId: props.user.id,
       amount,
       linkToPost: props.link,
-      platform: props.platform
+      platform: props.platform,
     })
     window.close()
   }
@@ -91,15 +91,17 @@ const Transaction = props => {
           </p>
           <form onSubmit={handleSubmit}>
             <div>
-              <label id="setAmountLabel" htmlFor="ethAmount">
-                <span style={{fontFamily: 'Montserrat-Thin'}}>
-                  Send Ether To{'\n'}
-                </span>
-                {data.transferData.recipient.username}
-              </label>
+              {data.transferData.recipient && (
+                <label id="setAmountLabel" htmlFor="ethAmount">
+                  <span style={{fontFamily: 'Montserrat-Thin'}}>
+                    Send Ether To{'\n'}
+                  </span>
+                  {data.transferData.recipient.username}
+                </label>
+              )}
               <input
                 id="setAmountInput"
-                onChange={e => setAmount(e.target.value)}
+                onChange={(e) => setAmount(e.target.value)}
                 type="float"
                 name="amount"
                 autoComplete="off"
