@@ -37,7 +37,7 @@ const Transaction = (props) => {
       linkToPost: props.link,
       platform: props.platform,
     })
-    window.close()
+    window.location.replace('http://topper-fsa.herokuapp.com/success')
   }
 
   const cancelTransaction = () => {

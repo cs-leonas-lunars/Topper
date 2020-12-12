@@ -137,6 +137,30 @@ form div {
   z-index: 2;
 }
 
+#successText {
+  position: absolute;
+  font-size: 4rem;
+  text-align: center;
+  color: #fff;
+  font-family: Montserrat-Bold;
+  width: 100%;
+  top: 300px;
+  left: 0%;
+  z-index: 2;
+}
+
+#redirectText {
+  position: absolute;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #fff;
+  font-family: Montserrat-Thin;
+  width: 100%;
+  top: 405px;
+  left: 0%;
+  z-index: 2;
+}
+
 #paraText {
   position: absolute;
   font-size: 1.5rem;

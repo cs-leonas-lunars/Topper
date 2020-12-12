@@ -3,13 +3,14 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Landing from './Landing'
 import Home from './Home'
 import Transaction from './Transaction'
+import Success from './Success'
 import {me} from './userActions'
 
 const Routes = () => {
   const [data, setData] = useState({
     userData: null,
     transactionData: null,
-    loading: true
+    loading: true,
   })
 
   // useEffect for user
@@ -20,7 +21,7 @@ const Routes = () => {
         setData({
           userData: resData.user,
           transactionData: resData.transactions,
-          loading: false
+          loading: false,
         })
       } catch (err) {
         console.error(err)
@@ -75,6 +76,8 @@ const Routes = () => {
         ) : (
           <Landing />
         )
+      ) : window.location.href.split('/')[3] === 'success' ? (
+        <Success />
       ) : data.userData && data.userData.id ? (
         <Route>
           <Home user={data.userData} transactions={data.transactionData} />
