@@ -5,10 +5,10 @@ import AuthButtons from './AuthButtons'
 
 // all components are functional
 // no React.Component
-const Home = props => {
+const Home = (props) => {
   const [data, setData] = useState({
     accountData: null,
-    loading: true
+    loading: true,
   })
 
   // useEffect for user
@@ -16,10 +16,11 @@ const Home = props => {
     const findData = async () => {
       try {
         let accountData = await loadBlockchainData()
-        await pushAddress(accountData.account)
+        if (accountData && accountData.account)
+          await pushAddress(accountData.account)
         setData({
           accountData,
-          loading: false
+          loading: false,
         })
       } catch (err) {
         console.error(err)
@@ -77,6 +78,13 @@ const Home = props => {
         <button id="logout" onClick={() => logout()}>
           Logout
         </button>
+        <div id="menuButton" onClick={() => toggleMenu(false)}>
+          =
+        </div>
+        <div id="menu"></div>
+        <div id="closeMenu" onClick={() => toggleMenu(true)}>
+          +
+        </div>
         <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
       </header>
     </div>
