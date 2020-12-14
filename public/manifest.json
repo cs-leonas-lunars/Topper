@@ -3,8 +3,7 @@
 
   "name": "Topper",
 
-  "description":
-    "Tip your favorite Reddit contributors over the Ethereum Network",
+  "description": "Tip your favorite Reddit contributors over the Ethereum Network",
   "version": "0.0.1",
 
   "browser_action": {
@@ -15,8 +14,7 @@
     "128": "./images/icon128.png"
   },
 
-  "content_security_policy":
-    "script-src 'self' 'sha256-2f2/1D0emiWe/SLg6UTAOT3O6C6C61kbslq01Bv7g+A='; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'sha256-oFLJ6lXhtUpi52RbQCuiiF1O2XBHND4tH6uJFX8kAzE='; object-src 'self'",
   "permissions": ["activeTab", "tabs", "storage", "notifications"],
   "content_scripts": [
     {
