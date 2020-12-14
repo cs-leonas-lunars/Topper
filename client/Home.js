@@ -6,10 +6,10 @@ import {Link} from 'react-router-dom'
 
 // all components are functional
 // no React.Component
-const Home = (props) => {
+const Home = props => {
   const [data, setData] = useState({
     accountData: null,
-    loading: true,
+    loading: true
   })
 
   // useEffect for user
@@ -21,7 +21,7 @@ const Home = (props) => {
           await pushAddress(accountData.account)
         setData({
           accountData,
-          loading: false,
+          loading: false
         })
       } catch (err) {
         console.error(err)
@@ -84,7 +84,7 @@ const Home = (props) => {
         <div id="menuButton" onClick={() => toggleMenu(false)}>
           =
         </div>
-        <div id="menu"></div>
+        <div id="menu" />
         <div id="closeMenu" onClick={() => toggleMenu(true)}>
           +
         </div>

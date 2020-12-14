@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 import Signup from './Signup'
 import Login from './Login'
 
-const Landing = (props) => {
+const Landing = props => {
   // component variable is arbitrary number to decide what should be shown, depending on what the user is trying to do
   const [component, setComponent] = useState(0)
 

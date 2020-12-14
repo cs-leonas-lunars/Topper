@@ -556,6 +556,101 @@ form div {
   overflow: hidden;
 }
 
+#container {
+  position: absolute;
+  width: 100%;
+  height: 97%;
+  overflow-y: scroll;
+  top: 0%;
+  border-radius: 40px;
+}
+
+#missionStatement {
+  position: absolute;
+  width: 97%;
+  height: 325px;
+  top: 500px;
+  left: 1.5%;
+  border-radius: 40px;
+  background-color: rgb(255, 255, 255, 0.1);
+  z-index: 2;
+}
+
+#meetUs {
+  position: absolute;
+  width: 97%;
+  height: 1500px;
+  top: 900px;
+  left: 1.5%;
+  border-radius: 40px;
+  background-color: rgb(255, 255, 255, 0.1);
+  z-index: 2;
+}
+
+#headshotContainer1 {
+  position: absolute;
+  width: 30%;
+  height: 700px;
+  left: 15%;
+  top: 100px;
+}
+
+#headshotContainer2 {
+  position: absolute;
+  width: 30%;
+  height: 700px;
+  right: 15%;
+  top: 100px;
+}
+
+#headshotContainer3 {
+  position: absolute;
+  width: 30%;
+  height: 700px;
+  left: 15%;
+  top: 800px;
+}
+
+#headshotContainer4 {
+  position: absolute;
+  width: 30%;
+  height: 700px;
+  right: 15%;
+  top: 800px;
+}
+
+.headshot {
+  position: absolute;
+  width: 95%;
+  height: auto;
+  top: 0%;
+  left: 2.5%;
+  border-radius: 100px;
+}
+
+.headshotName {
+  position: absolute;
+  bottom: 25vh;
+  text-align: center;
+  width: 100%;
+}
+
+.headshotDesc {
+  position: absolute;
+  bottom: 20vh;
+}
+
+#contact {
+  position: absolute;
+  top: 2475px;
+  width: 97%;
+  border-radius: 40px;
+  background-color: rgb(255, 255, 255, 0.1);
+  height: 300px;
+  z-index: 2;
+  line-height: 300px;
+  left: 1.5%;
+}
 /* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

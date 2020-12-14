@@ -11,7 +11,7 @@ const Routes = () => {
   const [data, setData] = useState({
     userData: null,
     transactionData: null,
-    loading: true,
+    loading: true
   })
 
   // useEffect for user
@@ -22,7 +22,7 @@ const Routes = () => {
         setData({
           userData: resData.user,
           transactionData: resData.transactions,
-          loading: false,
+          loading: false
         })
       } catch (err) {
         console.error(err)
