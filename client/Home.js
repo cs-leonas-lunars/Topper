@@ -72,7 +72,7 @@ const Home = props => {
         <h1 id="logoText">Topper</h1>
         <h1 id="titleText" onClick={() => setComponent(0)}>
           {props.user.username}
-          <AuthButtons />
+          {/*<AuthButtons />*/}
         </h1>
         <p id="paraText">{data.accountData.balance}</p>
         <Link to="/learnMore">
