@@ -43,7 +43,7 @@ const createApp = () => {
 
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || 'blah blah blah',
+      secret: process.env.SESSION_SECRET,
       store: sessionStore,
       resave: false,
       saveUninitialized: false
@@ -68,7 +68,7 @@ const createApp = () => {
   })
 
   app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+    res.sendFile(path.join(__dirname, '../public/index.html'))
   })
 
   app.use((err, req, res, next) => {
