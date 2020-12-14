@@ -43,10 +43,10 @@ const createApp = () => {
 
   app.use(
     session({
-      secret: process.env.SESSION_SECRET,
+      secret: process.env.SESSION_SECRET || 'topper is the best',
       store: sessionStore,
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: false
     })
   )
   app.use(passport.initialize())
