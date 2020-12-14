@@ -34,9 +34,9 @@ if (
     })
 
     currentRedditURL = location.href
-    setInterval(function () {
+    setInterval(function() {
       if (location.href != currentRedditURL) {
-        pageNavigationReddit()
+        findRedditPosts().then(() => pageNavigationReddit())
         currentRedditURL = location.href
       }
     }, 250)

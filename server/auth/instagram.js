@@ -6,27 +6,33 @@ const {User} = require('../db/models')
 let userId = null
 module.exports = router
 
-passport.use(
-  new InstagramStrategy(
-    {
-      clientID: process.env.INSTAGRAM_CLIENT_ID,
-      clientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
-      callbackURL: process.env.INSTAGRAM_CALLBACK
-    },
-    async function(accessToken, refreshToken, profile, done) {
-      console.log(profile, 'profile')
-      done(null)
-    }
+if (!process.env.INSTAGRAM_CLIENT_ID || !process.env.INSTAGRAM_CLIENT_SECRET) {
+  console.log(
+    'Instagram client ID / secret not found. Skipping Instagram OAuth.'
   )
-)
+} else {
+  passport.use(
+    new InstagramStrategy(
+      {
+        clientID: process.env.INSTAGRAM_CLIENT_ID,
+        clientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
+        callbackURL: process.env.INSTAGRAM_CALLBACK
+      },
+      async function(accessToken, refreshToken, profile, done) {
+        console.log(profile, 'profile')
+        done(null)
+      }
+    )
+  )
 
-router.get('/', passport.authenticate('instagram'))
+  router.get('/', passport.authenticate('instagram'))
 
-router.get('/callback', async (req, res, next) => {
-  userId = req.user.id
+  router.get('/callback', async (req, res, next) => {
+    userId = req.user.id
 
-  await passport.authenticate('instagram', {
-    failureRedirect: '/',
-    successRedirect: '/'
-  })(req, res, next)
-})
+    await passport.authenticate('instagram', {
+      failureRedirect: '/',
+      successRedirect: '/'
+    })(req, res, next)
+  })
+}
