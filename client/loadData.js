@@ -6,6 +6,7 @@ let fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 
 // beginning transaction logic
 export const loadBlockchainData = async (recipientUsername) => {
+  console.log('THIS WAS HIT!!!')
   if (window.ethereum) {
     console.log('New Metamask')
     window.web3 = new Web3(window.ethereum)
@@ -18,17 +19,17 @@ export const loadBlockchainData = async (recipientUsername) => {
       recipient = await axios.get(
         `https://topper-fsa.herokuapp.com/api/users/${recipientUsername}`
       )
-    if (!recipient.data && recipientUsername) {
+    if ((!recipient || !recipient.data) && recipientUsername) {
       window.location.replace(
         `https://www.reddit.com/message/compose?to=${recipientUsername}&subject=Topper%20-%20Receive%20Your%20Tip&message=Hey%20${recipientUsername},%20I%20liked%20your%20post.%20Download%20the%20Topper%20Chrome%20Extension%20to%20receive%20your%20tip%20in%20ETH.%20Link%20to%20download:%20https://topper-fsa.herokuapp.com`
       )
-    } else if (!recipient.data) {
+    } else if ((!recipient || !recipient.data) && !recipientUsername) {
       return {
         account: ethereum.selectedAddress,
         walletType: 'Metamask',
         balance: ethBalance,
       }
-    } else if (recipient && recipientUsername) {
+    } else if (recipient && recipient.data && recipientUsername) {
       return {
         account: ethereum.selectedAddress,
         recipient: recipient.data,
@@ -52,11 +53,11 @@ export const loadBlockchainData = async (recipientUsername) => {
       recipient = await axios.get(
         `https://topper-fsa.herokuapp.com/api/users/${recipientUsername}`
       )
-    if (!recipient.data && recipientUsername) {
+    if (recipient && !recipient.data && recipientUsername) {
       window.location.replace(
         `https://www.reddit.com/message/compose?to=${recipientUsername}&subject=Topper%20-%20Receive%20Your%20Tip&message=Hey%20${recipientUsername},%20I%20liked%20your%20post.%20Download%20the%20Topper%20Chrome%20Extension%20to%20receive%20your%20tip%20in%20ETH.%20Link%20to%20download:%20https://topper-fsa.herokuapp.com`
       )
-    } else if (!recipient.data) {
+    } else if (recipient && !recipient.data) {
       return {
         account: account[0],
         walletType: 'Fortmatic',

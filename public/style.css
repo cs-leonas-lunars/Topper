@@ -1,5 +1,7 @@
+html,
 body {
-  font-family: sans-serif;
+  position: absolute;
+  overflow: hidden;
 }
 
 a {
@@ -74,6 +76,7 @@ form div {
 .App {
   text-align: center;
   background-color: transparent;
+  overflow: hidden;
 }
 
 #background {
@@ -81,6 +84,7 @@ form div {
   object-fit: cover;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 #overlay {
@@ -133,6 +137,30 @@ form div {
   font-family: Montserrat-Bold;
   width: 100%;
   top: 300px;
+  left: 0%;
+  z-index: 2;
+}
+
+#successText {
+  position: absolute;
+  font-size: 4rem;
+  text-align: center;
+  color: #fff;
+  font-family: Montserrat-Bold;
+  width: 100%;
+  top: 300px;
+  left: 0%;
+  z-index: 2;
+}
+
+#redirectText {
+  position: absolute;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #fff;
+  font-family: Montserrat-Thin;
+  width: 100%;
+  top: 405px;
   left: 0%;
   z-index: 2;
 }
@@ -434,6 +462,10 @@ form div {
   color: #ccc;
 }
 
+#authButtons {
+  font-size: 1rem;
+}
+
 #ethereumText {
   position: absolute;
   font-size: 0.6rem;
@@ -461,6 +493,7 @@ form div {
   outline: none;
   transition: color 0.35s;
   z-index: 2;
+  display: none;
 }
 
 #menuButton:hover {
@@ -477,6 +510,7 @@ form div {
   border-radius: 40px 0px 0px 40px;
   transition: width 0.5s, box-shadow 0.5s;
   z-index: 3;
+  display: none;
 }
 
 #closeMenu {
@@ -495,6 +529,7 @@ form div {
   transform: rotate(45deg);
   transition: right 0.5s, color 0.35s;
   z-index: 4;
+  display: none;
 }
 
 #closeMenu:hover {
@@ -518,6 +553,7 @@ form div {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  overflow: hidden;
 }
 
 /* @keyframes App-logo-spin {
@@ -529,310 +565,410 @@ form div {
   }
 } */
 
-/*
-.App {
-  text-align: center;
-  background-color: transparent;
-}
+@media screen and (max-width: 480px) {
+  html,
+  body {
+    position: absolute;
+    overflow: hidden;
+  }
 
-#background {
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-}
+  .App {
+    text-align: center;
+    background-color: transparent;
+    overflow: hidden;
+  }
 
-#overlay {
-  position: absolute;
-  background-color: rgb(0, 0, 0, 0.15);
-  backdrop-filter: blur(100px);
-  height: 100vh;
-  width: 100vw;
-  transition: background-color 0.5s;
-  z-index: 1;
-}
+  #background {
+    position: absolute;
+    object-fit: cover;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
 
-#brandIcon {
-  position: absolute;
-  width: 105px;
-  height: auto;
-  top: 17vh;
-  left: 50%;
-  margin-left: -52.5px;
-  z-index: 2;
-}
+  #overlay {
+    position: absolute;
+    background-color: rgb(0, 0, 0, 0.15);
+    backdrop-filter: blur(100px);
+    height: 100vh;
+    width: 100vw;
+    transition: background-color 0.5s;
+    z-index: 1;
+  }
 
-#logoText {
-  position: absolute;
-  font-size: 2.5rem;
-  text-align: center;
-  color: #fff;
-  font-family: PoetsenOne;
-  width: 100vw;
-  bottom: 40vh;
-  z-index: 2;
-}
+  #brandIcon {
+    position: absolute;
+    width: 105px;
+    height: auto;
+    top: 17vh;
+    left: 50%;
+    margin-left: -52.5px;
+    z-index: 2;
+  }
 
-#setAmountLabel {
-  position: absolute;
-  font-size: 1.5rem;
-  text-align: center;
-  color: #fff;
-  font-family: Montserrat-Bold;
-  width: 80%;
-  left: 10%;
-  bottom: 72.5vh;
-  z-index: 2;
-}
+  #logoText {
+    position: absolute;
+    font-size: 1.5rem;
+    text-align: left;
+    color: #fff;
+    font-family: PoetsenOne;
+    top: 15px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 2;
+  }
 
-#setAmountInput {
-  position: absolute;
-  background-color: rgb(255, 255, 255, 0.1);
-  font-size: 1.25rem;
-  text-align: center;
-  padding-left: 5px;
-  color: #fff;
-  font-family: Montserrat-Thin;
-  width: 80%;
-  height: 60px;
-  left: 9%;
-  bottom: 48.5vh;
-  outline: none;
-  border-radius: 100vw;
-  border-width: 0;
-  z-index: 2;
-}
+  #titleText {
+    position: absolute;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #fff;
+    font-family: Montserrat-Bold;
+    width: 100%;
+    top: 275px;
+    left: 0%;
+    z-index: 2;
+  }
 
-#login {
-  position: absolute;
-  width: 150px;
-  height: 50px;
-  left: 50%;
-  margin-left: -75px;
-  bottom: 25vh;
-  background-color: transparent;
-  backdrop-filter: blur(35px);
-  border-radius: 100vh;
-  border-width: 0;
-  cursor: pointer;
-  outline: none;
-  box-shadow: 0px 0px 35px -17.5px #000;
-  transition: background-color 0.35s, box-shadow 0.35s;
-  z-index: 2;
-}
+  #paraText {
+    position: absolute;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #fff;
+    font-family: Montserrat-Thin;
+    width: 80%;
+    top: 405px;
+    left: 10%;
+    z-index: 2;
+  }
 
-#login:hover {
-  background-color: rgb(255, 255, 255, 0.1);
-  box-shadow: 0px 0px 50px -17.5px #000;
-}
+  #setAmountLabel {
+    position: absolute;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #fff;
+    font-family: Montserrat-Bold;
+    width: 80%;
+    left: 10%;
+    bottom: 72.5vh;
+    z-index: 2;
+  }
 
-#loginText {
-  position: absolute;
-  width: 82.5%;
-  top: -1%;
-  right: 0%;
-  font-size: 1rem;
-  font-family: Montserrat-Bold;
-  text-align: center;
-  color: #fff;
-  cursor: pointer;
-  z-index: 3;
-}
+  #setAmountInput {
+    position: absolute;
+    background-color: rgb(255, 255, 255, 0.1);
+    font-size: 1.25rem;
+    text-align: center;
+    padding-left: 5px;
+    color: #fff;
+    font-family: Montserrat-Thin;
+    width: 80%;
+    height: 60px;
+    left: 9%;
+    bottom: 48.5vh;
+    outline: none;
+    border-radius: 100vw;
+    border-width: 0;
+    z-index: 2;
+  }
 
-#submitTransaction {
-  position: absolute;
-  width: 150px;
-  height: 50px;
-  left: 50%;
-  margin-left: -75px;
-  bottom: 25vh;
-  background-color: transparent;
-  backdrop-filter: blur(35px);
-  border-radius: 100vh;
-  border-width: 0;
-  cursor: pointer;
-  outline: none;
-  font-size: 0.85rem;
-  font-family: Montserrat-Bold;
-  text-align: center;
-  color: #fff;
-  box-shadow: 0px 0px 35px -17.5px #000;
-  transition: background-color 0.35s, box-shadow 0.35s;
-  z-index: 2;
-}
+  #login {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    top: 500px;
+    left: 50%;
+    margin-left: -75px;
+    background-color: transparent;
+    backdrop-filter: blur(35px);
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 0px 35px -17.5px #000;
+    transition: background-color 0.35s, box-shadow 0.35s;
+    z-index: 2;
+  }
 
-#submitTransaction:hover {
-  background-color: rgb(255, 255, 255, 0.1);
-  box-shadow: 0px 0px 50px -17.5px #000;
-}
+  #login:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 50px -17.5px #000;
+  }
 
-.circle {
-  position: absolute;
-  background-color: #eb6c6c;
-  height: 40px;
-  width: 40px;
-  top: 5px;
-  left: 5px;
-  border-radius: 100vh;
-  z-index: 3;
-  display: none;
-}
+  #loginText {
+    position: absolute;
+    width: 100%;
+    top: -1%;
+    right: 0%;
+    font-size: 1rem;
+    font-family: Montserrat-Bold;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    z-index: 3;
+  }
 
-#redditIcon {
-  position: absolute;
-  height: 30px;
-  width: 30px;
-  top: 10px;
-  left: 14px;
-  z-index: 3;
-}
+  #submitTransaction {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    left: 50%;
+    margin-left: -75px;
+    bottom: 25vh;
+    background-color: transparent;
+    backdrop-filter: blur(35px);
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    font-size: 0.85rem;
+    font-family: Montserrat-Bold;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0px 0px 35px -17.5px #000;
+    transition: background-color 0.35s, box-shadow 0.35s;
+    z-index: 2;
+  }
 
-#signup {
-  position: absolute;
-  width: 60vw;
-  height: 50px;
-  left: 20vw;
-  bottom: 15vh;
-  font-size: 0.75rem;
-  font-family: Montserrat-Thin;
-  text-align: center;
-  background-color: transparent;
-  color: #fff;
-  border-radius: 100vh;
-  border-width: 0;
-  cursor: pointer;
-  outline: none;
-  transition: color 0.35s;
-  z-index: 2;
-}
+  #submitTransaction:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 50px -17.5px #000;
+  }
 
-.signup-component {
-  z-index: 2;
-  font-family: Montserrat-Thin;
-}
+  .circle {
+    position: absolute;
+    background-color: #eb6c6c;
+    height: 40px;
+    width: 40px;
+    top: 5px;
+    left: 5px;
+    border-radius: 100vh;
+    z-index: 3;
+    display: none;
+  }
 
-#signup-button {
-  position: absolute;
-  color: #fff;
-  width: 150px;
-  height: 50px;
-  left: 50%;
-  margin-left: -75px;
-  bottom: 25vh;
-  background-color: transparent;
-  backdrop-filter: blur(35px);
-  border-radius: 100vh;
-  border-width: 0;
-  cursor: pointer;
-  outline: none;
-  box-shadow: 0px 0px 35px -17.5px #000;
-  transition: background-color 0.35s, box-shadow 0.35s;
-  z-index: 2;
-}
+  #redditIcon {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 10px;
+    left: 14px;
+    z-index: 3;
+  }
 
-#signup-button:hover {
-  background-color: rgb(255, 255, 255, 0.1);
-  box-shadow: 0px 0px 50px -17.5px #000;
-}
+  #signup {
+    position: absolute;
+    width: 60vw;
+    height: 50px;
+    left: 20vw;
+    top: 550px;
+    font-size: 0.75rem;
+    font-family: Montserrat-Thin;
+    text-align: center;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.35s;
+    z-index: 2;
+  }
 
-#signup:hover {
-  color: #ccc;
-}
+  .signup-component {
+    z-index: 2;
+    font-family: Montserrat-Thin;
+  }
 
-#cancelTransaction {
-  position: absolute;
-  width: 60vw;
-  height: 50px;
-  left: 20vw;
-  bottom: 15vh;
-  font-size: 0.75rem;
-  font-family: Montserrat-Thin;
-  text-align: center;
-  background-color: transparent;
-  color: #fff;
-  border-radius: 100vh;
-  border-width: 0;
-  cursor: pointer;
-  outline: none;
-  transition: color 0.35s;
-  z-index: 2;
-}
+  #signup-button {
+    position: absolute;
+    color: #fff;
+    width: 150px;
+    height: 50px;
+    left: 50%;
+    margin-left: -75px;
+    bottom: 25vh;
+    background-color: transparent;
+    backdrop-filter: blur(35px);
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0px 0px 35px -17.5px #000;
+    transition: background-color 0.35s, box-shadow 0.35s;
+    z-index: 2;
+  }
 
-#ethereumText {
-  position: absolute;
-  font-size: 0.6rem;
-  text-align: center;
-  color: #fff;
-  font-family: Montserrat-ExtraThin;
-  width: 100vw;
-  bottom: 3.5vw;
-  z-index: 2;
-  display: none;
-}
+  #signup-button:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 50px -17.5px #000;
+  }
 
-#menuButton {
-  position: absolute;
-  top: 3.5vw;
-  right: 5vw;
-  font-size: 3rem;
-  font-family: Montserrat-Thin;
-  text-align: center;
-  background-color: transparent;
-  color: #fff;
-  border-radius: 100vh;
-  border-width: 0;
-  cursor: pointer;
-  outline: none;
-  transition: color 0.35s;
-  z-index: 2;
-}
+  #signup:hover {
+    color: #ccc;
+  }
 
-#menuButton:hover {
-  color: #ccc;
-}
+  #cancelTransaction {
+    position: absolute;
+    width: 60vw;
+    height: 50px;
+    left: 20vw;
+    bottom: 15vh;
+    font-size: 0.75rem;
+    font-family: Montserrat-Thin;
+    text-align: center;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.35s;
+    z-index: 2;
+  }
 
-#menu {
-  position: absolute;
-  background-color: rgb(255, 255, 255, 0.4);
-  backdrop-filter: blur(35px);
-  height: 100vh;
-  width: 0vw;
-  right: 0vw;
-  border-radius: 40px 0px 0px 40px;
-  transition: width 0.5s, box-shadow 0.5s;
-  z-index: 3;
-}
+  #authButtons {
+    font-size: 0rem;
+    display: none;
+  }
 
-#closeMenu {
-  position: absolute;
-  top: 2.5vw;
-  right: -75vw;
-  font-size: 3rem;
-  font-family: Montserrat-Thin;
-  text-align: center;
-  background-color: transparent;
-  color: #444;
-  border-radius: 100vh;
-  border-width: 0;
-  cursor: pointer;
-  outline: none;
-  transform: rotate(45deg);
-  transition: right 0.5s, color 0.35s;
-  z-index: 4;
-}
+  #ethereumText {
+    position: absolute;
+    font-size: 0.6rem;
+    text-align: center;
+    color: #fff;
+    font-family: Montserrat-ExtraThin;
+    width: 100vw;
+    bottom: 3.5vw;
+    z-index: 2;
+    display: none;
+  }
 
-#closeMenu:hover {
-  color: #777;
-}
+  #menuButton {
+    position: absolute;
+    top: 16px;
+    right: 5vw;
+    font-size: 3rem;
+    font-family: Montserrat-Thin;
+    text-align: center;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.35s;
+    z-index: 2;
+    display: block;
+  }
 
-.App-header {
-  background-color: transparent;
-  min-height: 100vh;
-  min-width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  #menuButton:hover {
+    color: #ccc;
+  }
+
+  #menu {
+    position: absolute;
+    background-color: rgb(255, 255, 255, 0.4);
+    backdrop-filter: blur(35px);
+    height: 100vh;
+    width: 0vw;
+    right: 0vw;
+    border-radius: 40px 0px 0px 40px;
+    transition: width 0.5s, box-shadow 0.5s;
+    z-index: 3;
+    display: block;
+  }
+
+  #closeMenu {
+    position: absolute;
+    top: 2.5vw;
+    right: -75vw;
+    font-size: 3rem;
+    font-family: Montserrat-Thin;
+    text-align: center;
+    background-color: transparent;
+    color: #444;
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    transform: rotate(45deg);
+    transition: right 0.5s, color 0.35s;
+    z-index: 4;
+    display: block;
+  }
+
+  #closeMenu:hover {
+    color: #777;
+  }
+
+  #learnLanding {
+    position: absolute;
+    height: 50px;
+    right: 35px;
+    top: 20px;
+    font-size: 0.95rem;
+    font-family: Montserrat-Thin;
+    text-align: right;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.35s;
+    z-index: 2;
+    display: none;
+  }
+
+  #learnHome {
+    position: absolute;
+    height: 50px;
+    right: 135px;
+    top: 20px;
+    font-size: 0.95rem;
+    font-family: Montserrat-Thin;
+    text-align: right;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.35s;
+    z-index: 2;
+    display: none;
+  }
+
+  #logout {
+    position: absolute;
+    height: 50px;
+    right: 35px;
+    top: 20px;
+    font-size: 0.95rem;
+    font-family: Montserrat-Bold;
+    text-align: right;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 100vh;
+    border-width: 0;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.35s;
+    z-index: 2;
+    display: none;
+  }
+
+  .App-header {
+    background-color: transparent;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    overflow: hidden;
+  }
 }
-*/
