@@ -1,12 +1,12 @@
 import React, {useState, lazy} from 'react'
-
+import {Link} from 'react-router-dom'
 // const Signup = lazy(() => import('./Signup'))
 // const Login = lazy(() => import('./Login'))
 
 import Signup from './Signup'
 import Login from './Login'
 
-const Landing = (props) => {
+const Landing = props => {
   // component variable is arbitrary number to decide what should be shown, depending on what the user is trying to do
   const [component, setComponent] = useState(0)
 
@@ -40,7 +40,9 @@ const Landing = (props) => {
           <button id="signup" onClick={() => setComponent(1)}>
             Create An Account
           </button>
-          <button id="learnLanding">Learn More</button>
+          <Link to="/learnMore">
+            <button id="learnLanding">Learn More</button>
+          </Link>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
         </header>
       </div>
