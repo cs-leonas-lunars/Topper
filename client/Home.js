@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {logout, pushAddress} from './userActions'
 import {loadBlockchainData} from './loadData'
 import AuthButtons from './AuthButtons'
+import {Link} from 'react-router-dom'
 
 // all components are functional
 // no React.Component
@@ -74,7 +75,9 @@ const Home = (props) => {
           <AuthButtons />
         </h1>
         <p id="paraText">{data.accountData.balance}</p>
-        <button id="learnHome">Learn More</button>
+        <Link to="/learnMore">
+          <button id="learnHome">Learn More</button>
+        </Link>
         <button id="logout" onClick={() => logout()}>
           Logout
         </button>

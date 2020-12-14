@@ -1,5 +1,5 @@
 import React, {useState, lazy} from 'react'
-
+import {Link} from 'react-router-dom'
 // const Signup = lazy(() => import('./Signup'))
 // const Login = lazy(() => import('./Login'))
 
@@ -40,7 +40,9 @@ const Landing = (props) => {
           <button id="signup" onClick={() => setComponent(1)}>
             Create An Account
           </button>
-          <button id="learnLanding">Learn More</button>
+          <Link to="/learnMore">
+            <button id="learnLanding">Learn More</button>
+          </Link>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
         </header>
       </div>
