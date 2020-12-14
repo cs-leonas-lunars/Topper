@@ -9,11 +9,11 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 5000
 const app = express()
-const dotenv = require('dotenv')
+// const dotenv = require('dotenv')
 
 module.exports = app
 
-dotenv.config()
+// dotenv.config()
 
 if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
@@ -46,7 +46,7 @@ const createApp = () => {
       secret: process.env.SESSION_SECRET,
       store: sessionStore,
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: false,
     })
   )
   app.use(passport.initialize())

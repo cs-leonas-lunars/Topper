@@ -27,6 +27,7 @@ if (
   endReddit = allRedditPosts.length
 
   window.onload = () => {
+    console.log('window reloaded!')
     allRedditPosts.map((post, idx) => {
       let tagReddit = allRedditHeaders[idx].children[0].children[0].innerText
       if (tagReddit.toLowerCase() !== 'promoted') injectRedditButton(post, idx)
@@ -57,7 +58,7 @@ function findRedditPosts() {
   )
   endReddit = allRedditPosts.length
 
-  let redditPosts = allRedditPosts.slice(start, end)
+  let redditPosts = allRedditPosts.slice(startReddit, endReddit)
   redditPosts.map((post, idx) => {
     let tagReddit =
       allRedditHeaders[idx + startReddit].children[0].children[0].innerText
