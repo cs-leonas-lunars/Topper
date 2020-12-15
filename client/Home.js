@@ -81,6 +81,33 @@ const Home = props => {
         <button id="logout" onClick={() => logout()}>
           Logout
         </button>
+        <div id="transaction-container">
+          {props.transactions && props.transactions.length ? (
+            props.transactions.map(transaction => (
+              <div key={transaction.id}>
+                {transaction.recipientId === props.user.id && (
+                  <div className="transaction">
+                    <h1 id="amount-pos">+{transaction.amount}</h1>
+                    <img
+                      src="/images/recieve.png"
+                      className="transaction-icon"
+                    />
+                    <h2>{transaction.createdAt.split(' ')[0]}</h2>
+                  </div>
+                )}
+                {transaction.senderId === props.user.id && (
+                  <div className="transaction">
+                    <h1 id="amount-neg">-{transaction.amount}</h1>
+                    <img src="images/send.png" className="transaction-icon" />
+                    <h2>{transaction.createdAt.split(' ')[0]}</h2>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <div>No Transactions</div>
+          )}
+        </div>
         <div id="menuButton" onClick={() => toggleMenu(false)}>
           =
         </div>
