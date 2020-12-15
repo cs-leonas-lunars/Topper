@@ -6,12 +6,13 @@ import Transaction from './Transaction'
 import Success from './Success'
 import {me} from './userActions'
 import LearnMore from './LearnMore'
+import DownloadNow from './DownloadNow'
 
 const Routes = () => {
   const [data, setData] = useState({
     userData: null,
     transactionData: null,
-    loading: true,
+    loading: true
   })
 
   // useEffect for user
@@ -22,7 +23,7 @@ const Routes = () => {
         setData({
           userData: resData.user,
           transactionData: resData.transactions,
-          loading: false,
+          loading: false
         })
       } catch (err) {
         console.error(err)
@@ -65,6 +66,7 @@ const Routes = () => {
     </div>
   ) : (
     <Switch>
+      <Route exact path="/download" component={DownloadNow} />
       <Route exact path="/learnMore" component={LearnMore} />
       {window.location.href.split('/')[3].split('?')[0] ===
       'send-transaction' ? (
