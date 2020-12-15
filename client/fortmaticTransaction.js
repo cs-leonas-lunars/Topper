@@ -28,6 +28,5 @@ export default async function fortmaticTransaction(
   // Send Ether transaction with web3
   await web3.eth.sendTransaction(txnParams, (error, txnHash) => {
     if (error) throw error
-    console.log(txnHash)
   })
 }

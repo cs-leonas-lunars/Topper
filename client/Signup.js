@@ -55,8 +55,6 @@ const Signup = () => {
     }
   }
 
-  console.log(validatePassword, checked, 'both should be true')
-
   return (
     <div className="signup-component">
       <form onSubmit={handleSubmit}>

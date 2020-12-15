@@ -47,7 +47,6 @@ router.put('/update', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const user = await User.create(req.body)
-    console.log(user, 'NEW USER')
     res.send(user)
   } catch (err) {
     console.error(err)
