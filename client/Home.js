@@ -73,7 +73,7 @@ const Home = props => {
         <div id="home-container">
           <img id="profileIcon" src="/images/profile.png" alt="profile icon" />
           <h1 id="logoText">Topper</h1>
-          <h1 id="titleText" onClick={() => setComponent(0)}>
+          <h1 className="titleText" onClick={() => setComponent(0)}>
             {props.user.username}
             <AuthButtons />
           </h1>
