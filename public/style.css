@@ -118,7 +118,7 @@ form div {
 }
 
 #logoText {
-  position: absolute;
+  position: fixed;
   font-size: 1.5rem;
   text-align: left;
   color: #fff;
@@ -352,7 +352,7 @@ form div {
 }
 
 #learnLanding {
-  position: absolute;
+  position: fixed;
   height: 50px;
   right: 35px;
   top: 20px;
@@ -374,7 +374,7 @@ form div {
 }
 
 #about {
-  position: absolute;
+  position: fixed;
   height: 50px;
   right: 160px;
   top: 20px;
@@ -396,7 +396,7 @@ form div {
 }
 
 #learnHome {
-  position: absolute;
+  position: fixed;
   height: 50px;
   right: 135px;
   top: 20px;
@@ -418,7 +418,7 @@ form div {
 }
 
 #logout {
-  position: absolute;
+  position: fixed;
   height: 50px;
   right: 35px;
   top: 20px;
@@ -466,35 +466,87 @@ form div {
   font-size: 1rem;
 }
 
+#home-container {
+  position: absolute;
+  width: 100%;
+  height: 97%;
+  top: 0%;
+  overflow-y: scroll;
+  z-index: 2;
+}
+
 #transaction-container {
   position: absolute;
   height: 50%;
   width: 97%;
   top: 600px;
   left: 1.5%;
-  background-color: rgb(255, 255, 255, 0.1);
+  background-color: transparent;
   border-radius: 40px;
-  overflow-y: scroll;
   z-index: 2;
 }
 
 .transaction {
   position: absolute;
-  width: 97%;
+  width: 70%;
   height: 200px;
-  left: 1.5%;
-  background-color: rgb(255, 255, 255, 0.25);
+  left: 15%;
+  background-color: rgb(255, 255, 255, 0.85);
   border-radius: 40px;
-  box-shadow: 0px 10px 20px -15px #000;
+  box-shadow: 0px 10px 30px -20px #000;
 }
 
 .transaction-icon {
   position: absolute;
-  width: 70px;
-  height: 70px;
-  top: 15px;
-  right: 15px;
+  width: 120px;
+  height: 120px;
+  top: 40px;
+  right: 180px;
   z-index: 2;
+}
+
+.platform-icon {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 40px;
+  right: 40px;
+  background-color: #000;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#amount-pos {
+  position: absolute;
+  width: 50%;
+  line-height: 70px;
+  left: 40px;
+  font-size: 4rem;
+  text-align: left;
+  font-family: Montserrat-Bold;
+  color: #68956a;
+}
+
+#amount-neg {
+  position: absolute;
+  width: 50%;
+  line-height: 70px;
+  left: 40px;
+  font-size: 4rem;
+  text-align: left;
+  font-family: Montserrat-Bold;
+  color: #ff7d7d;
+}
+
+.transaction-date {
+  position: absolute;
+  width: 50%;
+  left: 40px;
+  bottom: 20px;
+  font-size: 1.2rem;
+  text-align: left;
+  font-family: Montserrat-Thin;
+  color: #777;
 }
 
 #ethereumText {
