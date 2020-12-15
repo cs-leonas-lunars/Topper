@@ -81,6 +81,9 @@ const Home = props => {
           <Link to="/learnMore">
             <button id="learnHome">Learn More</button>
           </Link>
+          <Link to="/download">
+            <button className="downloadButtonHome">Download Now</button>
+          </Link>
           <button id="logout" onClick={() => logout()}>
             Logout
           </button>

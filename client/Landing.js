@@ -42,7 +42,7 @@ const Landing = props => {
             <button id="learnLanding">Learn More</button>
           </Link>
           <Link to="/download">
-            <button id="downloadButton">Download Now</button>
+            <button className="downloadButton">Download Now</button>
           </Link>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
         </header>
@@ -84,6 +84,9 @@ const Landing = props => {
           </h1>
           <Login />
           <button id="learnLanding">Learn More</button>
+          <Link to="/download">
+            <button className="downloadButton">Download Now</button>
+          </Link>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
         </header>
       </div>
