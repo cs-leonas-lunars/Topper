@@ -32,6 +32,8 @@ const Home = props => {
     }, 2000)
   }, [])
 
+  let top = -100
+
   return data.loading ? (
     <div className="App">
       <header className="App-header">
@@ -83,27 +85,36 @@ const Home = props => {
         </button>
         <div id="transaction-container">
           {props.transactions && props.transactions.length ? (
-            props.transactions.map(transaction => (
-              <div key={transaction.id}>
-                {transaction.recipientId === props.user.id && (
-                  <div className="transaction">
-                    <h1 id="amount-pos">+{transaction.amount}</h1>
-                    <img
-                      src="/images/recieve.png"
-                      className="transaction-icon"
-                    />
-                    <h2>{transaction.createdAt.split(' ')[0]}</h2>
-                  </div>
-                )}
-                {transaction.senderId === props.user.id && (
-                  <div className="transaction">
-                    <h1 id="amount-neg">-{transaction.amount}</h1>
-                    <img src="images/send.png" className="transaction-icon" />
-                    <h2>{transaction.createdAt.split(' ')[0]}</h2>
-                  </div>
-                )}
-              </div>
-            ))
+            props.transactions.map(transaction => {
+              top += 220
+              return (
+                <div key={transaction.id}>
+                  {transaction.recipientId === props.user.id && (
+                    <div
+                      className="transaction"
+                      style={{top: top.toString() + 'px'}}
+                    >
+                      <h1 id="amount-pos">+{transaction.amount}</h1>
+                      <img
+                        src="/images/recieve.png"
+                        className="transaction-icon"
+                      />
+                      <h2>{transaction.createdAt.split(' ')[0]}</h2>
+                    </div>
+                  )}
+                  {transaction.senderId === props.user.id && (
+                    <div
+                      className="transaction"
+                      style={{top: top.toString() + 'px'}}
+                    >
+                      <h1 id="amount-neg">-{transaction.amount}</h1>
+                      <img src="images/send.png" className="transaction-icon" />
+                      <h2>{transaction.createdAt.split(' ')[0]}</h2>
+                    </div>
+                  )}
+                </div>
+              )
+            })
           ) : (
             <div>No Transactions</div>
           )}
