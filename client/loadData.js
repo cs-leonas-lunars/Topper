@@ -5,10 +5,8 @@ import axios from 'axios'
 let fm = new Fortmatic('pk_test_E28EBDED6FA415DC', 'ropsten')
 
 // beginning transaction logic
-export const loadBlockchainData = async (recipientUsername) => {
-  console.log('THIS WAS HIT!!!')
+export const loadBlockchainData = async recipientUsername => {
   if (window.ethereum) {
-    console.log('New Metamask')
     window.web3 = new Web3(window.ethereum)
     await window.ethereum.enable()
     let ethBalance = await window.web3.eth.getBalance(ethereum.selectedAddress)
@@ -27,21 +25,19 @@ export const loadBlockchainData = async (recipientUsername) => {
       return {
         account: ethereum.selectedAddress,
         walletType: 'Metamask',
-        balance: ethBalance,
+        balance: ethBalance
       }
     } else if (recipient && recipient.data && recipientUsername) {
       return {
         account: ethereum.selectedAddress,
         recipient: recipient.data,
         walletType: 'Metamask',
-        balance: ethBalance,
+        balance: ethBalance
       }
     }
   } else if (window.web3) {
-    console.log('Old Metamask!')
     alert('Please Update Your Metamask!')
   } else {
-    console.log('Fortmatic')
     window.web3 = new Web3(fm.getProvider())
     await web3.currentProvider.enable()
     let account = await web3.eth.getAccounts()
@@ -61,14 +57,14 @@ export const loadBlockchainData = async (recipientUsername) => {
       return {
         account: account[0],
         walletType: 'Fortmatic',
-        balance: ethBalance,
+        balance: ethBalance
       }
     } else if (recipient && recipientUsername) {
       return {
         account: account[0],
         recipient: recipient.data,
         walletType: 'Fortmatic',
-        balance: ethBalance,
+        balance: ethBalance
       }
     }
   }
