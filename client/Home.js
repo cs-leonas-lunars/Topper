@@ -32,7 +32,7 @@ const Home = props => {
     }, 2000)
   }, [])
 
-  let top = -100
+  let top = -200
 
   return data.loading ? (
     <div className="App">
@@ -70,54 +70,71 @@ const Home = props => {
           alt="background gradient"
         />
         <div id="overlay" onClick={() => toggleMenu(true)} />
-        <img id="profileIcon" src="/images/profile.png" alt="profile icon" />
-        <h1 id="logoText">Topper</h1>
-        <h1 id="titleText" onClick={() => setComponent(0)}>
-          {props.user.username}
-          <AuthButtons />
-        </h1>
-        <p id="paraText">{data.accountData.balance}</p>
-        <Link to="/learnMore">
-          <button id="learnHome">Learn More</button>
-        </Link>
-        <button id="logout" onClick={() => logout()}>
-          Logout
-        </button>
-        <div id="transaction-container">
-          {props.transactions && props.transactions.length ? (
-            props.transactions.map(transaction => {
-              top += 220
-              return (
-                <div key={transaction.id}>
-                  {transaction.recipientId === props.user.id && (
-                    <div
-                      className="transaction"
-                      style={{top: top.toString() + 'px'}}
-                    >
-                      <h1 id="amount-pos">+{transaction.amount}</h1>
-                      <img
-                        src="/images/recieve.png"
-                        className="transaction-icon"
-                      />
-                      <h2>{transaction.createdAt.split(' ')[0]}</h2>
-                    </div>
-                  )}
-                  {transaction.senderId === props.user.id && (
-                    <div
-                      className="transaction"
-                      style={{top: top.toString() + 'px'}}
-                    >
-                      <h1 id="amount-neg">-{transaction.amount}</h1>
-                      <img src="images/send.png" className="transaction-icon" />
-                      <h2>{transaction.createdAt.split(' ')[0]}</h2>
-                    </div>
-                  )}
-                </div>
-              )
-            })
-          ) : (
-            <div>No Transactions</div>
-          )}
+        <div id="home-container">
+          <img id="profileIcon" src="/images/profile.png" alt="profile icon" />
+          <h1 id="logoText">Topper</h1>
+          <h1 id="titleText" onClick={() => setComponent(0)}>
+            {props.user.username}
+            <AuthButtons />
+          </h1>
+          <p id="paraText">{data.accountData.balance}</p>
+          <Link to="/learnMore">
+            <button id="learnHome">Learn More</button>
+          </Link>
+          <button id="logout" onClick={() => logout()}>
+            Logout
+          </button>
+          <div id="transaction-container">
+            {props.transactions && props.transactions.length ? (
+              props.transactions.map(transaction => {
+                top += 220
+                return (
+                  <div key={transaction.id}>
+                    {transaction.recipientId === props.user.id && (
+                      <div
+                        className="transaction"
+                        style={{top: top.toString() + 'px'}}
+                      >
+                        <h1 id="amount-pos">+{transaction.amount} ETH</h1>
+                        <img
+                          src="/images/receive.png"
+                          className="transaction-icon"
+                        />
+                        <div
+                          onClick={() => window.open(transaction.linkToPost)}
+                          className="platform-icon"
+                        />
+                        <h2 className="transaction-date">
+                          {transaction.createdAt.split(' ')[0]}
+                        </h2>
+                      </div>
+                    )}
+                    {transaction.senderId === props.user.id && (
+                      <div
+                        className="transaction"
+                        style={{top: top.toString() + 'px'}}
+                      >
+                        <h1 id="amount-neg">-{transaction.amount} ETH</h1>
+                        <img
+                          src="images/send.png"
+                          className="transaction-icon"
+                        />
+                        <div
+                          onClick={() => window.open(transaction.linkToPost)}
+                          className="platform-icon"
+                        />
+                        <h2 className="transaction-date">
+                          {transaction.createdAt.split(' ')[0]}
+                        </h2>
+                      </div>
+                    )}
+                  </div>
+                )
+              })
+            ) : (
+              <div>No Transactions</div>
+            )}
+          </div>
         </div>
         <div id="menuButton" onClick={() => toggleMenu(false)}>
           =
