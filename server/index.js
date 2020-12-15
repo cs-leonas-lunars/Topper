@@ -9,18 +9,12 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 5000
 const app = express()
-// const dotenv = require('dotenv')
 
 module.exports = app
-
-// dotenv.config()
 
 if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
 }
-
-// from boilermakerl, i believe it is unnecessary but will leave it just in case
-// if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 passport.serializeUser((user, done) => done(null, user.id))
 

@@ -1,7 +1,6 @@
 import React from 'react'
 
 const AuthButtons = () => {
-  console.log('AUTH BUTTons component')
   // alex could you add a short sentence of why the user would want to connect their account to said service next to/around each button
   return (
     <div id="authButtons">
