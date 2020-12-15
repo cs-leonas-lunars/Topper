@@ -368,10 +368,28 @@ form div {
   text-decoration: underline;
 }
 
-#downloadButton {
+.downloadButton {
   position: absolute;
   height: 50px;
   right: 150px;
+  top: 20px;
+  font-size: 0.95rem;
+  font-family: Montserrat-Thin;
+  text-align: right;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 100vh;
+  border-width: 0;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.35s;
+  z-index: 2;
+}
+
+.downloadButtonHome {
+  position: absolute;
+  height: 50px;
+  right: 240px;
   top: 20px;
   font-size: 0.95rem;
   font-family: Montserrat-Thin;
