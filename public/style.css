@@ -219,6 +219,121 @@ form div {
   z-index: 2;
 }
 
+#inputUsername {
+  position: absolute;
+  width: 500px;
+  height: 65px;
+  left: 50%;
+  margin-left: -250px;
+  top: 350px;
+  background-color: transparent;
+  backdrop-filter: blur(35px);
+  border-radius: 100vh;
+  border-width: 0;
+  outline: none;
+  box-shadow: 0px 0px 35px -20px #000;
+  transition: background-color 0.35s, box-shadow 0.35s;
+  padding-left: 25px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: Montserrat-Bold;
+  z-index: 2;
+}
+
+#inputPassword {
+  position: absolute;
+  width: 500px;
+  height: 65px;
+  left: 50%;
+  margin-left: -250px;
+  top: 450px;
+  background-color: transparent;
+  backdrop-filter: blur(35px);
+  border-radius: 100vh;
+  border-width: 0;
+  outline: none;
+  box-shadow: 0px 0px 35px -20px #000;
+  transition: background-color 0.35s, box-shadow 0.35s;
+  padding-left: 25px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: Montserrat-Bold;
+  z-index: 2;
+}
+
+#inputEmail {
+  position: absolute;
+  width: 500px;
+  height: 65px;
+  left: 50%;
+  margin-left: -250px;
+  top: 150px;
+  background-color: transparent;
+  backdrop-filter: blur(35px);
+  border-radius: 100vh;
+  border-width: 0;
+  outline: none;
+  box-shadow: 0px 0px 35px -20px #000;
+  transition: background-color 0.35s, box-shadow 0.35s;
+  padding-left: 25px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: Montserrat-Bold;
+  z-index: 2;
+}
+
+#inputConfirmPassword {
+  position: absolute;
+  width: 500px;
+  height: 65px;
+  left: 50%;
+  margin-left: -250px;
+  top: 250px;
+  background-color: transparent;
+  backdrop-filter: blur(35px);
+  border-radius: 100vh;
+  border-width: 0;
+  outline: none;
+  box-shadow: 0px 0px 35px -20px #000;
+  transition: background-color 0.35s, box-shadow 0.35s;
+  padding-left: 25px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: Montserrat-Bold;
+  z-index: 2;
+}
+
+#inputUsername::placeholder {
+  color: #eee;
+}
+
+#inputPassword::placeholder {
+  color: #eee;
+}
+
+#inputEmail::placeholder {
+  color: #eee;
+}
+
+#inputConfirmPassword::placeholder {
+  color: #eee;
+}
+
+#checkbox {
+  position: absolute;
+  top: 550px;
+  width: 100%;
+  margin-left: -41vw;
+}
+
+#inputErrors {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  font-size: 1.5rem;
+  margin-left: -41.5vw;
+}
+
 #login {
   position: absolute;
   width: 200px;
@@ -246,6 +361,59 @@ form div {
   position: absolute;
   width: 100%;
   top: -11.5%;
+  right: 0%;
+  font-size: 1.5rem;
+  font-family: Montserrat-Thin;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  z-index: 3;
+}
+
+#redditAuth {
+  position: absolute;
+  width: 300px;
+  height: 65px;
+  left: 50%;
+  margin-left: -150px;
+  top: 500px;
+  background-color: transparent;
+  backdrop-filter: blur(35px);
+  border-radius: 100vh;
+  border-width: 0;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 0px 35px -20px #000;
+  transition: background-color 0.35s, box-shadow 0.35s;
+  z-index: 2;
+}
+
+#redditAdded {
+  position: absolute;
+  width: 1000px;
+  height: 65px;
+  left: 50%;
+  margin-left: -500px;
+  top: 500px;
+  background-color: transparent;
+  backdrop-filter: blur(35px);
+  border-radius: 100vh;
+  border-width: 0;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.35s, box-shadow 0.35s;
+  z-index: 2;
+}
+
+#redditAuth:hover {
+  background-color: rgb(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 45px -20px #000;
+}
+
+#redditAuthText {
+  position: absolute;
+  width: 100%;
+  top: -11%;
   right: 0%;
   font-size: 1.5rem;
   font-family: Montserrat-Thin;
@@ -344,7 +512,7 @@ form div {
   height: 50px;
   left: 50%;
   margin-left: -75px;
-  bottom: 25vh;
+  top: 625px;
   background-color: transparent;
   backdrop-filter: blur(35px);
   border-radius: 100vh;
@@ -387,9 +555,9 @@ form div {
 }
 
 .downloadButtonHome {
-  position: absolute;
+  position: fixed;
   height: 50px;
-  right: 240px;
+  right: 255px;
   top: 20px;
   font-size: 0.95rem;
   font-family: Montserrat-Thin;
@@ -539,6 +707,16 @@ form div {
   z-index: 2;
 }
 
+#noTransactions {
+  position: absolute;
+  width: 100%;
+  font-size: 2rem;
+  color: #fff;
+  font-family: Montserrat-Thin;
+  top: 120px;
+  text-align: center;
+}
+
 .transaction {
   position: absolute;
   width: 70%;
@@ -564,9 +742,18 @@ form div {
   height: 120px;
   top: 40px;
   right: 40px;
-  background-color: #000;
+  background-color: transparent;
   cursor: pointer;
   z-index: 2;
+  font-size: 1rem;
+  color: #777;
+  text-align: center;
+  line-height: 120px;
+  font-family: Montserrat-Thin;
+}
+
+.platform-icon:hover {
+  color: #9b9b9b;
 }
 
 #amount-pos {
@@ -699,6 +886,7 @@ form div {
   overflow-y: scroll;
   top: 0%;
   border-radius: 40px;
+  z-index: 2;
 }
 
 #missionStatement {
@@ -783,17 +971,17 @@ form div {
 
 .headshotName {
   position: absolute;
-  bottom: 30vh;
+  bottom: 25vh;
   text-align: center;
   width: 100%;
 }
 .headshotDesc {
   position: absolute;
-  width: 150px;
-  height: 150px;
-  bottom: 5vh;
+  width: 325px;
+  height: 125px;
+  bottom: 7.5vh;
   left: 50%;
-  margin-left: -75px;
+  margin-left: -162.5px;
   background-color: transparent;
   border-width: 0;
   outline: none;
@@ -804,9 +992,7 @@ form div {
   width: 150px;
   height: 50px;
   line-height: 50px;
-  top: 0px;
-  left: 50%;
-  margin-left: -75px;
+  left: 0px;
   background-color: rgb(10, 102, 194, 0.7);
   backdrop-filter: blur(35px);
   border-radius: 100vh;
@@ -830,9 +1016,7 @@ form div {
   width: 150px;
   height: 50px;
   line-height: 50px;
-  bottom: 0px;
-  left: 50%;
-  margin-left: -75px;
+  right: 0px;
   background-color: rgba(36, 41, 46, 0.7);
   backdrop-filter: blur(35px);
   border-radius: 100vh;

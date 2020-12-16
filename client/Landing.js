@@ -30,10 +30,8 @@ const Landing = props => {
           <p id="paraText">
             Send Crypto To Your Favorite Content Creators Like Never Before
           </p>
-          <div id="login">
-            <p id="loginText" onClick={() => setComponent(2)}>
-              Login
-            </p>
+          <div id="login" onClick={() => setComponent(2)}>
+            <p id="loginText">Login</p>
           </div>
           <button id="signup" onClick={() => setComponent(1)}>
             Create An Account
@@ -58,7 +56,7 @@ const Landing = props => {
             alt="background gradient"
           />
           <div id="overlay" />
-          <img id="brandIcon" src="/images/TipJar.png" alt="topper logo" />
+          {/*<img id="brandIcon" src="/images/TipJar.png" alt="topper logo" />*/}
           <h1 id="logoText" onClick={() => setComponent(0)}>
             ← Back
           </h1>

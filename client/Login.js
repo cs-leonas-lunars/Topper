@@ -23,23 +23,23 @@ const Login = () => {
     <div className="signup-component">
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">
-            <small>Username or Email</small>
-          </label>
           <input
             onChange={e => setUsername(e.target.value)}
             name="username"
             type="text"
+            id="inputUsername"
+            placeholder="Username..."
+            autocomplete="off"
           />
         </div>
         <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
           <input
             onChange={e => setPassword(e.target.value)}
             name="password"
             type="password"
+            id="inputPassword"
+            placeholder="Password..."
+            autocomplete="off"
           />
         </div>
         <button className="signup-button" type="submit" value="submit">

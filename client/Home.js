@@ -72,11 +72,20 @@ const Home = props => {
         <div id="overlay" onClick={() => toggleMenu(true)} />
         <div id="home-container">
           <img id="profileIcon" src="/images/profile.png" alt="profile icon" />
-          <h1 id="logoText">Topper</h1>
-          <h1 className="titleText" onClick={() => setComponent(0)}>
-            {props.user.username}
-            <AuthButtons />
+          <h1 id="logoText" onClick={() => setComponent(0)}>
+            Topper
           </h1>
+          {/*<AuthButtons />*/}
+          {props.user.reddit ? (
+            <div id="redditAdded">
+              <p id="loginText">Reddit: {props.user.reddit}</p>
+            </div>
+          ) : (
+            <a id="redditAuth" href="/auth/reddit">
+              <p id="redditAuthText">Connect Reddit</p>
+            </a>
+          )}
+          <h1 className="titleText">{props.user.username}</h1>
           <p id="paraText">{data.accountData.balance}</p>
           <Link to="/learnMore">
             <button id="learnHome">Learn More</button>
@@ -106,7 +115,9 @@ const Home = props => {
                         <div
                           onClick={() => window.open(transaction.linkToPost)}
                           className="platform-icon"
-                        />
+                        >
+                          Go To Post →
+                        </div>
                         <h2 className="transaction-date">
                           {transaction.createdAt.split(' ')[0]}
                         </h2>
@@ -125,7 +136,9 @@ const Home = props => {
                         <div
                           onClick={() => window.open(transaction.linkToPost)}
                           className="platform-icon"
-                        />
+                        >
+                          Go To Post →
+                        </div>
                         <h2 className="transaction-date">
                           {transaction.createdAt.split(' ')[0]}
                         </h2>
@@ -135,7 +148,7 @@ const Home = props => {
                 )
               })
             ) : (
-              <div>No Transactions</div>
+              <div id="noTransactions">No Transactions</div>
             )}
           </div>
         </div>

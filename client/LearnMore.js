@@ -19,7 +19,7 @@ const LearnMore = () => {
           <Link to="/">
             <h1 id="logoText"> ← Back </h1>
           </Link>
-          <h1 id="titleText">Welcome</h1>
+          <h1 className="titleText">Welcome</h1>
           <div id="missionStatement">
             <h2>Our Mission</h2>
             <p>
@@ -119,7 +119,7 @@ const LearnMore = () => {
               </small>
             </div>
           </div>
-          <div id="contact">Contact us capstonetopper@gmail.com</div>
+          <div id="contact">Contact us topperdapp@gmail.com</div>
           <p id="ethereumText">E T H E R E U M · P O W E R E D</p>
         </div>
         {/* <div id="videoTutorial">transaction video tutorial here</div>
