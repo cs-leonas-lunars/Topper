@@ -115,7 +115,9 @@ const Home = props => {
                         <div
                           onClick={() => window.open(transaction.linkToPost)}
                           className="platform-icon"
-                        />
+                        >
+                          Go To Post →
+                        </div>
                         <h2 className="transaction-date">
                           {transaction.createdAt.split(' ')[0]}
                         </h2>
@@ -134,7 +136,9 @@ const Home = props => {
                         <div
                           onClick={() => window.open(transaction.linkToPost)}
                           className="platform-icon"
-                        />
+                        >
+                          Go To Post →
+                        </div>
                         <h2 className="transaction-date">
                           {transaction.createdAt.split(' ')[0]}
                         </h2>

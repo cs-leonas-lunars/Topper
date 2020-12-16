@@ -742,9 +742,17 @@ form div {
   height: 120px;
   top: 40px;
   right: 40px;
-  background-color: #000;
+  background-color: transparent;
   cursor: pointer;
   z-index: 2;
+  font-size: 1rem;
+  color: #777;
+  text-align: center;
+  line-height: 120px;
+}
+
+.platform-icon:hover {
+  color: #9b9b9b;
 }
 
 #amount-pos {
