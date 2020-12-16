@@ -19,7 +19,7 @@ const LearnMore = () => {
           <Link to="/">
             <h1 id="logoText"> ← Back </h1>
           </Link>
-          <h1 id="titleText">Welcome</h1>
+          <h1 className="titleText">Welcome</h1>
           <div id="missionStatement">
             <h2>Our Mission</h2>
             <p>

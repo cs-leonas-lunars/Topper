@@ -85,7 +85,7 @@ const Home = props => {
               <p id="redditAuthText">Connect Reddit</p>
             </a>
           )}
-          <h1 id="titleText">{props.user.username}</h1>
+          <h1 className="titleText">{props.user.username}</h1>
           <p id="paraText">{data.accountData.balance}</p>
           <Link to="/learnMore">
             <button id="learnHome">Learn More</button>
