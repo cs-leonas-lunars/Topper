@@ -59,43 +59,40 @@ const Signup = () => {
     <div className="signup-component">
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
           <input
             onChange={e => setUsername(e.target.value)}
             name="username"
             type="text"
+            placeholder="Username..."
+            id="inputEmail"
           />
         </div>
         <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
           <input
             onChange={e => setEmail(e.target.value)}
             name="email"
             type="text"
+            placeholder="Email..."
+            id="inputConfirmPassword"
           />
         </div>
         <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
           <input
             onChange={e => setPassword(e.target.value)}
             name="password"
             type="password"
+            placeholder="Password"
+            id="inputUsername"
           />
         </div>
         <div>
-          <label htmlFor="confirmPassword">
-            <small>Confirm Password</small>
-          </label>
           <input
             onChange={e => setConfirmPassword(e.target.value)}
             name="confirmPassword"
             type="password"
+            placeholder="Repeat Password..."
+            id="confirmPassword"
+            id="inputPassword"
           />
         </div>
         <button
@@ -107,13 +104,13 @@ const Signup = () => {
           Sign up
         </button>
       </form>
-      <label>
+      <label id="checkbox">
         <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
         <small>
           By checking this box, I agree to Topper's terms and conditions
         </small>
       </label>
-      <div>
+      <div id="inputErrors">
         {validatePassword && <div>Passwords must match</div>}
         {!status && <div>Signup Failed</div>}
         {!strength && (
