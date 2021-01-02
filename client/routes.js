@@ -29,9 +29,7 @@ const Routes = () => {
         console.error(err)
       }
     }
-    setTimeout(() => {
-      findData()
-    }, 2000)
+    findData()
   }, [])
 
   // conditional render for landing v transaction v home v landing

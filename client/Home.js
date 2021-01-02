@@ -27,9 +27,7 @@ const Home = props => {
         console.error(err)
       }
     }
-    setTimeout(() => {
-      findData()
-    }, 2000)
+    findData()
   }, [])
 
   let top = -200
