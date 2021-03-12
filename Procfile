@@ -1,1 +1,1 @@
-web: node server webpack --config webpack.config.js
+web: npm run build-client
