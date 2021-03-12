@@ -1,1 +1,1 @@
-web: node webpack --config webpack.config.js server
+web: node server webpack --config webpack.config.js
