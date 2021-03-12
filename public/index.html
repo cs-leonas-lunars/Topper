@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/style.css" />
     <link rel="manifest" href="./pwaManifest.json" />
     <link rel="apple-touch-icon" href="./icon192.png" />
-    <!-- <script defer src="/bundle.js"></script> -->
+    <script defer src="/bundle.js"></script>
   </head>
   <body>
     <noscript>Please enable javascript</noscript>
@@ -33,13 +33,12 @@
               )
             },
             function (err) {
-              // registration failed :(
+              // registration failed
               console.log('ServiceWorker registration failed:', err)
             }
           )
         })
       }
     </script>
-    <script defer src="/bundle.js"></script>
   </body>
 </html>
