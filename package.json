@@ -62,7 +62,7 @@
     "passport-reddit": "^0.2.4",
     "passport-twitch": "^1.0.3",
     "passport-twitter": "^1.0.4",
-    "pg": "^7.9.0",
+    "pg": "^8.3.2",
     "pg-hstore": "^2.3.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
